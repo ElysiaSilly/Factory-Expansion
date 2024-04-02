@@ -1,0 +1,130 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+
+    id 'net.neoforged.gradle' version '[6.0.18,6.2)'
+    id 'org.spongepowered.mixin' version '0.7.+'
+    id 'net.covers1624.signing' version '1.1.4'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = mod_id
+}
+
+// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
+minecraft {
+    mappings channel: "${mapping_channel}", version: "${mapping_version}-${mc_version}"
+
+    runs {
+        configureEach {
+            workingDirectory project.file("run/${it.name}")
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                "${mod_id}" {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        client {
+            property 'forge.enabledGameTestNamespaces', mod_id
+        }
+
+        server {
+            property 'forge.enabledGameTestNamespaces', mod_id
+            args '--nogui'
+        }
+
+        gameTestServer {
+            property 'forge.enabledGameTestNamespaces', mod_id
+        }
+
+        data {
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+        }
+    }
+}
+
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    maven {
+        url = 'https://maven.minecraftforge.net/'
+    }
+    maven { // Thermal
+        name 'Thermal Maven'
+        url 'https://maven.covers1624.net/'
+    }
+    maven { // JEI + Patchouli
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+    maven { // JEI fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
+    maven { // Curios
+        url 'https://maven.theillusivec4.top/'
+    }
+}
+
+dependencies {
+    minecraft "net.neoforged:forge:${mc_version}-${neo_version}"
+
+    implementation fg.deobf("com.teamcofh:cofh_core:${mc_version}-${cofh_core_version}")
+    implementation fg.deobf("com.teamcofh:thermal_core:${mc_version}-${thermal_core_version}")
+    implementation fg.deobf("com.teamcofh:thermal_expansion:${mc_version}-${thermal_expansion_version}")
+    implementation fg.deobf("com.teamcofh:thermal_foundation:${mc_version}-${thermal_foundation_version}")
+
+    // compile against the JEI API but do not include it at runtime
+    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
+    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
+    // at runtime, use the full JEI jar for Forge
+    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
+}
+
+jar {
+    manifest {
+        attributes([
+                'Specification-Title'     : mod_id,
+                'Specification-Vendor'    : mod_authors,
+                'Specification-Version'   : '1',
+                'Implementation-Title'    : project.name,
+                'Implementation-Version'  : project.jar.archiveVersion,
+                'Implementation-Vendor'   : mod_authors,
+                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+
+    finalizedBy 'reobfJar'
+}
+
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

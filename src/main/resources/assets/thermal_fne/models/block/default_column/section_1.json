@@ -1,0 +1,6 @@
+{
+  "parent": "thermal_fne:parent/column/bottom",
+  "textures": {
+    "texture": "thermal_fne:block/default_column"
+  }
+}

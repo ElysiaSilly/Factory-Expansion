@@ -1,0 +1,47 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="Assets fall under ARR, code falls under MIT"
+
+[[mods]]
+modId="thermal_fne"
+version="1.20.1-0.0.1"
+displayName='Thermal: Factory Needs Expansion'
+displayUrl='https://github.com/TeamCitrusMods/Factory-Expansion'
+authors="ElysiaSilly, GraeyAmber, VertexCubed"
+description='''
+Thermal: The Factory Needs To Grow- Erm, Expand!
+
+Thermal: Factory Needs Expansion is an addon for Team CoFH's Thermal Suite mods, with a focus on expanding various deco and building options for all your industrial needs.
+
+We are not responsible, nor do we take responsibility and liability for any accidents caused by build code violations, safety hazards, and unregulated substances/chemicals.
+
+Special thanks to Team CoFH for developing the Thermal Series mods!
+'''
+
+[[dependencies.thermal_fne]]
+    modId="forge"
+    mandatory=true
+    versionRange="${neo_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.thermal_fne]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="${mc_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.thermal_fne]]
+modId = "cofh_core"
+mandatory = true
+versionRange = "${cofh_core_version_range}"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.thermal_fne]]
+modId = "thermal"
+mandatory = true
+versionRange = "${thermal_core_version_range}"
+ordering = "AFTER"
+side = "BOTH"

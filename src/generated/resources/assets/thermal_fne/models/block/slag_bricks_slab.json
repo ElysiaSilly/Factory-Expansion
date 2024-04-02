@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "thermal:block/slag_bricks",
+    "side": "thermal:block/slag_bricks",
+    "top": "thermal:block/slag_bricks"
+  }
+}

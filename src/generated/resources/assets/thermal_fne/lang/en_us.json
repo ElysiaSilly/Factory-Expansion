@@ -1,0 +1,19 @@
+{
+  "block.thermal_fne.flux_lamp": "Flux Lamp",
+  "block.thermal_fne.flux_lamp_inverted": "Flux Lamp (Inverted)",
+  "block.thermal_fne.rich_slag_block_slab": "Rich Slag Block Slab",
+  "block.thermal_fne.rich_slag_block_stairs": "Rich Slag Block Stairs",
+  "block.thermal_fne.rich_slag_block_wall": "Rich Slag Block Wall",
+  "block.thermal_fne.rich_slag_bricks_slab": "Rich Slag Bricks Slab",
+  "block.thermal_fne.rich_slag_bricks_stairs": "Rich Slag Bricks Stairs",
+  "block.thermal_fne.rich_slag_bricks_wall": "Rich Slag Bricks Wall",
+  "block.thermal_fne.slag_block_slab": "Slag Block Slab",
+  "block.thermal_fne.slag_block_stairs": "Slag Block Stairs",
+  "block.thermal_fne.slag_block_wall": "Slag Block Wall",
+  "block.thermal_fne.slag_bricks_slab": "Slag Bricks Slab",
+  "block.thermal_fne.slag_bricks_stairs": "Slag Bricks Stairs",
+  "block.thermal_fne.slag_bricks_wall": "Slag Bricks Wall",
+  "item.thermal_fne.black_iron_ingot": "Black Iron Ingot",
+  "item.thermal_fne.red_copper_ingot": "Red Copper Ingot",
+  "itemGroup.thermal_fne": "Thermal: Factory Needs Expansion"
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "thermal_fne:block/rich_slag_block_slab"
+    },
+    "type=double": {
+      "model": "thermal:block/rich_slag_block"
+    },
+    "type=top": {
+      "model": "thermal_fne:block/rich_slag_block_slab_top"
+    }
+  }
+}

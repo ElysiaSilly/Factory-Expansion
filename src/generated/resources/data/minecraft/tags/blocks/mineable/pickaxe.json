@@ -1,0 +1,10 @@
+{
+  "values": [
+    "thermal_fne:slag_block_slab",
+    "thermal_fne:slag_block_stairs",
+    "thermal_fne:slag_block_wall",
+    "thermal_fne:rich_slag_block_slab",
+    "thermal_fne:rich_slag_block_stairs",
+    "thermal_fne:rich_slag_block_wall"
+  ]
+}

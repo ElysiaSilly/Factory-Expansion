@@ -1,0 +1,5 @@
+// 1.20.1	2024-02-24T11:43:53.7661138	Tags for minecraft:block mod id thermal_fne
+b6fe7320994e1c64aaf7a824a32daf10b0f7169f data/minecraft/tags/blocks/mineable/pickaxe.json
+a6433de5c75f39d44b2393af8a627ac40ab06f5b data/minecraft/tags/blocks/slabs.json
+eea79879030d540ad9397a130d5af6a245cdc17d data/minecraft/tags/blocks/stairs.json
+572037a074483074179626d5cdac6ac5671d7170 data/minecraft/tags/blocks/walls.json
