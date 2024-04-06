@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -26,21 +27,21 @@ public class BlockRegistry {
 
 
     // Thermal Blocks
-    public static final RegistryObject<SlabBlock> SLAG_BLOCK_SLAB = register("slag_block_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BLOCK))));
-    public static final RegistryObject<StairBlock> SLAG_BLOCK_STAIRS = register("slag_block_stairs", () -> new StairBlock(() -> ThermalCore.BLOCKS.get(ID_SLAG_BLOCK).defaultBlockState(), BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BLOCK))));
-    public static final RegistryObject<WallBlock> SLAG_BLOCK_WALL = register("slag_block_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BLOCK))));
+    public static final RegistryObject<SlabBlock> SLAG_BLOCK_SLAB = register("slag_block_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BLOCK))), "thermal");
+    public static final RegistryObject<StairBlock> SLAG_BLOCK_STAIRS = register("slag_block_stairs", () -> new StairBlock(() -> ThermalCore.BLOCKS.get(ID_SLAG_BLOCK).defaultBlockState(), BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BLOCK))), "thermal");
+    public static final RegistryObject<WallBlock> SLAG_BLOCK_WALL = register("slag_block_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BLOCK))), "thermal");
 
-    public static final RegistryObject<SlabBlock> SLAG_BRICKS_SLAB = register("slag_bricks_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BRICKS))));
-    public static final RegistryObject<StairBlock> SLAG_BRICKS_STAIRS = register("slag_bricks_stairs", () -> new StairBlock(() -> ThermalCore.BLOCKS.get(ID_SLAG_BRICKS).defaultBlockState(), BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BRICKS))));
-    public static final RegistryObject<WallBlock> SLAG_BRICKS_WALL = register("slag_bricks_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BRICKS))));
+    public static final RegistryObject<SlabBlock> SLAG_BRICKS_SLAB = register("slag_bricks_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BRICKS))), "thermal");
+    public static final RegistryObject<StairBlock> SLAG_BRICKS_STAIRS = register("slag_bricks_stairs", () -> new StairBlock(() -> ThermalCore.BLOCKS.get(ID_SLAG_BRICKS).defaultBlockState(), BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BRICKS))), "thermal");
+    public static final RegistryObject<WallBlock> SLAG_BRICKS_WALL = register("slag_bricks_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BRICKS))), "thermal");
 
-    public static final RegistryObject<SlabBlock> RICH_SLAG_BLOCK_SLAB = register("rich_slag_block_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BLOCK))));
-    public static final RegistryObject<StairBlock> RICH_SLAG_BLOCK_STAIRS = register("rich_slag_block_stairs", () -> new StairBlock(() -> ThermalCore.BLOCKS.get(ID_SLAG_BLOCK).defaultBlockState(), BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BLOCK))));
-    public static final RegistryObject<WallBlock> RICH_SLAG_BLOCK_WALL = register("rich_slag_block_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BLOCK))));
+    public static final RegistryObject<SlabBlock> RICH_SLAG_BLOCK_SLAB = register("rich_slag_block_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BLOCK))), "thermal");
+    public static final RegistryObject<StairBlock> RICH_SLAG_BLOCK_STAIRS = register("rich_slag_block_stairs", () -> new StairBlock(() -> ThermalCore.BLOCKS.get(ID_SLAG_BLOCK).defaultBlockState(), BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BLOCK))), "thermal");
+    public static final RegistryObject<WallBlock> RICH_SLAG_BLOCK_WALL = register("rich_slag_block_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BLOCK))), "thermal");
 
-    public static final RegistryObject<SlabBlock> RICH_SLAG_BRICKS_SLAB = register("rich_slag_bricks_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BRICKS))));
-    public static final RegistryObject<StairBlock> RICH_SLAG_BRICKS_STAIRS = register("rich_slag_bricks_stairs", () -> new StairBlock(() -> ThermalCore.BLOCKS.get(ID_SLAG_BRICKS).defaultBlockState(), BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BRICKS))));
-    public static final RegistryObject<WallBlock> RICH_SLAG_BRICKS_WALL = register("rich_slag_bricks_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BRICKS))));
+    public static final RegistryObject<SlabBlock> RICH_SLAG_BRICKS_SLAB = register("rich_slag_bricks_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BRICKS))), "thermal");
+    public static final RegistryObject<StairBlock> RICH_SLAG_BRICKS_STAIRS = register("rich_slag_bricks_stairs", () -> new StairBlock(() -> ThermalCore.BLOCKS.get(ID_SLAG_BRICKS).defaultBlockState(), BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BRICKS))), "thermal");
+    public static final RegistryObject<WallBlock> RICH_SLAG_BRICKS_WALL = register("rich_slag_bricks_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(ThermalCore.BLOCKS.get(ID_SLAG_BRICKS))), "thermal");
 
 
     // Fully Custom Blocks
@@ -67,8 +68,15 @@ public class BlockRegistry {
     }
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block) {
-        RegistryObject<T> returnBlock = BLOCKS.register(name, block);
-        ITEMS.register(name, () -> new BlockItem(returnBlock.get(), new Item.Properties()));
-        return returnBlock;
+            RegistryObject<T> returnBlock = BLOCKS.register(name, block);
+            ITEMS.register(name, () -> new BlockItem(returnBlock.get(), new Item.Properties()));
+            return returnBlock;
+    }
+
+    private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block, String requirement) {
+        if(ModList.get().isLoaded(requirement)) {
+            return register(name, block);
+        }
+        return null;
     }
 }

@@ -34,14 +34,14 @@ Special thanks to Team CoFH for developing the Thermal Series mods!
 
 [[dependencies.thermal_fne]]
 modId = "cofh_core"
-mandatory = true
+mandatory = false
 versionRange = "${cofh_core_version_range}"
 ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.thermal_fne]]
 modId = "thermal"
-mandatory = true
+mandatory = false
 versionRange = "${thermal_core_version_range}"
 ordering = "AFTER"
 side = "BOTH"

@@ -84,16 +84,16 @@ repositories {
 dependencies {
     minecraft "net.neoforged:forge:${mc_version}-${neo_version}"
 
-    implementation fg.deobf("com.teamcofh:cofh_core:${mc_version}-${cofh_core_version}")
-    implementation fg.deobf("com.teamcofh:thermal_core:${mc_version}-${thermal_core_version}")
-    implementation fg.deobf("com.teamcofh:thermal_expansion:${mc_version}-${thermal_expansion_version}")
-    implementation fg.deobf("com.teamcofh:thermal_foundation:${mc_version}-${thermal_foundation_version}")
+    compileOnly fg.deobf("com.teamcofh:cofh_core:${mc_version}-${cofh_core_version}")
+    compileOnly fg.deobf("com.teamcofh:thermal_core:${mc_version}-${thermal_core_version}")
+    compileOnly fg.deobf("com.teamcofh:thermal_expansion:${mc_version}-${thermal_expansion_version}")
+    compileOnly fg.deobf("com.teamcofh:thermal_foundation:${mc_version}-${thermal_foundation_version}")
 
     // compile against the JEI API but do not include it at runtime
-    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
-    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
     // at runtime, use the full JEI jar for Forge
-    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 }
 
 jar {
