@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "thermal:block/slag_bricks",
-    "side": "thermal:block/slag_bricks",
-    "top": "thermal:block/slag_bricks"
-  }
-}

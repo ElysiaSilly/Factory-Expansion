@@ -1,0 +1,7 @@
+{
+  "block.factory_expansion.flux_lamp": "Flux Lamp",
+  "block.factory_expansion.flux_lamp_inverted": "Flux Lamp (Inverted)",
+  "item.factory_expansion.black_iron_ingot": "Black Iron Ingot",
+  "item.factory_expansion.red_copper_ingot": "Red Copper Ingot",
+  "itemGroup.factory_expansion": "Factory Expansion"
+}

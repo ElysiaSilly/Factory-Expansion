@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "thermal:block/rich_slag_block",
-    "side": "thermal:block/rich_slag_block",
-    "top": "thermal:block/rich_slag_block"
-  }
-}

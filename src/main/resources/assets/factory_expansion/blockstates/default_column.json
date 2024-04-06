@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "axis=x,head=false,tail=false": {
+      "model": "factory_expansion:block/default_column/section_0",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,head=false,tail=false": {
+      "model": "factory_expansion:block/default_column/section_0"
+    },
+    "axis=z,head=false,tail=false": {
+      "model": "factory_expansion:block/default_column/section_0",
+      "x": 270
+    },
+    "axis=x,head=true,tail=false": {
+      "model": "factory_expansion:block/default_column/section_1",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,head=true,tail=false": {
+      "model": "factory_expansion:block/default_column/section_1"
+    },
+    "axis=z,head=true,tail=false": {
+      "model": "factory_expansion:block/default_column/section_1",
+      "x": 270
+    },
+    "axis=x,head=true,tail=true": {
+      "model": "factory_expansion:block/default_column/section_2",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,head=true,tail=true": {
+      "model": "factory_expansion:block/default_column/section_2"
+    },
+    "axis=z,head=true,tail=true": {
+      "model": "factory_expansion:block/default_column/section_2",
+      "x": 270
+    },
+    "axis=x,head=false,tail=true": {
+      "model": "factory_expansion:block/default_column/section_3",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,head=false,tail=true": {
+      "model": "factory_expansion:block/default_column/section_3"
+    },
+    "axis=z,head=false,tail=true": {
+      "model": "factory_expansion:block/default_column/section_3",
+      "x": 270
+    }
+  }
+}
