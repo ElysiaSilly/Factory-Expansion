@@ -5,6 +5,7 @@ import dev.teamcitrusmods.factory_expansion.FactoryExpansion;
 import dev.teamcitrusmods.factory_expansion.block.ColumnBlock;
 import dev.teamcitrusmods.factory_expansion.block.FluxLampBlock;
 import dev.teamcitrusmods.factory_expansion.block.GirderBlock;
+import dev.teamcitrusmods.factory_expansion.block.VariantBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -46,6 +47,8 @@ public class BlockRegistry {
 
 
     // Fully Custom Blocks
+
+    public static final RegistryObject<VariantBlock> MULTIPLATE = register("multiplate", () -> new VariantBlock(BlockBehaviour.Properties.copy(Blocks.ANDESITE), 6));
 
     public static final RegistryObject<ColumnBlock> DEFAULT_COLUMN = register("default_column", () -> new ColumnBlock(BlockBehaviour.Properties.copy(Blocks.BASALT)));
     public static final RegistryObject<GirderBlock> TEST_GIRDER = register("test_girder", () -> new GirderBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));

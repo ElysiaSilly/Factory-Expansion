@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "factory_expansion:block/multiplate/transition_variant_0"
+    },
+    "variant=1": {
+      "model": "factory_expansion:block/multiplate/transition_variant_1"
+    },
+    "variant=2": {
+      "model": "factory_expansion:block/multiplate/transition_variant_2"
+    },
+    "variant=3": {
+      "model": "factory_expansion:block/multiplate/transition_variant_3"
+    },
+    "variant=4": {
+      "model": "factory_expansion:block/multiplate/transition_variant_4"
+    },
+    "variant=5": {
+      "model": "factory_expansion:block/multiplate/transition_variant_5"
+    }
+  }
+}
