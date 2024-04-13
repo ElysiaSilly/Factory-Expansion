@@ -13,7 +13,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class ColumnBlock extends RotatedPillarBlock
 {
-
     /* case x
      *   head=east
      *   tail=west
@@ -44,7 +43,6 @@ public class ColumnBlock extends RotatedPillarBlock
         // CHECK CLICKED FACE TO GET NEIGHBOR??
         
         // useful variables
-        var level = pContext.getLevel();
         var currentPos = pContext.getClickedPos();
         var clickedFace = pContext.getClickedFace();
 
@@ -74,6 +72,7 @@ public class ColumnBlock extends RotatedPillarBlock
                 break;
         }
 
+        var level = pContext.getLevel();
         BlockState neighborState = level.getBlockState(neighborPos);
 
         var currentBlock = this.asBlock();

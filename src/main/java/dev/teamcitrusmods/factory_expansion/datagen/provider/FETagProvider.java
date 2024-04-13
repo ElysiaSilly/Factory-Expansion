@@ -42,6 +42,8 @@ public class FETagProvider {
                         BlockRegistry.RICH_SLAG_BLOCK_SLAB.get(), BlockRegistry.RICH_SLAG_BLOCK_STAIRS.get(), BlockRegistry.RICH_SLAG_BLOCK_WALL.get()
                 );
             }
+
+            tag(BlockTags.WALLS).add(BlockRegistry.TEST_GIRDER.get());
         }
     }
 }

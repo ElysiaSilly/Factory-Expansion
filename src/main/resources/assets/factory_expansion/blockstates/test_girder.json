@@ -1,0 +1,20 @@
+{
+	"variants": {
+		"axis=x": {
+			"model": "factory_expansion:block/test_girder",
+			"y": 90
+		},
+		"axis=y,ymode=false": {
+			"model": "factory_expansion:block/test_girder",
+			"x": 90
+		},
+		"axis=y,ymode=true": {
+			"model": "factory_expansion:block/test_girder",
+			"x": 90,
+			"y": 90
+		},
+		"axis=z": {
+			"model": "factory_expansion:block/test_girder"
+		}
+	}
+}
