@@ -16,30 +16,37 @@ Factory Expansion is an industrial-style decoration mod which focuses on adding 
 We are not responsible, nor do we take responsibility and liability for any accidents caused by build code violations, safety hazards, and unregulated substances/chemicals.
 '''
 
-[[dependencies.thermal_fne]]
+[[dependencies.factory_expansion]]
     modId="forge"
     mandatory=true
     versionRange="${neo_version_range}"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.thermal_fne]]
+[[dependencies.factory_expansion]]
     modId="minecraft"
     mandatory=true
     versionRange="${mc_version_range}"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.thermal_fne]]
+[[dependencies.factory_expansion]]
 modId = "cofh_core"
 mandatory = false
 versionRange = "${cofh_core_version_range}"
 ordering = "AFTER"
 side = "BOTH"
 
-[[dependencies.thermal_fne]]
+[[dependencies.factory_expansion]]
 modId = "thermal"
 mandatory = false
 versionRange = "${thermal_core_version_range}"
 ordering = "AFTER"
 side = "BOTH"
+
+[[dependencies.factory_expansion]]
+modId="fusion"
+mandatory=true
+versionRange="[1.0.0,)"
+ordering="NONE"
+side="CLIENT"

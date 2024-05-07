@@ -1,6 +1,5 @@
 package dev.teamcitrusmods.factory_expansion.block;
 
-import dev.teamcitrusmods.factory_expansion.FactoryExpansion;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -11,8 +10,11 @@ import org.jetbrains.annotations.Nullable;
 public class VariantBlock extends Block
 {
     public static final IntegerProperty VARIANT = IntegerProperty.create("variant", 0, 7);
+
+    // max allowed variants, up to 8 (0..7)
     private final int MAXVARIANTS;
 
+    // stored random number to keep it synced between client and server
     private static int storedVariant;
 
     public VariantBlock(Properties pProperties, int maxVariants)
@@ -31,22 +33,22 @@ public class VariantBlock extends Block
     public BlockState getStateForPlacement(BlockPlaceContext pContext)
     {
         int toSetVariant = storedVariant;
-        var level = pContext.getLevel();
 
         // if no random number was generated
         if(storedVariant < 0)
         {
-
+            var level = pContext.getLevel();
             var random = level.random;
             random.setSeed(level.getGameTime());
+
+            // generate and store random number
             storedVariant = toSetVariant = random.nextInt(MAXVARIANTS);
         }
         else
         {
+            // "forget" the stored random number
             storedVariant = -1;
         }
-
-        FactoryExpansion.LOGGER.debug(level + " - val = " + toSetVariant);
 
         return super.getStateForPlacement(pContext)
                 .setValue(VARIANT, toSetVariant);
