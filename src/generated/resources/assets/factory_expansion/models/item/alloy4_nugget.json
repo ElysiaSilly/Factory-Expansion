@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "factory_expansion:item/alloy4_nugget"
+  }
+}

@@ -1,7 +1,6 @@
 package dev.teamcitrusmods.factory_expansion.datagen.provider;
 
 import dev.teamcitrusmods.factory_expansion.FactoryExpansion;
-import dev.teamcitrusmods.factory_expansion.registry.BlockRegistry;
 import dev.teamcitrusmods.factory_expansion.registry.ItemRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -16,8 +15,16 @@ public class FEItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        basicItem(ItemRegistry.BLACK_IRON_INGOT.get().asItem());
-        basicItem(ItemRegistry.RED_COPPER_INGOT.get().asItem());
+        basicItem(ItemRegistry.ALLOY1_INGOT.get().asItem());
+        basicItem(ItemRegistry.ALLOY2_INGOT.get().asItem());
+        basicItem(ItemRegistry.ALLOY3_INGOT.get().asItem());
+        basicItem(ItemRegistry.ALLOY4_INGOT.get().asItem());
+
+        basicItem(ItemRegistry.COPPER_NUGGET.get().asItem());
+        basicItem(ItemRegistry.ALLOY3_NUGGET.get().asItem());
+        basicItem(ItemRegistry.ALLOY4_NUGGET.get().asItem());
+
+        basicItem(ItemRegistry.REDSTONE_LIGHTBULB.get().asItem());
 
         if(ModList.get().isLoaded("thermal")) {
             wallInventory("slag_block_wall", new ResourceLocation("thermal", "block/slag_block"));

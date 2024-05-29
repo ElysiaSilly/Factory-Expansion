@@ -17,8 +17,16 @@ public class EnUsProvider extends LanguageProvider {
     protected void addTranslations() {
         add("itemGroup.factory_expansion", "Factory Expansion");
 
-        add(ItemRegistry.BLACK_IRON_INGOT.get(), "Black Iron Ingot");
-        add(ItemRegistry.RED_COPPER_INGOT.get(), "Red Copper Ingot");
+        add(ItemRegistry.ALLOY1_INGOT.get(), "Alloy1 Ingot");
+        add(ItemRegistry.ALLOY2_INGOT.get(), "Alloy2 Ingot");
+        add(ItemRegistry.ALLOY3_INGOT.get(), "Alloy3 Ingot");
+        add(ItemRegistry.ALLOY4_INGOT.get(), "Alloy4 Ingot");
+
+        add(ItemRegistry.COPPER_NUGGET.get(), "Copper Nugget");
+        add(ItemRegistry.ALLOY3_NUGGET.get(), "Alloy3 Nugget");
+        add(ItemRegistry.ALLOY4_NUGGET.get(), "Alloy4 Nugget");
+
+        add(ItemRegistry.REDSTONE_LIGHTBULB.get(), "Redstone Lightbulb");
 
         if(ModList.get().isLoaded("thermal")) {
             add(BlockRegistry.SLAG_BLOCK_SLAB.get(), "Slag Block Slab");

@@ -13,8 +13,16 @@ public class ItemRegistry {
             DeferredRegister.create(ForgeRegistries.ITEMS, FactoryExpansion.MODID);
 
     // ITEMS
-    public static final RegistryObject<Item> BLACK_IRON_INGOT = register("black_iron_ingot", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> RED_COPPER_INGOT = register("red_copper_ingot", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ALLOY1_INGOT = register("alloy1_ingot", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ALLOY2_INGOT = register("alloy2_ingot", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ALLOY3_INGOT = register("alloy3_ingot", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ALLOY4_INGOT = register("alloy4_ingot", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> COPPER_NUGGET = register("copper_nugget", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ALLOY3_NUGGET = register("alloy3_nugget", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ALLOY4_NUGGET = register("alloy4_nugget", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> REDSTONE_LIGHTBULB = register("redstone_lightbulb", () -> new Item(new Item.Properties()));
 
     public static RegistryObject<Item> register(String name, Supplier<Item> supplier) {
         return ITEMS.register(name, supplier);
