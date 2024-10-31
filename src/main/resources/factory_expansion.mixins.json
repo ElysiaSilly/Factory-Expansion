@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.teamcitrus.factory_expansion.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "factory_expansion.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

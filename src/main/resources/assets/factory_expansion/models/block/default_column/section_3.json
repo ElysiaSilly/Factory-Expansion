@@ -1,6 +1,0 @@
-{
-  "parent": "factory_expansion:parent/column/top",
-  "textures": {
-    "texture": "factory_expansion:block/default_column"
-  }
-}

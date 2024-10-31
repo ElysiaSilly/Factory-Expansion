@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "factory_expansion:block/multiplate/transition_variant_2"
-  }
-}
