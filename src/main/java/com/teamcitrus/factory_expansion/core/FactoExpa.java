@@ -9,9 +9,9 @@ import org.slf4j.Logger;
 
 @Mod(FactoExpa.MODID)
 public class FactoExpa {
-    public static final String MODID = "factory_expansion";
-    private static final Logger LOGGER = LogUtils.getLogger();
 
+    public static final String MODID = "factory_expansion";
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public FactoExpa(IEventBus bus, ModContainer container) {
 
