@@ -1,6 +1,6 @@
 package com.teamcitrus.factory_expansion.common.event;
 
-import com.teamcitrus.factory_expansion.common.flamethrower.Canister;
+import com.teamcitrus.factory_expansion.common.flamethrower.CanisterType;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -14,12 +14,13 @@ import net.neoforged.neoforge.registries.RegistryBuilder;
 public class FactoExpaRegistries {
 
     // the resourcekey for our custom registry (factory_expansion:canister_type)
-    public static final ResourceKey<Registry<Canister>> CANISTER_TYPE_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(FactoExpa.MODID, "canister_type"));
+    public static final ResourceKey<Registry<CanisterType>> CANISTER_TYPE_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(FactoExpa.MODID, "canister_type"));
 
     // our custom registry
-    public static final Registry<Canister> CANISTER_TYPE = new RegistryBuilder<>(CANISTER_TYPE_REGISTRY_KEY)
+    public static final Registry<CanisterType> CANISTER_TYPE = new RegistryBuilder<>(CANISTER_TYPE_REGISTRY_KEY)
             .defaultKey(ResourceLocation.fromNamespaceAndPath(FactoExpa.MODID, "empty")) // default value, like how items and blocks default to minecraft:air
             .create();
+
 
     // creates our custom registry
     @SubscribeEvent

@@ -1,17 +1,20 @@
 package com.teamcitrus.factory_expansion.common.item;
 
+import com.teamcitrus.factory_expansion.common.event.FactoExpaRegistries;
+import com.teamcitrus.factory_expansion.common.flamethrower.itemCanisterData.CanisterData;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
-import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -26,7 +29,7 @@ public class FlamethrowerItem extends Item {
     }
 
     private final List<ItemEntity> items = new ArrayList<>();
-
+    
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
 
@@ -34,10 +37,22 @@ public class FlamethrowerItem extends Item {
 
         if(!(entity instanceof Player player)) return;
 
+        if(!(player.isShiftKeyDown())) return;
+
         if(Minecraft.getInstance().hitResult == null) return;
 
+        ItemStack itemStack = player.getInventory().getItem(1);
+
+        Holder<Item> item = itemStack.getItemHolder();
+
+        CanisterData data = item.getData(CanisterData.getDataMap());
+
+        if(data != null) item.getData(CanisterData.getDataMap()).getCanisterType().process(getDefaultInstance(), itemStack, level, player, player.getLookAngle());
+
+
+        /*
         level.addParticle(ParticleTypes.FLAME, player.position().x, player.position().y + 1.4, player.position().z, player.getLookAngle().x, player.getLookAngle().y, player.getLookAngle().z);
-        level.addParticle(ParticleTypes.SMOKE, player.position().x, player.position().y + 1.4, player.position().z, player.getLookAngle().x, player.getLookAngle().y, player.getLookAngle().z);
+        level.addParticle(ParticleTypes.LARGE_SMOKE, player.position().x, player.position().y + 1.4, player.position().z, player.getLookAngle().x, player.getLookAngle().y, player.getLookAngle().z);
 
         //level.addParticle(ParticleTypes.FLAME, player.position().x, player.position().y + 0.3, player.position().z, 0, 2, 0);
 
@@ -83,6 +98,8 @@ public class FlamethrowerItem extends Item {
             } else {
                 firstItem.discard();
             }
+
+            //quickCheck.getRecipeFor(recipe, level).get().value().
 
             items.remove(firstItem);
         } else {
