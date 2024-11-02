@@ -6,6 +6,8 @@ import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.function.Supplier;
+
 public class FEItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(FactoExpa.MODID);
 
@@ -14,4 +16,10 @@ public class FEItems {
                     new FlamethrowerItem(new Item.Properties()
                             .stacksTo(1))
             );
+
+    public static final Supplier<Item> VANTA_ALLOY = ITEMS.registerSimpleItem("vanta_alloy", new Item.Properties());
+    public static final Supplier<Item> PALE_ALLOY = ITEMS.registerSimpleItem("pale_alloy", new Item.Properties());
+    public static final Supplier<Item> DESERT_ALLOY = ITEMS.registerSimpleItem("desert_alloy", new Item.Properties());
+    public static final Supplier<Item> BRASS_ALLOY = ITEMS.registerSimpleItem("brass_alloy", new Item.Properties());
+
 }
