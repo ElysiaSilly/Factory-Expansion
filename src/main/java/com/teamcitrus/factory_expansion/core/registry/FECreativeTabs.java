@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class FECreativeModeTabs {
+public class FECreativeTabs {
 
     public static final DeferredRegister<CreativeModeTab> CREATIVETABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, FactoExpa.MODID);
 
@@ -18,9 +18,9 @@ public class FECreativeModeTabs {
             .title(Component.translatable("itemGroup.factory_expansion"))
             .icon(() -> new ItemStack(Blocks.BARRIER))
             .displayItems((parameters, output) -> {
-                //for (DeferredHolder<Item, ? extends Item> item : MUBlocks.BLOCKITEMS.getEntries()) {
-                //    output.accept(item.get());
-                //}
+                for (DeferredHolder<Item, ? extends Item> item : FEBlocks.BLOCKITEMS.getEntries()) {
+                    output.accept(item.get());
+                }
                 for (DeferredHolder<Item, ? extends Item> item : FEItems.ITEMS.getEntries()) {
                     output.accept(item.get());
                 }
