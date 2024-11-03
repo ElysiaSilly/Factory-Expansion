@@ -1,14 +1,15 @@
 package com.teamcitrus.factory_expansion.common.item;
 
-import com.teamcitrus.factory_expansion.common.flamethrower.itemCanisterData.CanisterData;
+import com.teamcitrus.factory_expansion.common.flamethrower.canisterData.CanisterComponent;
+import com.teamcitrus.factory_expansion.common.flamethrower.canisterData.CanisterData;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
+import com.teamcitrus.factory_expansion.core.registry.FEComponents;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -55,84 +56,21 @@ public class FlamethrowerItem extends Item {
 
         Holder<Item> item = itemStack.getItemHolder();
 
-        CanisterData data = item.getData(CanisterData.getDataMap());
+        CanisterData data = item.getData(CanisterData.DATAMAP);
+        if(data == null) return;
 
-        if(data != null) item.getData(CanisterData.getDataMap()).getCanisterType().process(getDefaultInstance(), itemStack, level, player, player.getLookAngle());
+        data.getCanisterType().process(getDefaultInstance(), itemStack, level, player, player.getLookAngle());
 
-        /*
-        level.addParticle(ParticleTypes.FLAME, player.position().x, player.position().y + 1.4, player.position().z, player.getLookAngle().x, player.getLookAngle().y, player.getLookAngle().z);
-        level.addParticle(ParticleTypes.LARGE_SMOKE, player.position().x, player.position().y + 1.4, player.position().z, player.getLookAngle().x, player.getLookAngle().y, player.getLookAngle().z);
-
-        //level.addParticle(ParticleTypes.FLAME, player.position().x, player.position().y + 0.3, player.position().z, 0, 2, 0);
-
-
-        Vec3 pos = Minecraft.getInstance().hitResult.getLocation();
-
-        items.clear();
-
-        for(Entity resultEntity : level.getEntities(null, new AABB(pos, pos).inflate(0.5))) {
-
-            if(resultEntity instanceof ItemEntity itemEntity) {
-                items.add(itemEntity);
-            } else {
-                resultEntity.igniteForSeconds(10);
-                //resultEntity.hurt(DamageTypes.ON_FIRE.)
-                Vec3 entityPos = resultEntity.position();
-                level.addParticle(ParticleTypes.LAVA, entityPos.x, entityPos.y + 0.3, entityPos.z, 0, 0.01, 0);
-
-            }
-
-        }
-
-        if(items.isEmpty()) return;
-
-        ItemEntity firstItem = items.getFirst();
-        Vec3 firstItemPos = firstItem.position();
-
-        RecipeManager.CachedCheck<SingleRecipeInput, ? extends AbstractCookingRecipe> quickCheck = RecipeManager.createCheck(RecipeType.SMELTING);
-
-        SingleRecipeInput recipe = new SingleRecipeInput(firstItem.getItem());
-
-        if(quickCheck.getRecipeFor(recipe, level).isPresent()) {
-
-            level.addParticle(ParticleTypes.LAVA, firstItemPos.x, firstItemPos.y + 0.3, firstItemPos.z, 0, 0.01, 0);
-
-            ItemStack output = quickCheck.getRecipeFor(recipe, level).get().value().getResultItem(level.registryAccess());
-
-            ItemEntity newItem = new ItemEntity(level, firstItem.position().x, firstItem.position().y, firstItem.position().z, new ItemStack(output.getItem()));
-            level.addFreshEntity(newItem);
-
-            if(firstItem.getItem().getCount() > 1) {
-                firstItem.setItem(firstItem.getItem().split(firstItem.getItem().getCount() - 1));
-            } else {
-                firstItem.discard();
-            }
-
-            //quickCheck.getRecipeFor(recipe, level).get().value().
-
-            items.remove(firstItem);
+        if(!itemStack.has(FEComponents.CANISTER)) {
+            itemStack.set(FEComponents.CANISTER, new CanisterComponent(data.getCapacity(), data.getCapacity()));
         } else {
-            level.addParticle(ParticleTypes.SMOKE, firstItemPos.x, firstItemPos.y + 0.3, firstItemPos.z, 0, 0.01, 0);
-
-        }
-
-        /*
-        if(firstItem.getItem().is(Items.IRON_ORE)) {
-
-            ItemEntity newItem = new ItemEntity(level, firstItem.position().x, firstItem.position().y, firstItem.position().z, new ItemStack(Items.IRON_INGOT));
-
-            level.addFreshEntity(newItem);
-
-            if(firstItem.getItem().getCount() > 1) {
-                firstItem.setItem(firstItem.getItem().split(firstItem.getItem().getCount() - 1));
-            } else {
-                firstItem.discard();
+            if((itemStack.get(FEComponents.CANISTER).used()) > 1) {
+            itemStack.set(FEComponents.CANISTER, (itemStack.get(FEComponents.CANISTER).decreaseUses()));
+            player.displayClientMessage(Component.literal(String.valueOf(itemStack.get(FEComponents.CANISTER).used())), true);
+        } else {
+                player.getInventory().removeItem(1, 1);
             }
-
-            items.remove(firstItem);
         }
-
-         */
     }
 
 
