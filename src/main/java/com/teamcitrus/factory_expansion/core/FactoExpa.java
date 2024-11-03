@@ -25,5 +25,8 @@ public class FactoExpa {
         //? FERecipeTypes.RECIPE_TYPES.register(bus);
         FECanisterTypes.CANISTER.register(bus);
 
+        /// Capabilities, yahoo
+        bus.addListener(FECapabilities::registerCapabilities);
+
     }
 }
