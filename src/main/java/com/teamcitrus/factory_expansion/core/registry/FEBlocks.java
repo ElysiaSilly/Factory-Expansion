@@ -1,5 +1,6 @@
 package com.teamcitrus.factory_expansion.core.registry;
 
+import com.teamcitrus.factory_expansion.common.block.VariantBlock;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
@@ -21,6 +22,9 @@ public class FEBlocks {
             = registerBlockItem("pale_alloy_block", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
     public static final Supplier<? extends Block> VANTA_ALLOY_BLOCK
             = registerBlockItem("vanta_alloy_block", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
+
+    public static final Supplier<?> TRANS_BLOCK
+            = registerBlockItem("trans_block", () -> new VariantBlock(getProperties(Blocks.WHITE_WOOL), 3));
 
     // HELPERS
 

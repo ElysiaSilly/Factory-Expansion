@@ -19,8 +19,10 @@ public class FactoExpa {
         FEBlocks.BLOCKITEMS.register(bus);
         FEBlocks.BLOCKS.register(bus);
         FECreativeTabs.CREATIVETABS.register(bus);
-        FERecipeSerializer.RECIPE_SERIALIZERS.register(bus);
-        FERecipeTypes.RECIPE_TYPES.register(bus);
+
+        //? what is this stuff?
+        //? FERecipeSerializer.RECIPE_SERIALIZERS.register(bus);
+        //? FERecipeTypes.RECIPE_TYPES.register(bus);
         FECanisterTypes.CANISTER.register(bus);
 
     }
