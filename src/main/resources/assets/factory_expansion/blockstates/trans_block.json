@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "minecraft:block/white_wool"
+    },
+    "variant=1": {
+      "model": "minecraft:block/pink_wool"
+    },
+    "variant=2": {
+      "model": "minecraft:block/light_blue_wool"
+    }
+  }
+}
