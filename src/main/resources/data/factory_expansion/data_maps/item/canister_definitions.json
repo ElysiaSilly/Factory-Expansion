@@ -1,0 +1,16 @@
+{
+  "values": {
+    "minecraft:carrot": {
+      "type": "factory_expansion:soul",
+      "uses": 100
+    },
+    "minecraft:apple": {
+      "type": "factory_expansion:blaze",
+      "uses": 100
+    },
+    "minecraft:beetroot": {
+      "type": "factory_expansion:soul",
+      "uses": 100
+    }
+  }
+}

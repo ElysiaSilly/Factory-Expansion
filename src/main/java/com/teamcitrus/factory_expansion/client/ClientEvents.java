@@ -10,7 +10,7 @@ import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsE
 
 @SuppressWarnings({"unused"})
 @EventBusSubscriber(modid = FactoExpa.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class ClientRegistries {
+public class ClientEvents {
 
     @SubscribeEvent
     public static void onRegisterClientExtensions(RegisterClientExtensionsEvent e) {

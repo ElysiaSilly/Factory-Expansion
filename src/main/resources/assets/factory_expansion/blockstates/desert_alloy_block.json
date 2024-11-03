@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "factory_expansion:block/desert_alloy_block"
+    }
+  }
+}

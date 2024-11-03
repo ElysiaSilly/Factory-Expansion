@@ -17,13 +17,11 @@ public class FlamethrowerRenderer extends BlockEntityWithoutLevelRenderer {
 
     @Override
     public void renderByItem(ItemStack stack, ItemDisplayContext displayContext, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
-        System.out.println("rendering 1!");
 
         if(stack.is(FEItems.FLAMETHROWER)) {
-            System.out.println("rendering 2!");
+            //System.out.println("rendering 2!");
             Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Blocks.ACACIA_PLANKS.defaultBlockState(), poseStack, buffer, packedLight, packedOverlay);
         }
 
-        System.out.println("rendering 3!");
     }
 }

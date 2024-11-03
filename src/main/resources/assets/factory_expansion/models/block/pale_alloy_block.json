@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "factory_expansion:block/pale_alloy_block"
+  }
+}
