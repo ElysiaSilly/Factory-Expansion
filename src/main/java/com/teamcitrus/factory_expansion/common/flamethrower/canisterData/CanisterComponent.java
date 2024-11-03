@@ -9,6 +9,8 @@ import net.minecraft.network.codec.StreamCodec;
 
 public record CanisterComponent(int capacity, int used) {
 
+    // TODO : move this from a record so fields arent final
+
     public static MapCodec<CanisterComponent> MAP_CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(
             Codec.INT.fieldOf("capacity").forGetter(CanisterComponent::capacity),
             Codec.INT.fieldOf("used").forGetter(CanisterComponent::used)

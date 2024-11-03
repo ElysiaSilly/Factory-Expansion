@@ -4,10 +4,8 @@ import com.teamcitrus.factory_expansion.common.flamethrower.canisterData.Caniste
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.registries.RegistryBuilder;
 
-@EventBusSubscriber(modid = FactoExpa.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class FactoExpaRegistries {
 
     // the resourcekey for our custom registry (factory_expansion:canister_type)

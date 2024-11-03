@@ -1,5 +1,3 @@
 {
-  "itemGroup.factory_expansion": "Example Mod Tab",
-  "block.factory_expansion.example_block": "Example Block",
-  "item.factory_expansion.example_item": "Example Item"
+  "itemGroup.factory_expansion": "Factory Expansion"
 }

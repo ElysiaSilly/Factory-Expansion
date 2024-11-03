@@ -1,4 +1,4 @@
-package com.teamcitrus.factory_expansion.client;
+package com.teamcitrus.factory_expansion.client.event;
 
 import com.teamcitrus.factory_expansion.client.render.FlamethrowerExtension;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
@@ -10,7 +10,7 @@ import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsE
 
 @SuppressWarnings({"unused"})
 @EventBusSubscriber(modid = FactoExpa.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class ClientModEvents {
+public class ModRegistries {
 
     @SubscribeEvent
     public static void onRegisterClientExtensions(RegisterClientExtensionsEvent event) {
