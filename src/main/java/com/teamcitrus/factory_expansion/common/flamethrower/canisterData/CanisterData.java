@@ -1,12 +1,10 @@
-package com.teamcitrus.factory_expansion.common.flamethrower.itemCanisterData;
+package com.teamcitrus.factory_expansion.common.flamethrower.canisterData;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.teamcitrus.factory_expansion.common.event.FactoExpaRegistries;
-import com.teamcitrus.factory_expansion.common.flamethrower.CanisterType;
+import com.teamcitrus.factory_expansion.core.FactoExpaRegistries;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -21,18 +19,27 @@ public class CanisterData {
 
     public static final Codec<CanisterData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.STRING.fieldOf("type").forGetter(CanisterData -> CanisterData._type),
-            Codec.INT.fieldOf("uses").forGetter(CanisterData -> CanisterData.uses)
+            Codec.INT.fieldOf("capacity").forGetter(CanisterData -> CanisterData.uses),
+            Codec.BOOL.fieldOf("break").forGetter(CanisterData -> CanisterData.breakWhenEmpty),
+            Codec.STRING.fieldOf("model").forGetter((CanisterData -> CanisterData._modelPath))
     ).apply(instance, CanisterData::new));
 
     private final String _type;
+    private final String _modelPath;
 
     private final CanisterType canisterType;
     private final int uses;
+    private final boolean breakWhenEmpty;
+    private final ResourceLocation modelPath; // will be used for rendering the canister on the flamethrower
 
-    private CanisterData(String type, int uses) {
+    private CanisterData(String type, int uses, boolean breakWhenEmpty, String modelPath) {
         this._type = type;
+        this._modelPath = modelPath;
+
         this.uses =  uses;
         this.canisterType = FactoExpaRegistries.CANISTER_TYPE.get(ResourceLocation.parse(type));
+        this.breakWhenEmpty = breakWhenEmpty;
+        this.modelPath = ResourceLocation.parse(modelPath);
 
         // TODO : datamaps apparently just fail completely if one entry is borked |:
         // TODO : look into fixing this somehow
@@ -45,6 +52,14 @@ public class CanisterData {
 
     public int getUses() {
         return this.uses;
+    }
+
+    public boolean breakWhenEmpty() {
+        return this.breakWhenEmpty;
+    }
+
+    public ResourceLocation getModelPath() {
+        return this.modelPath;
     }
 
     private static final DataMapType<Item, CanisterData> DATAMAP = DataMapType.builder(
