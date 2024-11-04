@@ -59,12 +59,20 @@ public class GirderBlock extends Block implements SimpleWaterloggedBlock {
         boolean Y = state.getValue(Y_AXIS);
         boolean Z = state.getValue(Z_AXIS);
 
-        boolean isConnectable = neighborState.is(this) || neighborState.getBlock() instanceof IronBarsBlock || neighborState.getBlock() instanceof WallBlock;
-        boolean isOppositeOpposite = level.getBlockState(pos.relative(direction.getOpposite(), 1)).is(this) || level.getBlockState(pos.relative(direction.getOpposite(), 1)).getBlock() instanceof IronBarsBlock || level.getBlockState(pos.relative(direction.getOpposite(), 1)).getBlock() instanceof WallBlock;
+        boolean neighbourCanConnect;
+        boolean oppositeNeighbourCanConnect;
 
-        boolean isTheLastState = (state.getValue(Y_AXIS) ^ state.getValue(X_AXIS) ^ state.getValue(Z_AXIS)) && !(state.getValue(Y_AXIS) && state.getValue(X_AXIS) && state.getValue(Z_AXIS));
+        if(direction != Direction.UP && direction != Direction.DOWN) {
+            neighbourCanConnect = neighborState.is(this) || neighborState.getBlock() instanceof IronBarsBlock || neighborState.getBlock() instanceof WallBlock;
+            oppositeNeighbourCanConnect = level.getBlockState(pos.relative(direction.getOpposite(), 1)).is(this) || level.getBlockState(pos.relative(direction.getOpposite(), 1)).getBlock() instanceof IronBarsBlock || level.getBlockState(pos.relative(direction.getOpposite(), 1)).getBlock() instanceof WallBlock;
+        } else {
+            neighbourCanConnect = neighborState.is(this) ? neighborState.getValue(Y_AXIS) : false;
+            oppositeNeighbourCanConnect = level.getBlockState(pos.relative(direction.getOpposite(), 1)).is(this) ? level.getBlockState(pos.relative(direction.getOpposite(), 1)).getValue(Y_AXIS) : false;
+        }
 
-        boolean update = (isConnectable || isOppositeOpposite);
+        boolean isLastConnection = (state.getValue(Y_AXIS) ^ state.getValue(X_AXIS) ^ state.getValue(Z_AXIS)) && !(state.getValue(Y_AXIS) && state.getValue(X_AXIS) && state.getValue(Z_AXIS));
+
+        boolean update = (neighbourCanConnect || oppositeNeighbourCanConnect);
 
         switch(direction) {
             case WEST, EAST -> X = update;
@@ -72,7 +80,7 @@ public class GirderBlock extends Block implements SimpleWaterloggedBlock {
             case UP, DOWN -> Y = update;
         }
 
-        if(!(isTheLastState && !update)) {
+        if(!(isLastConnection && !update)) {
             level.setBlock(pos, state.setValue(Y_AXIS, Y).setValue(X_AXIS, X).setValue(Z_AXIS, Z), 3);
         }
 
@@ -115,7 +123,10 @@ public class GirderBlock extends Block implements SimpleWaterloggedBlock {
         BlockPos clickedPos = context.getClickedPos();
         Level level = context.getLevel();
 
-        if(level.getBlockState(clickedPos.above()).is(this) || level.getBlockState(clickedPos.below()).is(this)) {
+        boolean above = level.getBlockState(clickedPos.above()).is(this) ? level.getBlockState(clickedPos.above()).getValue(Y_AXIS) : false;
+        boolean below = level.getBlockState(clickedPos.below()).is(this) ? level.getBlockState(clickedPos.below()).getValue(Y_AXIS) : false;
+
+        if(above || below) {
             Y = true;
             hasNeighbours = true;
         }
