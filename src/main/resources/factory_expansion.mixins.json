@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "factory_expansion.refmap.json",
   "mixins": [
+    "FireBlockMixin"
   ],
   "client": [
   ],
