@@ -33,4 +33,5 @@ public class FECanisterTypes {
                     ResourceLocation.parse("null")
             ));
 
+    // TODO : demeter compat, canister that changes animal gender
 }
