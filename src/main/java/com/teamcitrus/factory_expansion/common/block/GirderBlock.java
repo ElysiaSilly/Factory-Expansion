@@ -11,8 +11,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -27,7 +26,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Objects;
 
-public class GirderBlock extends Block {
+public class GirderBlock extends Block implements SimpleWaterloggedBlock {
 
     private static final VoxelShape SHAPE_X = Block.box(0, 0, 4, 16, 16, 12);
     private static final VoxelShape SHAPE_Y = Block.box(4, 0, 4, 12, 16, 12);
@@ -52,17 +51,20 @@ public class GirderBlock extends Block {
     @Override
     protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
 
-        boolean isGirder = neighborState.is(this);
+        if (state.getValue(WATERLOGGED)) {
+            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
 
         boolean X = state.getValue(X_AXIS);
         boolean Y = state.getValue(Y_AXIS);
         boolean Z = state.getValue(Z_AXIS);
 
-        boolean isOppositeGirder = level.getBlockState(pos.relative(direction.getOpposite(), 1)).is(this);
+        boolean isConnectable = neighborState.is(this) || neighborState.getBlock() instanceof IronBarsBlock || neighborState.getBlock() instanceof WallBlock;
+        boolean isOppositeOpposite = level.getBlockState(pos.relative(direction.getOpposite(), 1)).is(this) || level.getBlockState(pos.relative(direction.getOpposite(), 1)).getBlock() instanceof IronBarsBlock || level.getBlockState(pos.relative(direction.getOpposite(), 1)).getBlock() instanceof WallBlock;
 
         boolean isTheLastState = (state.getValue(Y_AXIS) ^ state.getValue(X_AXIS) ^ state.getValue(Z_AXIS)) && !(state.getValue(Y_AXIS) && state.getValue(X_AXIS) && state.getValue(Z_AXIS));
 
-        boolean update = (isGirder || isOppositeGirder);
+        boolean update = (isConnectable || isOppositeOpposite);
 
         switch(direction) {
             case WEST, EAST -> X = update;
@@ -147,23 +149,8 @@ public class GirderBlock extends Block {
                 }
             }
         }
-        
+
         return Objects.requireNonNull(super.getStateForPlacement(context)).setValue(Y_AXIS, Y).setValue(X_AXIS, X).setValue(Z_AXIS, Z).setValue(WATERLOGGED, level.getFluidState(clickedPos).is(Fluids.WATER));
-    }
-
-    @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-
-        // TODO : fluidlogging, cant be arsed right now
-
-        ItemInteractionResult result = ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
-
-        if(stack.is(Items.WATER_BUCKET)) {
-            level.setBlock(pos, state.setValue(WATERLOGGED, true), 3);
-            result = ItemInteractionResult.SUCCESS;
-        }
-
-        return result;
     }
 
     @Override
