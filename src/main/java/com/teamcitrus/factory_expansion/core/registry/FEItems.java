@@ -3,10 +3,13 @@ package com.teamcitrus.factory_expansion.core.registry;
 import com.teamcitrus.factory_expansion.common.item.FlamethrowerItem;
 import com.teamcitrus.factory_expansion.common.item.WrenchItem;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.ArrayList;
 import java.util.function.Supplier;
 
 public class FEItems {
@@ -15,8 +18,9 @@ public class FEItems {
     public static final DeferredItem<FlamethrowerItem> FLAMETHROWER =
             ITEMS.register("flamethrower", () ->
                     new FlamethrowerItem(new Item.Properties()
-                            .stacksTo(1))
-            );
+                            .stacksTo(1)
+                            .component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
+                    ));
 
     public static final DeferredItem<WrenchItem> WRENCH =
             ITEMS.register("wrench", () ->
