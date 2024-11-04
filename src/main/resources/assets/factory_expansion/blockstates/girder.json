@@ -1,0 +1,49 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "factory_expansion:block/girder_horizontal"
+      },
+      "when": {
+        "x": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "factory_expansion:block/girder_vertical"
+      },
+      "when": {
+        "y": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "factory_expansion:block/girder_horizontal",
+        "y": 90
+      },
+      "when": {
+        "z": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "factory_expansion:block/girder_midsection"
+      },
+      "when": {
+        "y": "false",
+        "z": "false",
+        "x": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "factory_expansion:block/girder_midsection",
+        "y": 90
+      },
+      "when": {
+        "y": "false",
+        "z": "true"
+      }
+    }
+  ]
+}

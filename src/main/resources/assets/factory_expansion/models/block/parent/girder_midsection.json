@@ -1,0 +1,69 @@
+{
+	"credit": "an ElysiaSilly creation :D",
+	"textures": {
+		"particle": "#side",
+		"side": "#side",
+		"extra": "#extra"
+	},
+	"elements": [
+		{
+			"name": "top",
+			"from": [4, 14, 4],
+			"to": [12, 16, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, 15, 8]},
+			"faces": {
+				"north": {"uv": [4, 0, 12, 2], "texture": "#side"},
+				"east": {"uv": [8, 8, 12, 9], "texture": "#extra"},
+				"south": {"uv": [4, 0, 12, 2], "texture": "#side"},
+				"west": {"uv": [8, 8, 12, 9], "texture": "#extra"},
+				"up": {"uv": [2, 12, 6, 16], "rotation": 180, "texture": "#extra", "cullface": "up"},
+				"down": {"uv": [2, 0, 6, 4], "rotation": 180, "texture": "#extra"}
+			}
+		},
+		{
+			"name": "bottom",
+			"from": [4, 0, 4],
+			"to": [12, 2, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, 1, 8]},
+			"faces": {
+				"north": {"uv": [4, 14, 12, 16], "texture": "#side"},
+				"east": {"uv": [8, 15, 12, 16], "texture": "#extra"},
+				"south": {"uv": [4, 14, 12, 16], "texture": "#side"},
+				"west": {"uv": [8, 15, 12, 16], "texture": "#extra"},
+				"up": {"uv": [2, 4, 6, 8], "rotation": 180, "texture": "#extra"},
+				"down": {"uv": [2, 8, 6, 12], "texture": "#extra", "cullface": "down"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 45, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 225, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.25, 0.25, 0.25]
+		},
+		"gui": {
+			"rotation": [30, 225, 0],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"fixed": {
+			"scale": [0.5, 0.5, 0.5]
+		}
+	}
+}

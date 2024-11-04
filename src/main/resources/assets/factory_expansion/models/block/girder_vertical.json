@@ -1,0 +1,7 @@
+{
+  "parent": "factory_expansion:block/parent/girder_vertical",
+  "textures": {
+    "side": "factory_expansion:block/girder_side",
+    "extra": "factory_expansion:block/girder_extra"
+  }
+}
