@@ -1,5 +1,6 @@
 package com.teamcitrus.factory_expansion.common.block;
 
+import com.teamcitrus.factory_expansion.common.block.interfaces.IWrenchableBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -26,7 +28,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Objects;
 
-public class GirderBlock extends Block implements SimpleWaterloggedBlock {
+public class GirderBlock extends Block implements SimpleWaterloggedBlock, IWrenchableBlock {
 
     private static final VoxelShape SHAPE_X = Block.box(0, 0, 4, 16, 16, 12);
     private static final VoxelShape SHAPE_Y = Block.box(4, 0, 4, 12, 16, 12);
@@ -172,5 +174,20 @@ public class GirderBlock extends Block implements SimpleWaterloggedBlock {
     @Override
     protected FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    }
+
+    @Override
+    public boolean onWrench(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
+
+        // shoddy behaviour
+
+        if(player.isShiftKeyDown()) {
+            if(!state.getValue(Z_AXIS) && !state.getValue(X_AXIS)) return false;
+            level.setBlock(pos, state.cycle(Y_AXIS), 3);
+        } else {
+            if(state.getValue(Z_AXIS) && state.getValue(X_AXIS)) return false;
+            level.setBlock(pos, state.cycle(Z_AXIS).cycle(X_AXIS), 3);
+        }
+        return true;
     }
 }

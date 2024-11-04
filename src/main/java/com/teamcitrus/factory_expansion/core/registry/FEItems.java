@@ -1,6 +1,7 @@
 package com.teamcitrus.factory_expansion.core.registry;
 
 import com.teamcitrus.factory_expansion.common.item.FlamethrowerItem;
+import com.teamcitrus.factory_expansion.common.item.WrenchItem;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -14,6 +15,12 @@ public class FEItems {
     public static final DeferredItem<FlamethrowerItem> FLAMETHROWER =
             ITEMS.register("flamethrower", () ->
                     new FlamethrowerItem(new Item.Properties()
+                            .stacksTo(1))
+            );
+
+    public static final DeferredItem<WrenchItem> WRENCH =
+            ITEMS.register("wrench", () ->
+                    new WrenchItem(new Item.Properties()
                             .stacksTo(1))
             );
 

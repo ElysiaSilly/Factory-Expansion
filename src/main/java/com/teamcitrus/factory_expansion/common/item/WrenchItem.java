@@ -4,6 +4,7 @@ import com.teamcitrus.factory_expansion.common.block.interfaces.IWrenchableBlock
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -25,11 +26,12 @@ public class WrenchItem extends Item {
 
         boolean successful = false;
 
-        if(state instanceof IWrenchableBlock block) {
+        if(state.getBlock() instanceof IWrenchableBlock block) {
             Direction direction = context.getClickedFace();
             Vec3 posSpecific = context.getClickLocation();
+            Player player = context.getPlayer();
 
-            successful = block.onWrench(level, pos, state, direction, posSpecific);
+            successful = block.onWrench(level, pos, state, direction, posSpecific, player);
         }
 
         return successful ? InteractionResult.SUCCESS : super.useOn(context);
