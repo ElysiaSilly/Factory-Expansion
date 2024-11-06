@@ -1,5 +1,6 @@
 package com.teamcitrus.factory_expansion.common.flamethrower.canisterData;
 
+import com.teamcitrus.factory_expansion.common.item.FlamethrowerItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -30,6 +31,6 @@ public abstract class CanisterType {
     }
 
     // runs on the flamethrower's tick
-    public abstract void process(ItemStack flamethrower, ItemStack canisterItem, Level level, Player player, Vec3 playerLookVector);
+    public abstract void process(FlamethrowerItem flamethrower, ItemStack canisterItem, Level level, Player player, Vec3 playerLookVector);
     // put whatever you wanna do when this canister type is being used in the flamethrower here
 }

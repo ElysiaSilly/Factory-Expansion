@@ -1,6 +1,7 @@
 package com.teamcitrus.factory_expansion.common.flamethrower;
 
 import com.teamcitrus.factory_expansion.common.flamethrower.canisterData.CanisterType;
+import com.teamcitrus.factory_expansion.common.item.FlamethrowerItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -27,7 +28,7 @@ public class BlazeCanisterType extends CanisterType {
     }
 
     @Override
-    public void process(ItemStack flamethrower, ItemStack canisterItem, Level level, Player player, Vec3 playerLookVector) {
+    public void process(FlamethrowerItem flamethrower, ItemStack canisterItem, Level level, Player player, Vec3 playerLookVector) {
 
         // TODO : horrid code
 

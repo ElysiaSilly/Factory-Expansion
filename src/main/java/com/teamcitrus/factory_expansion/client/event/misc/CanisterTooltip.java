@@ -2,6 +2,8 @@ package com.teamcitrus.factory_expansion.client.event.misc;
 
 import com.teamcitrus.factory_expansion.common.flamethrower.canisterData.CanisterData;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
+import com.teamcitrus.factory_expansion.core.registry.FEComponents;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -20,14 +22,19 @@ public class CanisterTooltip {
 
     @SubscribeEvent
     public static void onRenderTooltipEvent(ItemTooltipEvent event) {
-        ItemStack itemStack = event.getItemStack();
+        ItemStack stack = event.getItemStack();
 
-        if(previous == itemStack) {
-            if(name != null) {
-                event.getToolTip().add(name);
+        if(previous == stack) {
+            if(name == null) return;
+            event.getToolTip().add(name);
+            if(!stack.has(FEComponents.CANISTER)) return;
+            if(stack.get(FEComponents.CANISTER).getCapacity() == -1) {
+                event.getToolTip().add(Component.literal("Capacity: CREATIVE"));
+            } else {
+                event.getToolTip().add(Component.literal(String.format("Capacity: %s / %s", stack.get(FEComponents.CANISTER).used(), stack.get(FEComponents.CANISTER).capacity())).withStyle(ChatFormatting.GRAY));
             }
         } else {
-            Holder<Item> item = itemStack.getItemHolder();
+            Holder<Item> item = stack.getItemHolder();
             CanisterData data = item.getData(CanisterData.DATAMAP);
             if(data != null) {
                 name = data.getCanisterType().getName();
@@ -36,6 +43,6 @@ public class CanisterTooltip {
             }
         }
 
-        previous = itemStack;
+        previous = stack;
     }
 }

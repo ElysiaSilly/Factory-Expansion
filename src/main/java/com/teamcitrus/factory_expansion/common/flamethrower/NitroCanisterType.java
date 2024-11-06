@@ -1,6 +1,7 @@
 package com.teamcitrus.factory_expansion.common.flamethrower;
 
 import com.teamcitrus.factory_expansion.common.flamethrower.canisterData.CanisterType;
+import com.teamcitrus.factory_expansion.common.item.FlamethrowerItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -15,7 +16,7 @@ public class NitroCanisterType extends CanisterType {
     }
 
     @Override
-    public void process(ItemStack flamethrower, ItemStack canisterItem, Level level, Player player, Vec3 playerLookVector) {
+    public void process(FlamethrowerItem flamethrower, ItemStack canisterItem, Level level, Player player, Vec3 playerLookVector) {
 
         if(level.isClientSide) return;
 
