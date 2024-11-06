@@ -1,0 +1,49 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "factory_expansion:block/girder/arid/horizontal"
+      },
+      "when": {
+        "x": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "factory_expansion:block/girder/arid/vertical"
+      },
+      "when": {
+        "y": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "factory_expansion:block/girder/arid/horizontal",
+        "y": 90
+      },
+      "when": {
+        "z": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "factory_expansion:block/girder/arid/midsection"
+      },
+      "when": {
+        "y": "false",
+        "z": "false",
+        "x": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "factory_expansion:block/girder/arid/midsection",
+        "y": 90
+      },
+      "when": {
+        "y": "false",
+        "z": "true"
+      }
+    }
+  ]
+}

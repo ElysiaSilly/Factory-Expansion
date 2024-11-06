@@ -1,0 +1,6 @@
+{
+  "parent": "factory_expansion:parent/flux_lamp",
+  "textures": {
+    "bulb": "factory_expansion:block/flux_lamp_lit"
+  }
+}

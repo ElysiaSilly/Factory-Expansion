@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "factory_expansion:block/girder_horizontal"
+        "model": "factory_expansion:block/girder/brass/horizontal"
       },
       "when": {
         "x": "true"
@@ -10,7 +10,7 @@
     },
     {
       "apply": {
-        "model": "factory_expansion:block/girder_vertical"
+        "model": "factory_expansion:block/girder/brass/vertical"
       },
       "when": {
         "y": "true"
@@ -18,7 +18,7 @@
     },
     {
       "apply": {
-        "model": "factory_expansion:block/girder_horizontal",
+        "model": "factory_expansion:block/girder/brass/horizontal",
         "y": 90
       },
       "when": {
@@ -27,7 +27,7 @@
     },
     {
       "apply": {
-        "model": "factory_expansion:block/girder_midsection"
+        "model": "factory_expansion:block/girder/brass/midsection"
       },
       "when": {
         "y": "false",
@@ -37,7 +37,7 @@
     },
     {
       "apply": {
-        "model": "factory_expansion:block/girder_midsection",
+        "model": "factory_expansion:block/girder/brass/midsection",
         "y": 90
       },
       "when": {

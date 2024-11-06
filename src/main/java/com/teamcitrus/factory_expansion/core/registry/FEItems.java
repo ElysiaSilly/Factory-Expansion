@@ -9,7 +9,6 @@ import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.ArrayList;
 import java.util.function.Supplier;
 
 public class FEItems {
@@ -28,9 +27,9 @@ public class FEItems {
                             .stacksTo(1))
             );
 
-    public static final Supplier<Item> VANTA_ALLOY = ITEMS.registerSimpleItem("vanta_alloy", new Item.Properties());
+    public static final Supplier<Item> BLACK_ALLOY = ITEMS.registerSimpleItem("black_alloy", new Item.Properties());
     public static final Supplier<Item> PALE_ALLOY = ITEMS.registerSimpleItem("pale_alloy", new Item.Properties());
-    public static final Supplier<Item> DESERT_ALLOY = ITEMS.registerSimpleItem("desert_alloy", new Item.Properties());
+    public static final Supplier<Item> ARID_ALLOY = ITEMS.registerSimpleItem("arid_alloy", new Item.Properties());
     public static final Supplier<Item> BRASS_ALLOY = ITEMS.registerSimpleItem("brass_alloy", new Item.Properties());
 
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "factory_expansion:item/vanta_alloy"
+    "layer0": "factory_expansion:item/black_alloy"
   }
 }
