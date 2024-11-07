@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "factory_expansion:block/chs_pipe_bundle",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "factory_expansion:block/chs_pipe_bundle"
+    },
+    "axis=z": {
+      "model": "factory_expansion:block/chs_pipe_bundle",
+      "x": 90
+    }
+  }
+}

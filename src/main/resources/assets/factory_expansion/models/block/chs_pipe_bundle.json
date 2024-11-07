@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "factory_expansion:block/chs_pipe_bundle_end",
+    "side": "factory_expansion:block/chs_pipe_bundle_side"
+  }
+}
