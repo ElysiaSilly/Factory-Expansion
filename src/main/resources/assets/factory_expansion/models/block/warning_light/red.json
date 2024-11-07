@@ -1,0 +1,6 @@
+{
+  "parent": "factory_expansion:parent/warning_light",
+  "textures": {
+    "bulb": "factory_expansion:block/warning_light/red"
+  }
+}

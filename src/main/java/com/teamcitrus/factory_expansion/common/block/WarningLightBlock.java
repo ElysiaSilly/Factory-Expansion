@@ -1,7 +1,7 @@
 package com.teamcitrus.factory_expansion.common.block;
 
 import com.mojang.serialization.MapCodec;
-import com.teamcitrus.factory_expansion.common.block.enums.LampBlockStates;
+import com.teamcitrus.factory_expansion.common.block.enums.WarningLightStates;
 import com.teamcitrus.factory_expansion.common.block.interfaces.IWrenchableBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,51 +27,41 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class LampBlock extends DirectionalBlock implements SimpleWaterloggedBlock, IWrenchableBlock {
+public class WarningLightBlock extends DirectionalBlock implements SimpleWaterloggedBlock, IWrenchableBlock {
 
-    private static final BooleanProperty LIT = BlockStateProperties.LIT;
+    public static final EnumProperty<WarningLightStates> STATE = EnumProperty.create("state", WarningLightStates.class);
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    private static final EnumProperty<LampBlockStates> MODE = EnumProperty.create("mode", LampBlockStates.class);
+    private static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
     private static final VoxelShape[] SHAPE = {
-            Block.box(4,4,5,12,12,16), // NORTH
-            Block.box(0,4,4,11,12,12), // EAST
-            Block.box(4,4,0,12,12,11), // SOUTH
-            Block.box(5,4,4,16,12,12), // WEST
-            Block.box(4,0,4,12,11,12), // UP
-            Block.box(4,5,4,12,16,12), // DOWN
+            Block.box(4,4,0,12,12,16), // NORTH, SOUTH
+            Block.box(0,4,4,16,12,12), // EAST, WEST
+            Block.box(4,0,4,12,16,12), // UP, DOWN
 
     };
 
-    public LampBlock(Properties properties, boolean UV) {
-        super(properties.noOcclusion().lightLevel((state) -> UV ? 0 : state.getValue(LIT) ? (state.getValue(MODE) == LampBlockStates.INVERTED ? 0 : 12) : (state.getValue(MODE) == LampBlockStates.INVERTED ? 12 : 0)));
+    public WarningLightBlock(Properties properties) {
+        super(properties.noOcclusion().lightLevel((state) -> state.getValue(STATE).lightLevel()));
         this.registerDefaultState(this.getStateDefinition().any()
-                .setValue(LIT, false)
+                .setValue(STATE, WarningLightStates.OFF)
                 .setValue(WATERLOGGED, false)
-                .setValue(MODE, LampBlockStates.NORMAL)
-                .setValue(FACING, Direction.DOWN)
+                .setValue(FACING, Direction.UP)
+                .setValue(POWERED, false)
         );
     }
 
     @Override
-    protected MapCodec<? extends DirectionalBlock> codec() {return null;}
-
-    @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return switch (state.getValue(FACING)) {
-            case NORTH -> SHAPE[0];
-            case EAST  -> SHAPE[1];
-            case SOUTH -> SHAPE[2];
-            case WEST  -> SHAPE[3];
-            case UP    -> SHAPE[4];
-            case DOWN  -> SHAPE[5];
+            case NORTH, SOUTH -> SHAPE[0];
+            case EAST, WEST   -> SHAPE[1];
+            case UP, DOWN     -> SHAPE[2];
         };
     }
 
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState()
-                .setValue(LIT, context.getLevel().hasNeighborSignal(context.getClickedPos()))
                 .setValue(FACING, context.getClickedFace())
                 .setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).is(Fluids.WATER));
     }
@@ -86,40 +76,52 @@ public class LampBlock extends DirectionalBlock implements SimpleWaterloggedBloc
     }
 
     @Override
-    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if(state.getValue(LIT) && !level.hasNeighborSignal(pos)) {
-            level.setBlock(pos, state.cycle(LIT), 2);
-        }
+    public boolean onWrench(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
+        return false;
     }
 
     @Override
-    public boolean onWrench(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
-
-        level.setBlock(pos, state.cycle(MODE), 3);
-
-        return true;
+    protected MapCodec<? extends DirectionalBlock> codec() {
+        return null;
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(LIT, WATERLOGGED, MODE, FACING);
+        builder.add(STATE, WATERLOGGED, FACING, POWERED);
     }
 
     @Override
     protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
         if(level.isClientSide) return;
 
-        if(state.getValue(LIT) != level.hasNeighborSignal(pos)) {
-            if(state.getValue(LIT)) {
+        if(state.getValue(POWERED) != level.hasNeighborSignal(pos)) {
+            if(state.getValue(POWERED)) {
                 level.scheduleTick(pos, this, 2);
             } else {
-                level.setBlock(pos, state.cycle(LIT), 2);
+                level.setBlock(pos, state.cycle(POWERED).cycle(STATE), 3);
             }
+        }
+    }
+
+    @Override
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if(state.getValue(POWERED) && !level.hasNeighborSignal(pos)) {
+            level.setBlock(pos, state.cycle(POWERED), 2);
         }
     }
 
     @Override
     protected FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    }
+
+    @Override
+    protected boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    @Override
+    protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+        return (15 / 3) * state.getValue(STATE).ordinal();
     }
 }

@@ -1,0 +1,108 @@
+{
+  "variants": {
+    "facing=down,state=off": {
+      "model": "factory_expansion:block/warning_light/off",
+      "x": 180
+    },
+    "facing=east,state=off": {
+      "model": "factory_expansion:block/warning_light/off",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,state=off": {
+      "model": "factory_expansion:block/warning_light/off",
+      "x": 90
+    },
+    "facing=south,state=off": {
+      "model": "factory_expansion:block/warning_light/off",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,state=off": {
+      "model": "factory_expansion:block/warning_light/off"
+    },
+    "facing=west,state=off": {
+      "model": "factory_expansion:block/warning_light/off",
+      "x": 90,
+      "y": 270
+    }, 
+    "facing=down,state=red": {
+      "model": "factory_expansion:block/warning_light/red",
+      "x": 180
+    },
+    "facing=east,state=red": {
+      "model": "factory_expansion:block/warning_light/red",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,state=red": {
+      "model": "factory_expansion:block/warning_light/red",
+      "x": 90
+    },
+    "facing=south,state=red": {
+      "model": "factory_expansion:block/warning_light/red",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,state=red": {
+      "model": "factory_expansion:block/warning_light/red"
+    },
+    "facing=west,state=red": {
+      "model": "factory_expansion:block/warning_light/red",
+      "x": 90,
+      "y": 270
+    },
+    "facing=down,state=yellow": {
+      "model": "factory_expansion:block/warning_light/yellow",
+      "x": 180
+    },
+    "facing=east,state=yellow": {
+      "model": "factory_expansion:block/warning_light/yellow",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,state=yellow": {
+      "model": "factory_expansion:block/warning_light/yellow",
+      "x": 90
+    },
+    "facing=south,state=yellow": {
+      "model": "factory_expansion:block/warning_light/yellow",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,state=yellow": {
+      "model": "factory_expansion:block/warning_light/yellow"
+    },
+    "facing=west,state=yellow": {
+      "model": "factory_expansion:block/warning_light/yellow",
+      "x": 90,
+      "y": 270
+    },
+    "facing=down,state=green": {
+      "model": "factory_expansion:block/warning_light/green",
+      "x": 180
+    },
+    "facing=east,state=green": {
+      "model": "factory_expansion:block/warning_light/green",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,state=green": {
+      "model": "factory_expansion:block/warning_light/green",
+      "x": 90
+    },
+    "facing=south,state=green": {
+      "model": "factory_expansion:block/warning_light/green",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,state=green": {
+      "model": "factory_expansion:block/warning_light/green"
+    },
+    "facing=west,state=green": {
+      "model": "factory_expansion:block/warning_light/green",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
