@@ -13,6 +13,8 @@ public class FactoExpa {
     public static final String MODID = "factory_expansion";
     public static final Logger LOGGER = LogUtils.getLogger();
 
+    public static String prefix(String string) { return MODID + ":" + string; }
+
     public FactoExpa(IEventBus bus, ModContainer container) {
 
         FEItems.ITEMS.register(bus);
