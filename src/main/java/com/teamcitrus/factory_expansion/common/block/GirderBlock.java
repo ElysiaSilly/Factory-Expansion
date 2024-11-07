@@ -168,7 +168,7 @@ public class GirderBlock extends Block implements SimpleWaterloggedBlock, IWrenc
                 }
             }
         }
-        
+
         return true;
     }
 }

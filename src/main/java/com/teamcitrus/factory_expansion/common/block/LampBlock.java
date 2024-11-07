@@ -95,7 +95,11 @@ public class LampBlock extends DirectionalBlock implements SimpleWaterloggedBloc
     @Override
     public boolean onWrench(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
 
-        level.setBlock(pos, state.cycle(MODE), 3);
+        if(player.isShiftKeyDown()) {
+            level.setBlock(pos, state.cycle(MODE), 3);
+        } else {
+            level.setBlock(pos, state.cycle(FACING), 3);
+        }
 
         return true;
     }

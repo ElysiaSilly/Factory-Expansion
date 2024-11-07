@@ -9,7 +9,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.Optional;
 
 public class WrenchItem extends Item {
     public WrenchItem(Properties properties) {
@@ -32,6 +35,19 @@ public class WrenchItem extends Item {
             Player player = context.getPlayer();
 
             successful = block.onWrench(level, pos, state, direction, posSpecific, player);
+        } else {
+            if(state.getOptionalValue(BlockStateProperties.FACING).isPresent()) {
+                level.setBlockAndUpdate(pos, state.cycle(BlockStateProperties.FACING));
+                successful = true;
+            }
+            if(state.getOptionalValue(BlockStateProperties.AXIS).isPresent()) {
+                level.setBlockAndUpdate(pos, state.cycle(BlockStateProperties.AXIS));
+                successful = true;
+            }
+            if(state.getOptionalValue(BlockStateProperties.HORIZONTAL_FACING).isPresent()) {
+                level.setBlockAndUpdate(pos, state.cycle(BlockStateProperties.HORIZONTAL_FACING));
+                successful = true;
+            }
         }
 
         return successful ? InteractionResult.SUCCESS : super.useOn(context);
