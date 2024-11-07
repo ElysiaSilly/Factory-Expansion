@@ -26,10 +26,11 @@ public class CanisterTooltip {
 
         if(previous == stack) {
             if(name == null) return;
-            event.getToolTip().add(name);
+            event.getToolTip().set(0, Component.literal(event.getToolTip().getFirst().copy().getString() + " (" + name.getString() + ")"));
+            //event.getToolTip().add(name);
             if(!stack.has(FEComponents.CANISTER)) return;
             if(stack.get(FEComponents.CANISTER).getCapacity() == -1) {
-                event.getToolTip().add(Component.literal("Capacity: CREATIVE"));
+                event.getToolTip().add(Component.literal("Capacity: CREATIVE").withStyle(ChatFormatting.GRAY));
             } else {
                 event.getToolTip().add(Component.literal(String.format("Capacity: %s / %s", stack.get(FEComponents.CANISTER).used(), stack.get(FEComponents.CANISTER).capacity())).withStyle(ChatFormatting.GRAY));
             }
@@ -45,4 +46,5 @@ public class CanisterTooltip {
 
         previous = stack;
     }
+
 }
