@@ -1,6 +1,6 @@
 package com.teamcitrus.factory_expansion.core.registry;
 
-import com.teamcitrus.factory_expansion.common.flamethrower.canisterData.CanisterComponent;
+import com.teamcitrus.factory_expansion.common.data.flamethrower.canisterData.CanisterComponent;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
 import net.minecraft.core.component.DataComponentType;
 import net.neoforged.neoforge.registries.DeferredRegister;

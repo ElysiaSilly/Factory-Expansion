@@ -1,6 +1,6 @@
-package com.teamcitrus.factory_expansion.common.flamethrower;
+package com.teamcitrus.factory_expansion.common.data.flamethrower;
 
-import com.teamcitrus.factory_expansion.common.flamethrower.canisterData.CanisterType;
+import com.teamcitrus.factory_expansion.common.data.flamethrower.canisterData.CanisterType;
 import com.teamcitrus.factory_expansion.common.item.FlamethrowerItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleTypes;

@@ -1,4 +1,4 @@
-package com.teamcitrus.factory_expansion.common.flamethrower.canisterData;
+package com.teamcitrus.factory_expansion.common.data.flamethrower.canisterData;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

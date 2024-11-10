@@ -1,9 +1,9 @@
 package com.teamcitrus.factory_expansion.core.registry;
 
-import com.teamcitrus.factory_expansion.common.flamethrower.BlazeCanisterType;
-import com.teamcitrus.factory_expansion.common.flamethrower.NitroCanisterType;
-import com.teamcitrus.factory_expansion.common.flamethrower.SoulCanisterType;
-import com.teamcitrus.factory_expansion.common.flamethrower.canisterData.CanisterType;
+import com.teamcitrus.factory_expansion.common.data.flamethrower.BlazeCanisterType;
+import com.teamcitrus.factory_expansion.common.data.flamethrower.NitroCanisterType;
+import com.teamcitrus.factory_expansion.common.data.flamethrower.SoulCanisterType;
+import com.teamcitrus.factory_expansion.common.data.flamethrower.canisterData.CanisterType;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
 import com.teamcitrus.factory_expansion.core.FactoExpaRegistries;
 import net.minecraft.network.chat.Component;

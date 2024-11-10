@@ -1,6 +1,6 @@
 package com.teamcitrus.factory_expansion.client.event.misc;
 
-import com.teamcitrus.factory_expansion.common.flamethrower.canisterData.CanisterData;
+import com.teamcitrus.factory_expansion.common.data.flamethrower.canisterData.CanisterData;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
 import com.teamcitrus.factory_expansion.core.registry.FEComponents;
 import net.minecraft.ChatFormatting;

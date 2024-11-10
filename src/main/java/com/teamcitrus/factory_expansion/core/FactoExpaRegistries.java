@@ -1,6 +1,6 @@
 package com.teamcitrus.factory_expansion.core;
 
-import com.teamcitrus.factory_expansion.common.flamethrower.canisterData.CanisterType;
+import com.teamcitrus.factory_expansion.common.data.flamethrower.canisterData.CanisterType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
