@@ -2,12 +2,10 @@ package com.teamcitrus.factory_expansion.common.block;
 
 import com.mojang.serialization.MapCodec;
 import com.teamcitrus.factory_expansion.common.block.enums.WarningLightStates;
-import com.teamcitrus.factory_expansion.common.block.interfaces.IWrenchableBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -22,12 +20,11 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class WarningLightBlock extends DirectionalBlock implements SimpleWaterloggedBlock, IWrenchableBlock {
+public class WarningLightBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
 
     public static final EnumProperty<WarningLightStates> STATE = EnumProperty.create("state", WarningLightStates.class);
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -73,11 +70,6 @@ public class WarningLightBlock extends DirectionalBlock implements SimpleWaterlo
         }
 
         return state;
-    }
-
-    @Override
-    public boolean onWrench(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
-        return false;
     }
 
     @Override

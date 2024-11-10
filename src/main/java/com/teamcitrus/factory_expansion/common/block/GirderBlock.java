@@ -39,7 +39,7 @@ public class GirderBlock extends Block implements SimpleWaterloggedBlock, IWrenc
     public static final BooleanProperty Z_AXIS = BooleanProperty.create("z");
 
     public GirderBlock(Properties properties) {
-        super(properties.noOcclusion().forceSolidOn());
+        super(properties.forceSolidOn());
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(X_AXIS, false)
                 .setValue(Y_AXIS, false)
@@ -149,7 +149,7 @@ public class GirderBlock extends Block implements SimpleWaterloggedBlock, IWrenc
     }
 
     @Override
-    public boolean onWrench(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
+    public boolean onWrenchUse(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
 
         if(!player.isShiftKeyDown()) {
             if(!state.getValue(Z_AXIS) && !state.getValue(X_AXIS)) return false;
@@ -170,5 +170,10 @@ public class GirderBlock extends Block implements SimpleWaterloggedBlock, IWrenc
         }
 
         return true;
+    }
+
+    @Override
+    public void onWrenchHover(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
+
     }
 }
