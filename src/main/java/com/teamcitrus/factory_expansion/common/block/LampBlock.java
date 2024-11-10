@@ -3,8 +3,11 @@ package com.teamcitrus.factory_expansion.common.block;
 import com.mojang.serialization.MapCodec;
 import com.teamcitrus.factory_expansion.common.block.enums.LampBlockStates;
 import com.teamcitrus.factory_expansion.common.block.interfaces.IWrenchableBlock;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
@@ -33,6 +36,8 @@ public class LampBlock extends DirectionalBlock implements SimpleWaterloggedBloc
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final EnumProperty<LampBlockStates> MODE = EnumProperty.create("mode", LampBlockStates.class);
 
+    private final boolean emitParticles;
+
     private static final VoxelShape[] SHAPE = {
             Block.box(4,4,5,12,12,16), // NORTH
             Block.box(0,4,4,11,12,12), // EAST
@@ -43,8 +48,9 @@ public class LampBlock extends DirectionalBlock implements SimpleWaterloggedBloc
 
     };
 
-    public LampBlock(Properties properties, boolean UV) {
-        super(properties.noOcclusion().lightLevel((state) -> UV ? 0 : state.getValue(LIT) ? (state.getValue(MODE) == LampBlockStates.INVERTED ? 0 : 12) : (state.getValue(MODE) == LampBlockStates.INVERTED ? 12 : 0)));
+    public LampBlock(Properties properties, int light, boolean emitParticles) {
+        super(properties.noOcclusion().lightLevel((state) -> state.getValue(LIT) ?  light : 0));
+        this.emitParticles = emitParticles;
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(LIT, false)
                 .setValue(WATERLOGGED, false)
@@ -93,7 +99,7 @@ public class LampBlock extends DirectionalBlock implements SimpleWaterloggedBloc
     }
 
     @Override
-    public boolean onWrench(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
+    public boolean onWrenchUse(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
 
         if(player.isShiftKeyDown()) {
             level.setBlock(pos, state.cycle(MODE), 3);
@@ -102,6 +108,16 @@ public class LampBlock extends DirectionalBlock implements SimpleWaterloggedBloc
         }
 
         return true;
+    }
+
+    @Override
+    public void onWrenchHover(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
+
+        if(player.isShiftKeyDown()) {
+            player.displayClientMessage(Component.literal("cycling through modes: " + state.getValue(MODE).getSerializedName() + " -> " + state.cycle(MODE).getValue(MODE).getSerializedName()).withStyle(ChatFormatting.GRAY), true);
+        } else {
+            player.displayClientMessage(Component.literal("cycling through orientation: " + state.getValue(FACING).getSerializedName() + " -> " + state.cycle(FACING).getValue(FACING).getSerializedName()).withStyle(ChatFormatting.GRAY), true);
+        }
     }
 
     @Override
@@ -125,5 +141,15 @@ public class LampBlock extends DirectionalBlock implements SimpleWaterloggedBloc
     @Override
     protected FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (state.getValue(LIT) && emitParticles) {
+            double d0 = (double)pos.getX() + 0.5 + (random.nextDouble() - 0.4) * 0.2;
+            double d1 = (double)pos.getY() + 0.7 + (random.nextDouble() - 0.9) * 0.2;
+            double d2 = (double)pos.getZ() + 0.5 + (random.nextDouble() - 0.4) * 0.2;
+            level.addParticle(DustParticleOptions.REDSTONE, d0, d1, d2, 0.0, 0.0, 0.0);
+        }
     }
 }

@@ -2,7 +2,7 @@
 	"credit": "an ElysiaSilly creation :D",
 	"render_type": "cutout",
 	"textures": {
-		"base": "factory_expansion:block/flux_lamp_base",
+		"base": "factory_expansion:block/flux_bulb/base",
 		"particle": "#bulb",
 		"bulb": "#bulb"
 	},
