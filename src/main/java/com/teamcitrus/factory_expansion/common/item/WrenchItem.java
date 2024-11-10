@@ -1,9 +1,11 @@
 package com.teamcitrus.factory_expansion.common.item;
 
 import com.teamcitrus.factory_expansion.common.block.interfaces.IWrenchableBlock;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -33,16 +35,40 @@ public class WrenchItem extends Item {
 
         if(!(hitResult instanceof BlockHitResult blockHitResult)) return;
 
+        if(level.isClientSide) return;
+
         BlockState state = level.getBlockState(blockHitResult.getBlockPos());
 
-        if(!(state.getBlock() instanceof IWrenchableBlock block)) return;
+        boolean override = false;
+        boolean isWrenchableBlock = false;
 
-        block.onWrenchHover(level, blockHitResult.getBlockPos(), state, blockHitResult.getDirection(), hitResult.getLocation(), player);
+        if(state.getBlock() instanceof IWrenchableBlock block) {
+            override = block.overrideDefaultWrenchBehaviour();
+            isWrenchableBlock = true;
 
+            if(override || player.isShiftKeyDown()) {
+                block.onWrenchHover(level, blockHitResult.getBlockPos(), state, blockHitResult.getDirection(), hitResult.getLocation(), player);
+            }
+        }
+
+        if(!override && (!isWrenchableBlock || !player.isShiftKeyDown())) {
+
+            if(state.getOptionalValue(BlockStateProperties.FACING).isPresent()) {
+                player.displayClientMessage(Component.literal("cycling through orientation: " + state.getValue(BlockStateProperties.FACING).getSerializedName() + " -> " + state.cycle(BlockStateProperties.FACING).getValue(BlockStateProperties.FACING).getSerializedName()).withStyle(ChatFormatting.GRAY), true);
+            }
+            if(state.getOptionalValue(BlockStateProperties.AXIS).isPresent()) {
+                player.displayClientMessage(Component.literal("cycling through orientation: " + state.getValue(BlockStateProperties.AXIS).getSerializedName() + " -> " + state.cycle(BlockStateProperties.AXIS).getValue(BlockStateProperties.AXIS).getSerializedName()).withStyle(ChatFormatting.GRAY), true);
+            }
+            if(state.getOptionalValue(BlockStateProperties.HORIZONTAL_FACING).isPresent()) {
+                player.displayClientMessage(Component.literal("cycling through orientation: " + state.getValue(BlockStateProperties.HORIZONTAL_FACING).getSerializedName() + " -> " + state.cycle(BlockStateProperties.HORIZONTAL_FACING).getValue(BlockStateProperties.HORIZONTAL_FACING).getSerializedName()).withStyle(ChatFormatting.GRAY), true);
+            }
+        }
     }
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
+
+        if(context.getLevel().isClientSide) return InteractionResult.SUCCESS;
 
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
@@ -50,15 +76,26 @@ public class WrenchItem extends Item {
         BlockState state = level.getBlockState(pos);
 
         boolean successful = false;
+        boolean override = false;
+        boolean isWrenchableBlock = false;
+
+        Player player = context.getPlayer();
+
+        if(player == null) return InteractionResult.SUCCESS;
 
         if(state.getBlock() instanceof IWrenchableBlock block) {
-            Direction direction = context.getClickedFace();
-            Vec3 posSpecific = context.getClickLocation();
-            Player player = context.getPlayer();
 
-            successful = block.onWrenchUse(level, pos, state, direction, posSpecific, player);
-        } else {
+            override = block.overrideDefaultWrenchBehaviour();
+            isWrenchableBlock = true;
 
+            if(override || player.isShiftKeyDown()) {
+                Direction direction = context.getClickedFace();
+                Vec3 posSpecific = context.getClickLocation();
+
+                successful = block.onWrenchUse(level, pos, state, direction, posSpecific, player);
+            }
+        }
+        if(!override && (!isWrenchableBlock || !player.isShiftKeyDown())) {
             if(state.getOptionalValue(BlockStateProperties.FACING).isPresent()) {
                 level.setBlockAndUpdate(pos, state.cycle(BlockStateProperties.FACING));
                 successful = true;

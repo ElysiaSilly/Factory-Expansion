@@ -186,6 +186,11 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
     }
 
     @Override
+    public boolean overrideDefaultWrenchBehaviour() {
+        return true;
+    }
+
+    @Override
     protected RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }

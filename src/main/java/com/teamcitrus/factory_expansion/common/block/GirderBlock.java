@@ -176,4 +176,9 @@ public class GirderBlock extends Block implements SimpleWaterloggedBlock, IWrenc
     public void onWrenchHover(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
 
     }
+
+    @Override
+    public boolean overrideDefaultWrenchBehaviour() {
+        return true;
+    }
 }

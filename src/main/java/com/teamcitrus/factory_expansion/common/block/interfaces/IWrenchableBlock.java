@@ -14,4 +14,7 @@ public interface IWrenchableBlock {
 
     /// called when a player has a wrench in their hand and is looking at the block
     void onWrenchHover(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player);
+
+    /// whether to override the wrench's default functionality, if false will prevent onWrenchUse/onWrenchHover from being called if the player is not shifting
+    boolean overrideDefaultWrenchBehaviour();
 }

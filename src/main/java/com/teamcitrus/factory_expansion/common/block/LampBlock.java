@@ -101,11 +101,7 @@ public class LampBlock extends DirectionalBlock implements SimpleWaterloggedBloc
     @Override
     public boolean onWrenchUse(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
 
-        if(player.isShiftKeyDown()) {
-            level.setBlock(pos, state.cycle(MODE), 3);
-        } else {
-            level.setBlock(pos, state.cycle(FACING), 3);
-        }
+        level.setBlock(pos, state.cycle(MODE), 3);
 
         return true;
     }
@@ -113,11 +109,12 @@ public class LampBlock extends DirectionalBlock implements SimpleWaterloggedBloc
     @Override
     public void onWrenchHover(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
 
-        if(player.isShiftKeyDown()) {
-            player.displayClientMessage(Component.literal("cycling through modes: " + state.getValue(MODE).getSerializedName() + " -> " + state.cycle(MODE).getValue(MODE).getSerializedName()).withStyle(ChatFormatting.GRAY), true);
-        } else {
-            player.displayClientMessage(Component.literal("cycling through orientation: " + state.getValue(FACING).getSerializedName() + " -> " + state.cycle(FACING).getValue(FACING).getSerializedName()).withStyle(ChatFormatting.GRAY), true);
-        }
+        player.displayClientMessage(Component.literal("cycling through modes: " + state.getValue(MODE).getSerializedName() + " -> " + state.cycle(MODE).getValue(MODE).getSerializedName()).withStyle(ChatFormatting.GRAY), true);
+    }
+
+    @Override
+    public boolean overrideDefaultWrenchBehaviour() {
+        return false;
     }
 
     @Override
