@@ -3,7 +3,7 @@ package com.teamcitrus.factory_expansion.common.block.enums;
 import net.minecraft.util.StringRepresentable;
 import org.joml.Vector2i;
 
-public enum FanBlockStates implements StringRepresentable {
+public enum FanBlockProperties implements StringRepresentable {
     TOP_LEFT    ("1", new Vector2i(-1, 1)),
     TOP         ("2", new Vector2i(0,  1)),
     TOP_RIGHT   ("3", new Vector2i(1,  1)),
@@ -17,7 +17,7 @@ public enum FanBlockStates implements StringRepresentable {
     private final String name;
     private final Vector2i relativePos;
 
-    FanBlockStates(String name, Vector2i relativePos) {
+    FanBlockProperties(String name, Vector2i relativePos) {
         this.name = name;
         this.relativePos = relativePos;
     }

@@ -1,6 +1,6 @@
 package com.teamcitrus.factory_expansion.common.block;
 
-import com.teamcitrus.factory_expansion.common.block.enums.FanBlockStates;
+import com.teamcitrus.factory_expansion.common.block.enums.FanBlockProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -19,13 +19,13 @@ import org.jetbrains.annotations.Nullable;
 
 public class FanBlock extends RotatedPillarBlock {
 
-    public static final EnumProperty<FanBlockStates> POS = EnumProperty.create("pos", FanBlockStates.class);
+    public static final EnumProperty<FanBlockProperties> POS = EnumProperty.create("pos", FanBlockProperties.class);
 
     public FanBlock(Properties properties) {
         super(properties.noOcclusion().pushReaction(PushReaction.DESTROY));
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(AXIS, Direction.Axis.Y)
-                .setValue(POS, FanBlockStates.MIDDLE)
+                .setValue(POS, FanBlockProperties.MIDDLE)
         );
     }
 
@@ -39,11 +39,12 @@ public class FanBlock extends RotatedPillarBlock {
 
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
+
         Direction.Axis axis = context.getClickedFace().getAxis();
         boolean flag = true;
 
-        for(FanBlockStates fan : FanBlockStates.values()) {
-            if(fan != FanBlockStates.MIDDLE) {
+        for(FanBlockProperties fan : FanBlockProperties.values()) {
+            if(fan != FanBlockProperties.MIDDLE) {
                 BlockPos adjusted = new BlockPos(0, 0, 0);
 
                 switch(axis) {
@@ -67,8 +68,8 @@ public class FanBlock extends RotatedPillarBlock {
 
         Direction.Axis axis = state.getValue(AXIS);
 
-        for(FanBlockStates fan : FanBlockStates.values()) {
-            if(fan != FanBlockStates.MIDDLE) {
+        for(FanBlockProperties fan : FanBlockProperties.values()) {
+            if(fan != FanBlockProperties.MIDDLE) {
                 BlockPos adjusted = new BlockPos(0, 0, 0);
 
                 switch(axis) {
@@ -85,12 +86,12 @@ public class FanBlock extends RotatedPillarBlock {
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
 
-        FanBlockStates block = state.getValue(POS);
+        FanBlockProperties block = state.getValue(POS);
         Direction.Axis axis = state.getValue(AXIS);
 
-        if(block == FanBlockStates.MIDDLE) {
-            for(FanBlockStates fan : FanBlockStates.values()) {
-                if(fan != FanBlockStates.MIDDLE) {
+        if(block == FanBlockProperties.MIDDLE) {
+            for(FanBlockProperties fan : FanBlockProperties.values()) {
+                if(fan != FanBlockProperties.MIDDLE) {
                     BlockPos adjusted = new BlockPos(0, 0, 0);
 
                     switch(axis) {

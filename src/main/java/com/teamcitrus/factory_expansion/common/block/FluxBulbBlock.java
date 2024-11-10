@@ -1,8 +1,9 @@
 package com.teamcitrus.factory_expansion.common.block;
 
 import com.mojang.serialization.MapCodec;
-import com.teamcitrus.factory_expansion.common.block.enums.LampBlockStates;
+import com.teamcitrus.factory_expansion.common.block.enums.FluxBulbProperties;
 import com.teamcitrus.factory_expansion.common.block.interfaces.IWrenchableBlock;
+import com.teamcitrus.factory_expansion.core.registry.FEBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -11,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -30,11 +32,11 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class LampBlock extends DirectionalBlock implements SimpleWaterloggedBlock, IWrenchableBlock {
+public class FluxBulbBlock extends DirectionalBlock implements SimpleWaterloggedBlock, IWrenchableBlock {
 
     private static final BooleanProperty LIT = BlockStateProperties.LIT;
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    private static final EnumProperty<LampBlockStates> MODE = EnumProperty.create("mode", LampBlockStates.class);
+    private static final EnumProperty<FluxBulbProperties> MODE = EnumProperty.create("mode", FluxBulbProperties.class);
 
     private final boolean emitParticles;
 
@@ -48,13 +50,13 @@ public class LampBlock extends DirectionalBlock implements SimpleWaterloggedBloc
 
     };
 
-    public LampBlock(Properties properties, int light, boolean emitParticles) {
+    public FluxBulbBlock(Properties properties, int light, boolean emitParticles) {
         super(properties.noOcclusion().lightLevel((state) -> state.getValue(LIT) ?  light : 0));
         this.emitParticles = emitParticles;
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(LIT, false)
                 .setValue(WATERLOGGED, false)
-                .setValue(MODE, LampBlockStates.NORMAL)
+                .setValue(MODE, FluxBulbProperties.NORMAL)
                 .setValue(FACING, Direction.DOWN)
         );
     }
@@ -101,7 +103,11 @@ public class LampBlock extends DirectionalBlock implements SimpleWaterloggedBloc
     @Override
     public boolean onWrenchUse(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
 
-        level.setBlock(pos, state.cycle(MODE), 3);
+        if(player.getOffhandItem().getItem() instanceof DyeItem dye) {
+            level.setBlockAndUpdate(pos, FEBlocks.FLUX_BULBS.get(dye.getDyeColor()).get().defaultBlockState().setValue(FACING, state.getValue(FACING)).setValue(LIT, state.getValue(LIT)).setValue(WATERLOGGED, state.getValue(WATERLOGGED)).setValue(MODE, state.getValue(MODE)));
+        } else {
+            level.setBlock(pos, state.cycle(MODE), 3);
+        }
 
         return true;
     }
@@ -109,7 +115,12 @@ public class LampBlock extends DirectionalBlock implements SimpleWaterloggedBloc
     @Override
     public void onWrenchHover(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
 
-        player.displayClientMessage(Component.literal("cycling through modes: " + state.getValue(MODE).getSerializedName() + " -> " + state.cycle(MODE).getValue(MODE).getSerializedName()).withStyle(ChatFormatting.GRAY), true);
+        if(player.getOffhandItem().getItem() instanceof DyeItem dye) {
+            player.displayClientMessage(Component.literal("change colour to " + dye.getDyeColor().name()).withStyle(ChatFormatting.GRAY), true);
+        } else {
+            player.displayClientMessage(Component.literal("cycling through modes: " + state.getValue(MODE).getSerializedName() + " -> " + state.cycle(MODE).getValue(MODE).getSerializedName()).withStyle(ChatFormatting.GRAY), true);
+        }
+
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.teamcitrus.factory_expansion.common.item.FlamethrowerItem;
 import com.teamcitrus.factory_expansion.common.item.WrenchItem;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.Blocks;
@@ -33,7 +34,7 @@ public class FEItems {
             ITEMS.register("transgender_block", () ->
                     new CycleableBlockItem(
                             new Item.Properties(),
-                            true,
+                            true, false,
                             Blocks.LIGHT_BLUE_WOOL, Blocks.WHITE_WOOL, Blocks.PINK_WOOL)
             );
 
@@ -41,8 +42,24 @@ public class FEItems {
             ITEMS.register("junk_collection", () ->
                     new CycleableBlockItem(
                             new Item.Properties(),
-                            false,
+                            false, false,
                             Blocks.DEEPSLATE, Blocks.POLISHED_ANDESITE, Blocks.GRANITE, Blocks.DIORITE_SLAB, Blocks.ACACIA_WOOD, Blocks.SPAWNER, FEBlocks.INDUSTRIAL_VENT.get())
+            );
+
+    public static final DeferredItem<CycleableBlockItem> FLUX_BULB =
+            ITEMS.register("flux_bulb", () ->
+                    new CycleableBlockItem(
+                            new Item.Properties(),
+                            false, true,
+                            FEBlocks.FLUX_BULB.get(), FEBlocks.INVERTED_FLUX_BULB.get())
+            );
+
+    public static final DeferredItem<CycleableBlockItem> RED_FLUX_BULB =
+            ITEMS.register("red_flux_bulb", () ->
+                    new CycleableBlockItem(
+                            new Item.Properties(),
+                            false, true,
+                            FEBlocks.FLUX_BULBS.get(DyeColor.RED).get(), FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.RED).get())
             );
 
     public static final Supplier<Item> BLACK_ALLOY = ITEMS.registerSimpleItem("black_alloy", new Item.Properties());

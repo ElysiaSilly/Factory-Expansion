@@ -1,6 +1,8 @@
 package com.teamcitrus.factory_expansion.common.item;
 
+import net.minecraft.Util;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -15,6 +17,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,33 +31,35 @@ public class CycleableBlockItem extends BlockItem {
     private final int max;
     //private Level level;
     private int random;
+    private final boolean assignToItem;
 
-    public CycleableBlockItem(Properties properties, boolean allowRandom, Block...blocks) {
+    public CycleableBlockItem(Properties properties, boolean allowRandom, boolean assignToItem, @Nonnull Block...blocks) {
         super(null, properties); // hoping passing in null will be fine LOL
         this.allowRandom = allowRandom;
         this.blocks.addAll(Arrays.asList(blocks));
         this.max = this.blocks.size();// + 1;
         this.current = allowRandom ? 0 : 1;
+        this.assignToItem = assignToItem;
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack item = player.getItemInHand(usedHand);
 
+        if(!player.isShiftKeyDown())  return InteractionResultHolder.pass(item);
+
         if(level.isClientSide) return InteractionResultHolder.success(item);
 
-        if(player.isShiftKeyDown()) {
-            int min = allowRandom ? 0 : 1;
+        int min = allowRandom ? 0 : 1;
 
-            if(current < max) {
-                current++;
-            } else if (current > min) {
-                current = min;
-            }
-
-            String string = current == 0 ? "(Random)" : "(" + current + "/" + blocks.size() + ") " + getBlock(current).getName().getString();
-            player.displayClientMessage(Component.literal(string), true);
+        if(current < max) {
+            current++;
+        } else if (current > min) {
+            current = min;
         }
+
+        String string = current == 0 ? "(" + getBlockDescription(current) + ")" : "(" + current + "/" + blocks.size() + ") " + getBlockDescription(current);
+        player.displayClientMessage(Component.literal(string), true);
 
         return InteractionResultHolder.success(item);
     }
@@ -83,13 +88,21 @@ public class CycleableBlockItem extends BlockItem {
         }
     }
 
+    public Block getBlock(Level level) {
+        return this.blocks.get(level.random.nextInt(blocks.size()));
+    }
+
     public Block getBlock(int current) {
         return this.blocks.get(current - 1);
     }
 
     @Override
     public void registerBlocks(Map<Block, Item> blockToItemMap, Item item) {
-        //super.registerBlocks(blockToItemMap, item);
+        if(assignToItem) {
+            for(Block block : this.blocks) {
+                blockToItemMap.put(block, item);
+            }
+        }
     }
 
     @Override
@@ -99,7 +112,12 @@ public class CycleableBlockItem extends BlockItem {
 
     @Override
     public String getDescriptionId() {
-        String string = current == 0 ? "Random" : getBlock(current).getName().getString();
-        return Component.translatable(this.getOrCreateDescriptionId()).getString() + " (" + string + ")";
+        return Component.translatable(this.getOrCreateDescriptionId()).getString() + " (" + getBlockDescription(current) + ")";
+    }
+
+    public String getBlockDescription(int index) {
+        return index == 0 ?
+                Component.translatable("tooltip.factory_expansion.random").getString() :
+                Component.translatable(Util.makeDescriptionId("item", BuiltInRegistries.ITEM.getKey(this)) + Util.makeDescriptionId("", BuiltInRegistries.BLOCK.getKey(getBlock(index)))).getString();
     }
 }

@@ -1,3 +1,18 @@
 {
-  "itemGroup.factory_expansion": "Factory Expansion"
+  "itemGroup.factory_expansion": "Factory Expansion",
+  "item.factory_expansion.junk_collection": "Junk Collection",
+  "item.factory_expansion.transgender_block": "Transgender Block",
+  "item.factory_expansion.flux_bulb": "Flux Bulb",
+  "item.factory_expansion.red_flux_bulb": "Red Flux Bulb",
+
+
+  "item.factory_expansion.flux_bulb.factory_expansion.flux_bulb": "Normal",
+  "item.factory_expansion.flux_bulb.factory_expansion.inverted_flux_bulb": "Inverted",
+  "item.factory_expansion.red_flux_bulb.factory_expansion.red_flux_bulb": "Normal",
+  "item.factory_expansion.red_flux_bulb.factory_expansion.red_inverted_flux_bulb": "Inverted",
+  "tooltip.factory_expansion.random": "Random",
+
+  "item.factory_expansion.transgender_block.minecraft.light_blue_wool": "Blue",
+  "item.factory_expansion.transgender_block.minecraft.pink_wool": "Pink",
+  "item.factory_expansion.transgender_block.minecraft.white_wool": "White"
 }

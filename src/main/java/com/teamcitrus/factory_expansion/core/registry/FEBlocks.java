@@ -43,13 +43,22 @@ public class FEBlocks {
             = registerBlockItem("warning_light", () -> new WarningLightBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
     public static final Supplier<? extends Block> FLUX_BULB
-            = registerBlockItem("flux_bulb", () -> new LampBlock(getProperties(Blocks.NETHERITE_BLOCK), 7, true));
+            = registerBlock("flux_bulb", () -> new FluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 7, true));
+
+    public static final Supplier<? extends Block> INVERTED_FLUX_BULB
+            = registerBlock("inverted_flux_bulb", () -> new InvertedFluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 7, true));
 
     public static final Supplier<? extends Block> UV_FLUX_BULB
-            = registerBlockItem("uv_flux_bulb", () -> new LampBlock(getProperties(Blocks.NETHERITE_BLOCK), 0, false));
+            = registerBlock("uv_flux_bulb", () -> new FluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 0, false));
+
+    public static final Supplier<? extends Block> INVERTED_UV_FLUX_BULB
+            = registerBlock("inverted_uv_flux_bulb", () -> new InvertedFluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 0, false));
 
     public static final Dictionary<DyeColor, Supplier<? extends Block>> FLUX_BULBS
-            = registerColouredBlockItems("flux_bulb", () -> new LampBlock(getProperties(Blocks.NETHERITE_BLOCK), 12, false));
+            = registerDyeableBlocks("flux_bulb", () -> new FluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 12, false), false);
+
+    public static final Dictionary<DyeColor, Supplier<? extends Block>> INVERTED_FLUX_BULBS
+            = registerDyeableBlocks("inverted_flux_bulb", () -> new InvertedFluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 12, false), false);
 
     // girder
 
@@ -79,22 +88,21 @@ public class FEBlocks {
     }
 
     /// register colour set of block and item
-    private static Dictionary<DyeColor, Supplier<? extends Block>> registerColouredBlockItems(String id, Supplier<? extends Block> blockType) {
+    private static Dictionary<DyeColor, Supplier<? extends Block>> registerDyeableBlocks(String id, Supplier<? extends Block> blockType, boolean registerItem) {
 
         Dictionary<DyeColor, Supplier<? extends Block>> blocks = new Hashtable<>();
 
         for(DyeColor colour : DyeColor.values()) {
             String name = String.format("%s_%s", colour.getName(), id);
-            Supplier<? extends Block> block = registerBlockItem(name, blockType);
+            Supplier<? extends Block> block = registerItem ? registerBlockItem(name, blockType) : registerBlock(name, blockType);
             blocks.put(colour, block);
         }
         return blocks;
     }
 
-    @SuppressWarnings("unchecked")
     /// register block
-    private static Supplier<Block> registerBlockItem(String resourceLocation) {
-        return (Supplier<Block>) registerBlockItem(resourceLocation, () -> new Block(BlockBehaviour.Properties.of()));
+    private static Supplier<Block> registerBlock(String id, Supplier<? extends Block> blockType) {
+        return BLOCKS.register(id, blockType);
     }
 
     /// returns block properties
