@@ -43,13 +43,13 @@ public class FEBlocks {
             = registerBlockItem("warning_light", () -> new WarningLightBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
     public static final Supplier<? extends Block> FLUX_BULB
-            = registerBlockItem("flux_bulb", () -> new LampBlock(getProperties(Blocks.NETHERITE_BLOCK), false));
+            = registerBlockItem("flux_bulb", () -> new LampBlock(getProperties(Blocks.NETHERITE_BLOCK), 7, true));
 
     public static final Supplier<? extends Block> UV_FLUX_BULB
-            = registerBlockItem("uv_flux_bulb", () -> new LampBlock(getProperties(Blocks.NETHERITE_BLOCK), true));
+            = registerBlockItem("uv_flux_bulb", () -> new LampBlock(getProperties(Blocks.NETHERITE_BLOCK), 0, false));
 
     public static final Dictionary<DyeColor, Supplier<? extends Block>> FLUX_BULBS
-            = registerColouredBlockItems("flux_bulb", () -> new LampBlock(getProperties(Blocks.NETHERITE_BLOCK), false));
+            = registerColouredBlockItems("flux_bulb", () -> new LampBlock(getProperties(Blocks.NETHERITE_BLOCK), 12, false));
 
     // girder
 
@@ -67,6 +67,9 @@ public class FEBlocks {
     public static final Supplier<?> TRANS_BLOCK
             = registerBlockItem("trans_block", () -> new VariantBlock(getProperties(Blocks.WHITE_WOOL), 3));
 
+    public static final Supplier<? extends Block> DISPLAY
+            = registerBlockItem("display", () -> new DisplayBlock(getProperties(Blocks.NETHERITE_BLOCK)));
+
 
     /// register block and item
     private static Supplier<? extends Block> registerBlockItem(String id, Supplier<? extends Block> blockType) {
@@ -75,15 +78,14 @@ public class FEBlocks {
         return tempBlock;
     }
 
-    // HELP!!
     /// register colour set of block and item
     private static Dictionary<DyeColor, Supplier<? extends Block>> registerColouredBlockItems(String id, Supplier<? extends Block> blockType) {
 
         Dictionary<DyeColor, Supplier<? extends Block>> blocks = new Hashtable<>();
 
         for(DyeColor colour : DyeColor.values()) {
-            id = String.format("%s_%s", colour.getName(), id);
-            Supplier<? extends Block> block = registerBlockItem(id, blockType);
+            String name = String.format("%s_%s", colour.getName(), id);
+            Supplier<? extends Block> block = registerBlockItem(name, blockType);
             blocks.put(colour, block);
         }
         return blocks;
