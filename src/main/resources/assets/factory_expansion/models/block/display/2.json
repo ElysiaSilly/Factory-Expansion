@@ -1,0 +1,8 @@
+{
+  "parent": "factory_expansion:parent/display",
+  "textures": {
+    "front": "factory_expansion:block/display/front_2",
+    "back": "factory_expansion:block/display/back",
+    "side": "factory_expansion:block/display/side"
+  }
+}
