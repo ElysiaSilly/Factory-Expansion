@@ -1,6 +1,8 @@
 package com.teamcitrus.factory_expansion.core.registry;
 
 import com.teamcitrus.factory_expansion.common.block.*;
+import com.teamcitrus.factory_expansion.common.block.fauxmultiblock.FauxMultiBlock;
+import com.teamcitrus.factory_expansion.common.block.fauxmultiblock.TestMulti;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.DyeColor;
@@ -46,6 +48,10 @@ public class FEBlocks {
 
     public static final Supplier<? extends Block> MEDIUM_INDUSTRIAL_VENT
             = registerBlock("medium_industrial_vent", () -> new MediumVentBlock(getProperties(Blocks.NETHERITE_BLOCK)));
+
+
+    public static final Supplier<? extends Block> TEST
+            = registerBlockItem("test", () -> new FauxMultiBlock<>(getProperties(Blocks.NETHERITE_BLOCK), TestMulti.class));
 
     // lamps
 

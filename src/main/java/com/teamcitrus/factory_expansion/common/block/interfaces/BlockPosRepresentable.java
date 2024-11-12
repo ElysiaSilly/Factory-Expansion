@@ -4,5 +4,7 @@ import net.minecraft.core.BlockPos;
 
 public interface BlockPosRepresentable {
 
-    BlockPos getRelativePos();
+    BlockPos position();
+
+
 }
