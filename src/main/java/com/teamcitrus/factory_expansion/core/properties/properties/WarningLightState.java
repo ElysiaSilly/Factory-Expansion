@@ -1,8 +1,8 @@
-package com.teamcitrus.factory_expansion.common.block.properties;
+package com.teamcitrus.factory_expansion.core.properties.properties;
 
 import net.minecraft.util.StringRepresentable;
 
-public enum WarningLightProperties implements StringRepresentable {
+public enum WarningLightState implements StringRepresentable {
     OFF   ("off",    0),
     RED   ("red",    5),
     YELLOW("yellow", 9),
@@ -11,7 +11,7 @@ public enum WarningLightProperties implements StringRepresentable {
     private final String name;
     private final int lightLevel;
 
-    WarningLightProperties(String name, int lightLevel) {
+    WarningLightState(String name, int lightLevel) {
         this.name = name;
         this.lightLevel = lightLevel;
     }

@@ -1,4 +1,4 @@
-package com.teamcitrus.factory_expansion.common.item.CycleBlockItem;
+package com.teamcitrus.factory_expansion.common.item.cycleable;
 
 import net.minecraft.Util;
 import net.minecraft.core.component.DataComponents;
@@ -27,27 +27,26 @@ import java.util.Map;
 
 public class CycleBlockItem extends BlockItem {
 
-    private CycleMode mode = CycleMode.RANDOM_AND_CYCLE;
+    private Mode mode = Mode.RANDOM_AND_CYCLE;
     private boolean assignToItem = false;
 
 
-    private final List<OptionalStateBlock> blocks = new ArrayList<>();
-    private int index;
+    private final List<OptPropertyBlock> blocks = new ArrayList<>();
+    private int index = 0;
     private final int max;
 
     private int random;
 
-    public CycleBlockItem(Properties properties, @Nonnull OptionalStateBlock...blocks) {
+    public CycleBlockItem(Properties properties, @Nonnull OptPropertyBlock...blocks) {
         super(null, properties); // hoping passing in null will be fine LOL
-        //this.mode = mode;
+
         this.blocks.addAll(Arrays.asList(blocks));
         this.max = this.blocks.size();// + 1;
-        this.index = this.mode.random ? 0 : 1;
-        //this.assignToItem = assignToItem;
     }
 
-    public CycleBlockItem mode(CycleMode mode) {
+    public CycleBlockItem mode(Mode mode) {
         this.mode = mode;
+        this.index = this.mode.random ? 0 : 1;
         return this;
     }
 
@@ -100,7 +99,7 @@ public class CycleBlockItem extends BlockItem {
         return getOptStateBlock().getBlock();
     }
 
-    public OptionalStateBlock getOptStateBlock() {
+    public OptPropertyBlock getOptStateBlock() {
         if(index == 0) {
             return this.blocks.get(this.random);
         } else {
@@ -113,7 +112,7 @@ public class CycleBlockItem extends BlockItem {
     }
 
     public boolean cycleBlock() {
-        if(this.mode == CycleMode.RANDOM_ONLY) return false;
+        if(this.mode == Mode.RANDOM_ONLY) return false;
 
         int min = this.mode.random ? 0 : 1;
 
@@ -126,14 +125,14 @@ public class CycleBlockItem extends BlockItem {
         return true;
     }
 
-    public OptionalStateBlock getOptStateBlock(int index) {
+    public OptPropertyBlock getOptStateBlock(int index) {
         return this.blocks.get(index - 1);
     }
 
     @Override
     public void registerBlocks(Map<Block, Item> blockToItemMap, Item item) {
         if(assignToItem) {
-            for(OptionalStateBlock block : this.blocks) {
+            for(OptPropertyBlock block : this.blocks) {
                 blockToItemMap.put(block.getBlock(), item);
             }
         }
@@ -150,13 +149,28 @@ public class CycleBlockItem extends BlockItem {
     }
 
     public String getBlockDescription(int index) {
-        if(this.mode == CycleMode.RANDOM_ONLY) {
+        if(this.mode == Mode.RANDOM_ONLY) {
             return "";
         } else {
             String string = index == 0 ?
                     Component.translatable("tooltip.factory_expansion.random").getString() :
-                    Component.translatable(Util.makeDescriptionId("item", BuiltInRegistries.ITEM.getKey(this)) + Util.makeDescriptionId("", BuiltInRegistries.BLOCK.getKey(getBlock()))).getString();
+                    Component.translatable(Util.makeDescriptionId("item", BuiltInRegistries.ITEM.getKey(this)) + "." + index).getString();
             return " " + "(" + string + ")";
+        }
+    }
+
+    public enum Mode {
+
+        RANDOM_ONLY(true, false),
+        CYCLE_ONLY(false, true),
+        RANDOM_AND_CYCLE(true, true);
+
+        public final boolean random;
+        public final boolean selection;
+
+        Mode(boolean random, boolean selection) {
+            this.random = random;
+            this.selection = selection;
         }
     }
 }

@@ -1,10 +1,10 @@
-package com.teamcitrus.factory_expansion.common.block.properties;
+package com.teamcitrus.factory_expansion.core.properties.properties;
 
 import com.teamcitrus.factory_expansion.common.block.interfaces.BlockPosRepresentable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.StringRepresentable;
 
-public enum LargeVentProperties implements StringRepresentable, BlockPosRepresentable {
+public enum LargeVentBlocks implements StringRepresentable, BlockPosRepresentable {
     TOP_LEFT    ("1", new BlockPos(-1, 0, 1)),
     TOP         ("2", new BlockPos(0, 0, 1)),
     TOP_RIGHT   ("3", new BlockPos(1, 0, 1)),
@@ -18,7 +18,7 @@ public enum LargeVentProperties implements StringRepresentable, BlockPosRepresen
     private final String name;
     private final BlockPos relativePos;
 
-    LargeVentProperties(String name, BlockPos relativePos) {
+    LargeVentBlocks(String name, BlockPos relativePos) {
         this.name = name;
         this.relativePos = relativePos;
     }

@@ -1,110 +1,110 @@
 {
   "variants": {
-    "axis=x,pos=1": {
+    "axis=x,block=1": {
       "model": "factory_expansion:block/industrial_fan/1",
       "x": 90,
       "y": 90
     },
-    "axis=y,pos=1": {
+    "axis=y,block=1": {
       "model": "factory_expansion:block/industrial_fan/1"
     },
-    "axis=z,pos=1": {
+    "axis=z,block=1": {
       "model": "factory_expansion:block/industrial_fan/1",
       "x": 90
     },
-    "axis=x,pos=2": {
+    "axis=x,block=2": {
       "model": "factory_expansion:block/industrial_fan/2",
       "x": 90,
       "y": 90
     },
-    "axis=y,pos=2": {
+    "axis=y,block=2": {
       "model": "factory_expansion:block/industrial_fan/2"
     },
-    "axis=z,pos=2": {
+    "axis=z,block=2": {
       "model": "factory_expansion:block/industrial_fan/2",
       "x": 90
     },
-    "axis=x,pos=3": {
+    "axis=x,block=3": {
       "model": "factory_expansion:block/industrial_fan/3",
       "x": 90,
       "y": 90
     },
-    "axis=y,pos=3": {
+    "axis=y,block=3": {
       "model": "factory_expansion:block/industrial_fan/3"
     },
-    "axis=z,pos=3": {
+    "axis=z,block=3": {
       "model": "factory_expansion:block/industrial_fan/3",
       "x": 90
     },
-    "axis=x,pos=4": {
+    "axis=x,block=4": {
       "model": "factory_expansion:block/industrial_fan/4",
       "x": 90,
       "y": 90
     },
-    "axis=y,pos=4": {
+    "axis=y,block=4": {
       "model": "factory_expansion:block/industrial_fan/4"
     },
-    "axis=z,pos=4": {
+    "axis=z,block=4": {
       "model": "factory_expansion:block/industrial_fan/4",
       "x": 90
     },
-    "axis=x,pos=5": {
+    "axis=x,block=5": {
       "model": "factory_expansion:block/industrial_fan/5",
       "x": 90,
       "y": 90
     },
-    "axis=y,pos=5": {
+    "axis=y,block=5": {
       "model": "factory_expansion:block/industrial_fan/5"
     },
-    "axis=z,pos=5": {
+    "axis=z,block=5": {
       "model": "factory_expansion:block/industrial_fan/5",
       "x": 90
     },
-    "axis=x,pos=6": {
+    "axis=x,block=6": {
       "model": "factory_expansion:block/industrial_fan/6",
       "x": 90,
       "y": 90
     },
-    "axis=y,pos=6": {
+    "axis=y,block=6": {
       "model": "factory_expansion:block/industrial_fan/6"
     },
-    "axis=z,pos=6": {
+    "axis=z,block=6": {
       "model": "factory_expansion:block/industrial_fan/6",
       "x": 90
     },
-    "axis=x,pos=7": {
+    "axis=x,block=7": {
       "model": "factory_expansion:block/industrial_fan/7",
       "x": 90,
       "y": 90
     },
-    "axis=y,pos=7": {
+    "axis=y,block=7": {
       "model": "factory_expansion:block/industrial_fan/7"
     },
-    "axis=z,pos=7": {
+    "axis=z,block=7": {
       "model": "factory_expansion:block/industrial_fan/7",
       "x": 90
     },
-    "axis=x,pos=8": {
+    "axis=x,block=8": {
       "model": "factory_expansion:block/industrial_fan/8",
       "x": 90,
       "y": 90
     },
-    "axis=y,pos=8": {
+    "axis=y,block=8": {
       "model": "factory_expansion:block/industrial_fan/8"
     },
-    "axis=z,pos=8": {
+    "axis=z,block=8": {
       "model": "factory_expansion:block/industrial_fan/8",
       "x": 90
     },
-    "axis=x,pos=9": {
+    "axis=x,block=9": {
       "model": "factory_expansion:block/industrial_fan/9",
       "x": 90,
       "y": 90
     },
-    "axis=y,pos=9": {
+    "axis=y,block=9": {
       "model": "factory_expansion:block/industrial_fan/9"
     },
-    "axis=z,pos=9": {
+    "axis=z,block=9": {
       "model": "factory_expansion:block/industrial_fan/9",
       "x": 90
     }

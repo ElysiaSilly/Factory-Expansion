@@ -1,4 +1,4 @@
-package com.teamcitrus.factory_expansion.common.item.CycleBlockItem;
+package com.teamcitrus.factory_expansion.common.item.cycleable;
 
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
@@ -10,7 +10,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 
-public class OptionalStateBlock<T extends Comparable<T>, V extends T> {
+public class OptPropertyBlock<T extends Comparable<T>, V extends T> {
     // this <> stuff is new to me so its probably very unstable atm, if something goes wrong scream at me
 
     private final Block block;
@@ -18,16 +18,16 @@ public class OptionalStateBlock<T extends Comparable<T>, V extends T> {
 
     public Dictionary<Property<T>, V> properties = new Hashtable<>();
 
-    public OptionalStateBlock(Block block) {
+    public OptPropertyBlock(Block block) {
         this.block = block;
     }
 
-    public OptionalStateBlock<T, V> setState(Property<T> property, V value) {
+    public OptPropertyBlock<T, V> setProperty(Property<T> property, V value) {
         properties.put(property, value);
         return this;
     }
 
-    public OptionalStateBlock placementContext() {
+    public OptPropertyBlock<T, V> placementContext() {
         context = true;
         return this;
     }

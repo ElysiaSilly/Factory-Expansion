@@ -2,7 +2,8 @@ package com.teamcitrus.factory_expansion.common.block;
 
 import com.mojang.serialization.MapCodec;
 import com.teamcitrus.factory_expansion.common.block.interfaces.block.IWrenchableBlock;
-import com.teamcitrus.factory_expansion.common.block.properties.FluxBulbProperties;
+import com.teamcitrus.factory_expansion.core.properties.FEProperties;
+import com.teamcitrus.factory_expansion.core.properties.properties.FluxBulbMode;
 import com.teamcitrus.factory_expansion.core.registry.FEBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -36,7 +37,7 @@ public class FluxBulbBlock extends DirectionalBlock implements SimpleWaterlogged
 
     private static final BooleanProperty LIT = BlockStateProperties.LIT;
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    private static final EnumProperty<FluxBulbProperties> MODE = EnumProperty.create("mode", FluxBulbProperties.class);
+    private static final EnumProperty<FluxBulbMode> MODE = FEProperties.FLUX_BULB_MODE;
 
     private final boolean emitParticles;
 
@@ -56,7 +57,7 @@ public class FluxBulbBlock extends DirectionalBlock implements SimpleWaterlogged
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(LIT, false)
                 .setValue(WATERLOGGED, false)
-                .setValue(MODE, FluxBulbProperties.NORMAL)
+                .setValue(MODE, FluxBulbMode.NORMAL)
                 .setValue(FACING, Direction.DOWN)
         );
     }

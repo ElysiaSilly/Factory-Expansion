@@ -1,6 +1,7 @@
 package com.teamcitrus.factory_expansion.common.block;
 
-import com.teamcitrus.factory_expansion.common.block.properties.MediumVentProperties;
+import com.teamcitrus.factory_expansion.core.properties.FEProperties;
+import com.teamcitrus.factory_expansion.core.properties.properties.MediumVentBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -19,13 +20,13 @@ import org.jetbrains.annotations.Nullable;
 
 public class MediumVentBlock extends RotatedPillarBlock {
 
-    public static final EnumProperty<MediumVentProperties> POS = EnumProperty.create("pos", MediumVentProperties.class);
+    public static final EnumProperty<MediumVentBlocks> POS = FEProperties.MEDIUM_VENT_BLOCKS;
 
     public MediumVentBlock(Properties properties) {
         super(properties.noOcclusion().pushReaction(PushReaction.DESTROY));
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(AXIS, Direction.Axis.Y)
-                .setValue(POS, MediumVentProperties.MIDDLE)
+                .setValue(POS, MediumVentBlocks.MIDDLE)
         );
     }
 
@@ -43,8 +44,8 @@ public class MediumVentBlock extends RotatedPillarBlock {
         Direction.Axis axis = context.getClickedFace().getAxis();
         boolean flag = true;
 
-        for(MediumVentProperties fan : MediumVentProperties.values()) {
-            if(fan != MediumVentProperties.MIDDLE) {
+        for(MediumVentBlocks fan : MediumVentBlocks.values()) {
+            if(fan != MediumVentBlocks.MIDDLE) {
                 BlockPos adjusted = new BlockPos(0, 0, 0);
 
                 switch(axis) {
@@ -68,8 +69,8 @@ public class MediumVentBlock extends RotatedPillarBlock {
 
         Direction.Axis axis = state.getValue(AXIS);
 
-        for(MediumVentProperties fan : MediumVentProperties.values()) {
-            if(fan != MediumVentProperties.MIDDLE) {
+        for(MediumVentBlocks fan : MediumVentBlocks.values()) {
+            if(fan != MediumVentBlocks.MIDDLE) {
                 BlockPos adjusted = new BlockPos(0, 0, 0);
 
                 switch(axis) {
@@ -86,12 +87,12 @@ public class MediumVentBlock extends RotatedPillarBlock {
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
 
-        MediumVentProperties block = state.getValue(POS);
+        MediumVentBlocks block = state.getValue(POS);
         Direction.Axis axis = state.getValue(AXIS);
 
-        if(block == MediumVentProperties.MIDDLE) {
-            for(MediumVentProperties fan : MediumVentProperties.values()) {
-                if(fan != MediumVentProperties.MIDDLE) {
+        if(block == MediumVentBlocks.MIDDLE) {
+            for(MediumVentBlocks fan : MediumVentBlocks.values()) {
+                if(fan != MediumVentBlocks.MIDDLE) {
                     BlockPos adjusted = new BlockPos(0, 0, 0);
 
                     switch(axis) {

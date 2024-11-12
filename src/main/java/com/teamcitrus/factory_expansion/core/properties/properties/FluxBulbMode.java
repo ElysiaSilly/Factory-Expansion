@@ -1,14 +1,14 @@
-package com.teamcitrus.factory_expansion.common.block.properties;
+package com.teamcitrus.factory_expansion.core.properties.properties;
 
 import net.minecraft.util.StringRepresentable;
 
-public enum FluxBulbProperties implements StringRepresentable {
+public enum FluxBulbMode implements StringRepresentable {
     NORMAL  ("normal"),
     BLINKING("blinking");
 
     private final String name;
 
-    FluxBulbProperties(String name) {
+    FluxBulbMode(String name) {
         this.name = name;
     }
 

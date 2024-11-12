@@ -1,7 +1,8 @@
 package com.teamcitrus.factory_expansion.common.block;
 
 import com.mojang.serialization.MapCodec;
-import com.teamcitrus.factory_expansion.common.block.properties.WarningLightProperties;
+import com.teamcitrus.factory_expansion.core.properties.FEProperties;
+import com.teamcitrus.factory_expansion.core.properties.properties.WarningLightState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -26,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class WarningLightBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
 
-    public static final EnumProperty<WarningLightProperties> STATE = EnumProperty.create("state", WarningLightProperties.class);
+    public static final EnumProperty<WarningLightState> STATE = FEProperties.WARNING_LIGHT_STATE;
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
@@ -40,7 +41,7 @@ public class WarningLightBlock extends DirectionalBlock implements SimpleWaterlo
     public WarningLightBlock(Properties properties) {
         super(properties.noOcclusion().lightLevel((state) -> state.getValue(STATE).lightLevel()));
         this.registerDefaultState(this.getStateDefinition().any()
-                .setValue(STATE, WarningLightProperties.OFF)
+                .setValue(STATE, WarningLightState.OFF)
                 .setValue(WATERLOGGED, false)
                 .setValue(FACING, Direction.UP)
                 .setValue(POWERED, false)
