@@ -30,7 +30,7 @@ public class FEItems {
             ITEMS.register("flamethrower", () ->
                     new FlamethrowerItem(new Item.Properties()
                             .stacksTo(1)
-                            .component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
+                            // this might not be needed for now // .component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
                     ));
 
     public static final DeferredItem<WrenchItem> WRENCH =

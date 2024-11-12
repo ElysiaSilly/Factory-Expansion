@@ -9,6 +9,12 @@ import org.jetbrains.annotations.Nullable;
 
 public class VariantBlock extends Block
 {
+    ///
+    /// PROBABLY DEPRECATED
+    ///
+
+
+
     public static final IntegerProperty VARIANT = IntegerProperty.create("variant", 0, 7);
 
     // max allowed variants, up to 8 (0..7)

@@ -8,6 +8,9 @@ import net.neoforged.neoforge.items.ComponentItemHandler;
 public class FECapabilities {
 
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+
+        /// registers an ItemHandler to the Flamethrower item, to allow it to store ItemStacks
+        /// this is a wrapper that handles the CONTAINER DataComponent
         event.registerItem(
                 Capabilities.ItemHandler.ITEM,
                 (itemStack, context) -> new ComponentItemHandler(itemStack, DataComponents.CONTAINER, 3),

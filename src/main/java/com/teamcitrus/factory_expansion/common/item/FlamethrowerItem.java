@@ -12,6 +12,8 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -70,11 +72,12 @@ public class FlamethrowerItem extends Item {
         }
     }
 
-
+    
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack mainStack = player.getMainHandItem();
 
+        /// some checks that need to be changed
         if(!level.isClientSide()) return super.use(level, player, usedHand);
         if(!(usedHand == InteractionHand.MAIN_HAND)) return super.use(level, player, usedHand);
         if(!(mainStack.getItem() instanceof FlamethrowerItem)) return super.use(level, player, usedHand);
@@ -91,6 +94,9 @@ public class FlamethrowerItem extends Item {
         // this works but... // contents = mainStack.get(DataComponents.CONTAINER);
         // this works but... // FactoExpa.LOGGER.info("info: " + contents.getSlots());
 
+        /// this works but is still jank
+        /// it won't save on world loading XD... packets and nbt?
+        /// https://docs.neoforged.net/docs/networking/
         IItemHandler itemHandler = mainStack.getCapability(Capabilities.ItemHandler.ITEM);
         if(itemHandler != null) {
             var itemA = itemHandler.getStackInSlot(CAN_A);
@@ -99,11 +105,18 @@ public class FlamethrowerItem extends Item {
                 player.setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
             }
             else {
-                // player.setItemSlot(EquipmentSlot.OFFHAND, itemA);
                 var item = itemHandler.extractItem(CAN_A, 1/*this might be size?*/, false);
                 player.setItemSlot(EquipmentSlot.OFFHAND, item);
             }
+            itemA = itemHandler.getStackInSlot(CAN_A);
+            FactoExpa.LOGGER.info(itemA.isEmpty() ? "stack: none" : "stack: " + itemA.getItem().toString());
         }
         return super.use(level, player, usedHand); // change this
+    }
+
+    /// this is where the magic is gonna happen
+    @Override
+    public boolean overrideStackedOnOther(ItemStack stack, Slot slot, ClickAction action, Player player) {
+        return super.overrideStackedOnOther(stack, slot, action, player);
     }
 }

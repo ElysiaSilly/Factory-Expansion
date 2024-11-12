@@ -35,7 +35,7 @@ public class FactoExpa {
         //? FERecipeTypes.RECIPE_TYPES.register(bus);
         FECanisterTypes.CANISTER.register(bus);
 
-        /// Capabilities, yahoo
+        /// Remember to add Capabilites in the listener
         bus.addListener(FECapabilities::registerCapabilities);
     }
 }

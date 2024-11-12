@@ -89,6 +89,15 @@ public class FEBlocks {
     public static final Supplier<? extends Block> DISPLAY
             = registerBlockItem("display", () -> new DisplayBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
+    /// blast
+
+    public static final Supplier<?> EGG_BLOCK
+            = registerBlockItem("egg_block", () -> new BlastBlock(getProperties(Blocks.WHITE_WOOL), () -> FEItems.TRANS_BLOCK.get()));
+
+    public static final Supplier<?> LEGG_BLOCK
+            = registerBlockItem("legg_block", () -> new BlastAxisBlock(getProperties(Blocks.WHITE_WOOL)));
+
+
 
     /// register block and item
     private static Supplier<? extends Block> registerBlockItem(String id, Supplier<? extends Block> blockType) {
