@@ -1,6 +1,6 @@
 package com.teamcitrus.factory_expansion.common.block;
 
-import com.teamcitrus.factory_expansion.common.item.CycleBlockItem.CycleBlockItem;
+import com.teamcitrus.factory_expansion.common.item.cycleable.CycleBlockItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.Explosion;

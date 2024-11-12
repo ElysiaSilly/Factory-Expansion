@@ -16,20 +16,19 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import org.jetbrains.annotations.Nullable;
 
-public class FauxMultiBlock<T extends Enum<T> & BlockPosRepresentable & StringRepresentable> extends Block {
+public abstract class FauxMultiBlock<T extends Enum<T> & BlockPosRepresentable & StringRepresentable> extends Block {
 
     public final MultiBlock<T> MULTI;
 
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
-    public final EnumProperty<T> BLOCKS;// = EnumProperty.create("block", TestMulti.class);
+    public static final EnumProperty<TestMulti> BLOCKS = EnumProperty.create("block", TestMulti.class);
 
     public FauxMultiBlock(Properties properties, Class<T> c) {
         super(properties);
         this.MULTI = new MultiBlock<>(c, this);
-        this.BLOCKS = EnumProperty.create("blocks", c);
         this.registerDefaultState(this.getStateDefinition().any()
-                .setValue(BLOCKS, TestMulti.MIDDLE) // ignoring this for now
+                .setValue(BLOCKS, TestMulti.MIDDLE)
                 .setValue(FACING, Direction.UP)
         );
     }
