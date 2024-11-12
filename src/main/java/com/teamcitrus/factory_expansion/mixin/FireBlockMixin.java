@@ -1,7 +1,7 @@
 package com.teamcitrus.factory_expansion.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import com.teamcitrus.factory_expansion.common.block.interfaces.ITransformOnBurnBlock;
+import com.teamcitrus.factory_expansion.common.block.interfaces.block.ITransformOnBurnBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;

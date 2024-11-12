@@ -2,7 +2,7 @@ package com.teamcitrus.factory_expansion.common.block;
 
 import com.mojang.serialization.MapCodec;
 import com.teamcitrus.factory_expansion.common.block.be.DisplayBlockBE;
-import com.teamcitrus.factory_expansion.common.block.interfaces.IWrenchableBlock;
+import com.teamcitrus.factory_expansion.common.block.interfaces.block.IWrenchableBlock;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

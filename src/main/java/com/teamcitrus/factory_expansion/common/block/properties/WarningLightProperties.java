@@ -1,4 +1,4 @@
-package com.teamcitrus.factory_expansion.common.block.enums;
+package com.teamcitrus.factory_expansion.common.block.properties;
 
 import net.minecraft.util.StringRepresentable;
 

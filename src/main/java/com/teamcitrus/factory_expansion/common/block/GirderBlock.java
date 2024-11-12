@@ -1,6 +1,6 @@
 package com.teamcitrus.factory_expansion.common.block;
 
-import com.teamcitrus.factory_expansion.common.block.interfaces.IWrenchableBlock;
+import com.teamcitrus.factory_expansion.common.block.interfaces.block.IWrenchableBlock;
 import com.teamcitrus.factory_expansion.core.keys.FEBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -4,12 +4,18 @@
   "item.factory_expansion.transgender_block": "Transgender Block",
   "item.factory_expansion.flux_bulb": "Flux Bulb",
   "item.factory_expansion.red_flux_bulb": "Red Flux Bulb",
+  "item.factory_expansion.industrial_vent": "Industrial Vent",
 
 
   "item.factory_expansion.flux_bulb.factory_expansion.flux_bulb": "Normal",
   "item.factory_expansion.flux_bulb.factory_expansion.inverted_flux_bulb": "Inverted",
   "item.factory_expansion.red_flux_bulb.factory_expansion.red_flux_bulb": "Normal",
   "item.factory_expansion.red_flux_bulb.factory_expansion.red_inverted_flux_bulb": "Inverted",
+
+  "item.factory_expansion.industrial_vent.factory_expansion.large_industrial_vent": "3x3",
+  "item.factory_expansion.industrial_vent.factory_expansion.medium_industrial_vent": "2x2",
+
+
   "tooltip.factory_expansion.random": "Random",
 
   "item.factory_expansion.transgender_block.minecraft.light_blue_wool": "Blue",

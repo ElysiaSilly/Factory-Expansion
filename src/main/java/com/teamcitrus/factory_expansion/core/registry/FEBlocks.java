@@ -4,9 +4,7 @@ import com.teamcitrus.factory_expansion.common.block.*;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -34,8 +32,20 @@ public class FEBlocks {
     public static final Supplier<? extends Block> CHS_PIPE_BUNDLE
             = registerBlockItem("chs_pipe_bundle", () -> new RotatedPillarBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
-    public static final Supplier<? extends Block> INDUSTRIAL_VENT
-            = registerBlockItem("industrial_vent", () -> new FanBlock(getProperties(Blocks.NETHERITE_BLOCK)));
+    public static final Supplier<? extends Block> DRYWALL
+            = registerBlockItem("drywall", () -> new Block(BlockBehaviour.Properties.of().strength(0.5f).destroyTime(0.5f)));
+    public static final Supplier<? extends Block> DRYWALL_STAIRS
+            = registerBlockItem("drywall_stairs", () -> new StairBlock(DRYWALL.get().defaultBlockState(), getProperties(DRYWALL.get())));
+    public static final Supplier<? extends Block> DRYWALL_SLAB
+            = registerBlockItem("drywall_slab", () -> new SlabBlock(getProperties(DRYWALL.get())));
+
+    // vent
+
+    public static final Supplier<? extends Block> LARGE_INDUSTRIAL_VENT
+            = registerBlock("large_industrial_vent", () -> new LargeVentBlock(getProperties(Blocks.NETHERITE_BLOCK)));
+
+    public static final Supplier<? extends Block> MEDIUM_INDUSTRIAL_VENT
+            = registerBlock("medium_industrial_vent", () -> new MediumVentBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
     // lamps
 

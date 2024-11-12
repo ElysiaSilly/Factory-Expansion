@@ -1,6 +1,6 @@
 package com.teamcitrus.factory_expansion.common.block;
 
-import com.teamcitrus.factory_expansion.common.block.enums.FanBlockProperties;
+import com.teamcitrus.factory_expansion.common.block.properties.LargeVentProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -17,15 +17,15 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.PushReaction;
 import org.jetbrains.annotations.Nullable;
 
-public class FanBlock extends RotatedPillarBlock {
+public class LargeVentBlock extends RotatedPillarBlock {
 
-    public static final EnumProperty<FanBlockProperties> POS = EnumProperty.create("pos", FanBlockProperties.class);
+    public static final EnumProperty<LargeVentProperties> POS = EnumProperty.create("pos", LargeVentProperties.class);
 
-    public FanBlock(Properties properties) {
+    public LargeVentBlock(Properties properties) {
         super(properties.noOcclusion().pushReaction(PushReaction.DESTROY));
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(AXIS, Direction.Axis.Y)
-                .setValue(POS, FanBlockProperties.MIDDLE)
+                .setValue(POS, LargeVentProperties.MIDDLE)
         );
     }
 
@@ -43,14 +43,14 @@ public class FanBlock extends RotatedPillarBlock {
         Direction.Axis axis = context.getClickedFace().getAxis();
         boolean flag = true;
 
-        for(FanBlockProperties fan : FanBlockProperties.values()) {
-            if(fan != FanBlockProperties.MIDDLE) {
+        for(LargeVentProperties fan : LargeVentProperties.values()) {
+            if(fan != LargeVentProperties.MIDDLE) {
                 BlockPos adjusted = new BlockPos(0, 0, 0);
 
                 switch(axis) {
-                    case X -> adjusted = adjusted.offset(0, fan.getRelativePos().y, fan.getRelativePos().x);
-                    case Y -> adjusted = adjusted.offset(fan.getRelativePos().x, 0, fan.getRelativePos().y);
-                    case Z -> adjusted = adjusted.offset(fan.getRelativePos().x, fan.getRelativePos().y, 0);
+                    case X -> adjusted = adjusted.offset(0, fan.getRelativePos().getZ(), fan.getRelativePos().getX());
+                    case Y -> adjusted = adjusted.offset(fan.getRelativePos().getX(), 0, fan.getRelativePos().getZ());
+                    case Z -> adjusted = adjusted.offset(fan.getRelativePos().getX(), fan.getRelativePos().getZ(), 0);
                 }
 
                 if(!level.getBlockState(pos.offset(adjusted)).canBeReplaced()) {
@@ -68,14 +68,14 @@ public class FanBlock extends RotatedPillarBlock {
 
         Direction.Axis axis = state.getValue(AXIS);
 
-        for(FanBlockProperties fan : FanBlockProperties.values()) {
-            if(fan != FanBlockProperties.MIDDLE) {
+        for(LargeVentProperties fan : LargeVentProperties.values()) {
+            if(fan != LargeVentProperties.MIDDLE) {
                 BlockPos adjusted = new BlockPos(0, 0, 0);
 
                 switch(axis) {
-                    case X -> adjusted = adjusted.offset(0, fan.getRelativePos().y, fan.getRelativePos().x);
-                    case Y -> adjusted = adjusted.offset(fan.getRelativePos().x, 0, fan.getRelativePos().y);
-                    case Z -> adjusted = adjusted.offset(fan.getRelativePos().x, fan.getRelativePos().y, 0);
+                    case X -> adjusted = adjusted.offset(0, fan.getRelativePos().getZ(), fan.getRelativePos().getX());
+                    case Y -> adjusted = adjusted.offset(fan.getRelativePos().getX(), 0, fan.getRelativePos().getZ());
+                    case Z -> adjusted = adjusted.offset(fan.getRelativePos().getX(), fan.getRelativePos().getZ(), 0);
                 }
 
                 level.setBlock(pos.offset(adjusted), this.defaultBlockState().setValue(POS, fan).setValue(AXIS, axis), 3);
@@ -86,18 +86,18 @@ public class FanBlock extends RotatedPillarBlock {
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
 
-        FanBlockProperties block = state.getValue(POS);
+        LargeVentProperties block = state.getValue(POS);
         Direction.Axis axis = state.getValue(AXIS);
 
-        if(block == FanBlockProperties.MIDDLE) {
-            for(FanBlockProperties fan : FanBlockProperties.values()) {
-                if(fan != FanBlockProperties.MIDDLE) {
+        if(block == LargeVentProperties.MIDDLE) {
+            for(LargeVentProperties fan : LargeVentProperties.values()) {
+                if(fan != LargeVentProperties.MIDDLE) {
                     BlockPos adjusted = new BlockPos(0, 0, 0);
 
                     switch(axis) {
-                        case X -> adjusted = adjusted.offset(0, fan.getRelativePos().y, fan.getRelativePos().x);
-                        case Y -> adjusted = adjusted.offset(fan.getRelativePos().x, 0, fan.getRelativePos().y);
-                        case Z -> adjusted = adjusted.offset(fan.getRelativePos().x, fan.getRelativePos().y, 0);
+                        case X -> adjusted = adjusted.offset(0, fan.getRelativePos().getZ(), fan.getRelativePos().getX());
+                        case Y -> adjusted = adjusted.offset(fan.getRelativePos().getX(), 0, fan.getRelativePos().getZ());
+                        case Z -> adjusted = adjusted.offset(fan.getRelativePos().getX(), fan.getRelativePos().getZ(), 0);
                     }
 
                     if(level.getBlockState(pos.offset(adjusted)).is(this)) level.destroyBlock(pos.offset(adjusted), false);
@@ -107,9 +107,9 @@ public class FanBlock extends RotatedPillarBlock {
             BlockPos adjusted = new BlockPos(0, 0, 0);
 
             switch(axis) {
-                case X -> adjusted = adjusted.offset(0, block.getRelativePos().y * -1, block.getRelativePos().x * -1);
-                case Y -> adjusted = adjusted.offset(block.getRelativePos().x * -1, 0, block.getRelativePos().y * -1);
-                case Z -> adjusted = adjusted.offset(block.getRelativePos().x * -1, block.getRelativePos().y * -1, 0);
+                case X -> adjusted = adjusted.offset(0, block.getRelativePos().getZ() * -1, block.getRelativePos().getX() * -1);
+                case Y -> adjusted = adjusted.offset(block.getRelativePos().getX() * -1, 0, block.getRelativePos().getZ() * -1);
+                case Z -> adjusted = adjusted.offset(block.getRelativePos().getX() * -1, block.getRelativePos().getZ() * -1, 0);
             }
 
             if(level.getBlockState(pos.offset(adjusted)).is(this)) level.destroyBlock(pos.offset(adjusted), false);

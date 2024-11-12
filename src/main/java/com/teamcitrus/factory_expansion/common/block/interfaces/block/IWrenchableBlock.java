@@ -1,4 +1,4 @@
-package com.teamcitrus.factory_expansion.common.block.interfaces;
+package com.teamcitrus.factory_expansion.common.block.interfaces.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

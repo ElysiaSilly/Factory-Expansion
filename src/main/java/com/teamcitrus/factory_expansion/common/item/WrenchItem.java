@@ -1,6 +1,6 @@
 package com.teamcitrus.factory_expansion.common.item;
 
-import com.teamcitrus.factory_expansion.common.block.interfaces.IWrenchableBlock;
+import com.teamcitrus.factory_expansion.common.block.interfaces.block.IWrenchableBlock;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;

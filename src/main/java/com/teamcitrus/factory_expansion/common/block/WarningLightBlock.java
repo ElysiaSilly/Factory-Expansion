@@ -1,7 +1,7 @@
 package com.teamcitrus.factory_expansion.common.block;
 
 import com.mojang.serialization.MapCodec;
-import com.teamcitrus.factory_expansion.common.block.enums.WarningLightProperties;
+import com.teamcitrus.factory_expansion.common.block.properties.WarningLightProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

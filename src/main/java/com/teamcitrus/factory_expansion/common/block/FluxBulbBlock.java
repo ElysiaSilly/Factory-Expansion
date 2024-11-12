@@ -1,8 +1,8 @@
 package com.teamcitrus.factory_expansion.common.block;
 
 import com.mojang.serialization.MapCodec;
-import com.teamcitrus.factory_expansion.common.block.enums.FluxBulbProperties;
-import com.teamcitrus.factory_expansion.common.block.interfaces.IWrenchableBlock;
+import com.teamcitrus.factory_expansion.common.block.interfaces.block.IWrenchableBlock;
+import com.teamcitrus.factory_expansion.common.block.properties.FluxBulbProperties;
 import com.teamcitrus.factory_expansion.core.registry.FEBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -51,7 +51,7 @@ public class FluxBulbBlock extends DirectionalBlock implements SimpleWaterlogged
     };
 
     public FluxBulbBlock(Properties properties, int light, boolean emitParticles) {
-        super(properties.noOcclusion().lightLevel((state) -> state.getValue(LIT) ?  light : 0));
+        super(properties.lightLevel((state) -> state.getValue(LIT) ?  light : 0));
         this.emitParticles = emitParticles;
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(LIT, false)
