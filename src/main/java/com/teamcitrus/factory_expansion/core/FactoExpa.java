@@ -7,13 +7,19 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import org.slf4j.Logger;
 
+import java.util.Random;
+
 @Mod(FactoExpa.MODID)
 public class FactoExpa {
+
+    public static Random random = new java.util.Random();
 
     public static final String MODID = "factory_expansion";
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static String prefix(String string) { return MODID + ":" + string; }
+
+    public static int drywall = random.nextInt(10);
 
     public FactoExpa(IEventBus bus, ModContainer container) {
 
@@ -31,6 +37,5 @@ public class FactoExpa {
 
         /// Capabilities, yahoo
         bus.addListener(FECapabilities::registerCapabilities);
-
     }
 }

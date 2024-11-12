@@ -1,5 +1,9 @@
 package com.teamcitrus.factory_expansion.common.item;
 
+import com.teamcitrus.factory_expansion.core.FactoExpa;
+import net.minecraft.Util;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
@@ -7,9 +11,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class PoppedDrywallRationItem extends Item {
+public class PoppedDrywallFoodItem extends Item {
 
-    public PoppedDrywallRationItem(Properties properties) {
+    public PoppedDrywallFoodItem(Properties properties) {
         super(properties);
     }
 
@@ -35,5 +39,10 @@ public class PoppedDrywallRationItem extends Item {
     @Override
     public boolean isDamageable(ItemStack stack) {
         return super.isDamageable(stack);
+    }
+
+    @Override
+    public String getDescriptionId() {
+        return Component.translatable(Util.makeDescriptionId("item", BuiltInRegistries.ITEM.getKey(this)) + "." + FactoExpa.drywall).getString();
     }
 }
