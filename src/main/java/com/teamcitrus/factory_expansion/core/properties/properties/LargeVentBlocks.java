@@ -29,7 +29,7 @@ public enum LargeVentBlocks implements StringRepresentable, BlockPosRepresentabl
     }
 
     @Override
-    public BlockPos getRelativePos() {
+    public BlockPos position() {
         return this.relativePos;
     }
 }

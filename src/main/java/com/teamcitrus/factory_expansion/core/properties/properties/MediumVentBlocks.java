@@ -24,7 +24,7 @@ public enum MediumVentBlocks implements StringRepresentable, BlockPosRepresentab
     }
 
     @Override
-    public BlockPos getRelativePos() {
+    public BlockPos position() {
         return this.relativePos;
     }
 }
