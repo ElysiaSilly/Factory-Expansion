@@ -20,6 +20,7 @@ public class FEBlocks {
 
     // blocks
 
+    // brass alloy
     public static final Supplier<? extends Block> BRASS_ALLOY_BLOCK
             = registerBlockItem("brass_alloy_block", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
     public static final Supplier<? extends Block> BRASS_GRATE
@@ -29,6 +30,7 @@ public class FEBlocks {
     public static final Supplier<? extends Block> BRASS_GIRDER
             = registerBlockItem("brass_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
+    // arid alloy
     public static final Supplier<? extends Block> ARID_ALLOY_BLOCK
             = registerBlockItem("arid_alloy_block", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
     public static final Supplier<? extends Block> ARID_GRATE
@@ -38,6 +40,7 @@ public class FEBlocks {
     public static final Supplier<? extends Block> ARID_GIRDER
             = registerBlockItem("arid_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
+    // pale alloy
     public static final Supplier<? extends Block> PALE_ALLOY_BLOCK
             = registerBlockItem("pale_alloy_block", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
     public static final Supplier<? extends Block> PALE_GRATE
@@ -47,6 +50,7 @@ public class FEBlocks {
     public static final Supplier<? extends Block> PALE_GIRDER
             = registerBlockItem("pale_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
+    // black alloy
     public static final Supplier<? extends Block> BLACK_ALLOY_BLOCK
             = registerBlockItem("black_alloy_block", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
     public static final Supplier<? extends Block> BLACK_GRATE
@@ -56,6 +60,14 @@ public class FEBlocks {
     public static final Supplier<? extends Block> BLACK_GIRDER
             = registerBlockItem("black_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
+    public static final Supplier<? extends Block> LARGE_BLACK_VENT
+            = registerBlock("large_black_vent", () -> new LargeVentBlock(getProperties(BLACK_ALLOY_BLOCK.get())));
+    public static final Supplier<? extends Block> MEDIUM_BLACK_VENT
+            = registerBlock("medium_black_vent", () -> new MediumVentBlock(getProperties(BLACK_ALLOY_BLOCK.get())));
+    public static final Supplier<? extends Block> SMALL_BLACK_VENT
+            = registerBlock("small_black_vent", () -> new RotatedPillarBlock(getProperties(BLACK_ALLOY_BLOCK.get())));
+
+    // scrap metal
     public static final Supplier<? extends Block> SCRAP_METAL_BLOCK
             = registerBlockItem("scrap_metal_block", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
     public static final Supplier<? extends Block> SCRAP_METAL_STAIRS
@@ -75,6 +87,7 @@ public class FEBlocks {
     public static final Supplier<? extends Block> CHS_PIPING
             = registerBlockItem("chs_piping", () -> new RotatedPillarBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
+    // drywall
     public static final Supplier<? extends Block> DRYWALL
             = registerBlockItem("drywall", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().strength(0.5f).destroyTime(0.5f)));
     public static final Supplier<? extends Block> DRYWALL_STAIRS
@@ -82,6 +95,7 @@ public class FEBlocks {
     public static final Supplier<? extends Block> DRYWALL_SLAB
             = registerBlockItem("drywall_slab", () -> new SlabBlock(getProperties(DRYWALL.get())));
 
+    // industrial grade concrete
     public static final Supplier<? extends Block> BLACK_INDUSTRY_CONCRETE
             = registerBlockItem("black_industry_concrete", () -> new Block(getProperties(Blocks.BLACK_CONCRETE)));
     public static final Supplier<? extends Block> CARVED_BLACK_INDUSTRY_CONCRETE
@@ -95,6 +109,7 @@ public class FEBlocks {
     public static final Supplier<? extends Block> COLD_INDUSTRY_CONCRETE
             = registerBlockItem("cold_industry_concrete", () -> new Block(getProperties(Blocks.BLACK_CONCRETE)));
 
+    // clinker bricks
     public static final Supplier<? extends Block> RED_CLINKER_BRICKS
             = registerBlockItem("red_clinker_bricks", () -> new Block(getProperties(Blocks.BRICKS)));
 
@@ -107,12 +122,6 @@ public class FEBlocks {
     public static final Supplier<? extends Block> BLACK_CLINKER_BRICKS
             = registerBlockItem("black_clinker_bricks", () -> new Block(getProperties(Blocks.BRICKS)));
     // vent
-
-    public static final Supplier<? extends Block> LARGE_INDUSTRIAL_VENT
-            = registerBlock("large_industrial_vent", () -> new LargeVentBlock(getProperties(Blocks.NETHERITE_BLOCK)));
-
-    public static final Supplier<? extends Block> MEDIUM_INDUSTRIAL_VENT
-            = registerBlock("medium_industrial_vent", () -> new MediumVentBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
 
     //public static final Supplier<? extends Block> TEST

@@ -74,62 +74,68 @@ public class FEItems {
     public static final DeferredItem<CycleBlockItem> TRANS_BLOCK =
             ITEMS.register("transgender_block", () -> new CycleBlockItem(
                     new Item.Properties(),
+                    CycleBlockItem.Mode.RANDOM_AND_CYCLE,
 
-                    optProperty(Blocks.LIGHT_BLUE_WOOL).placementContext(),
-                    optProperty(Blocks.WHITE_WOOL).placementContext(),
-                    optProperty(Blocks.PINK_WOOL).placementContext()
+                    optProperty(Blocks.LIGHT_BLUE_WOOL, 1).placementContext(),
+                    optProperty(Blocks.WHITE_WOOL, 1).placementContext(),
+                    optProperty(Blocks.PINK_WOOL, 1).placementContext()
 
-                    ).mode(CycleBlockItem.Mode.RANDOM_AND_CYCLE)
+                    )
             );
 
     public static final DeferredItem<CycleBlockItem> RANDOM_LOG =
             ITEMS.register("random_log", () -> new CycleBlockItem(
                     new Item.Properties(),
+                    CycleBlockItem.Mode.RANDOM_ONLY,
 
-                    optProperty(Blocks.OAK_LOG).setProperty(BlockStateProperties.AXIS, Direction.Axis.X),
-                    optProperty(Blocks.OAK_LOG).setProperty(BlockStateProperties.AXIS, Direction.Axis.Y),
-                    optProperty(Blocks.OAK_LOG).setProperty(BlockStateProperties.AXIS, Direction.Axis.Z)
+                    optProperty(Blocks.OAK_LOG, 1).setProperty(BlockStateProperties.AXIS, Direction.Axis.X),
+                    optProperty(Blocks.OAK_LOG, 1).setProperty(BlockStateProperties.AXIS, Direction.Axis.Y),
+                    optProperty(Blocks.OAK_LOG, 1).setProperty(BlockStateProperties.AXIS, Direction.Axis.Z)
 
-                    ).mode(CycleBlockItem.Mode.RANDOM_ONLY)
+                    )
             );
 
     public static final DeferredItem<CycleBlockItem> FLUX_BULB =
             ITEMS.register("flux_bulb", () -> new CycleBlockItem(
                     new Item.Properties(),
+                    CycleBlockItem.Mode.CYCLE_ONLY,
 
-                    optProperty(FEBlocks.FLUX_BULB.get()).placementContext(),
-                    optProperty(FEBlocks.INVERTED_FLUX_BULB.get()).placementContext(),
-                    optProperty(FEBlocks.FLUX_BULB.get()).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext(),
-                    optProperty(FEBlocks.INVERTED_FLUX_BULB.get()).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext()
+                    optProperty(FEBlocks.FLUX_BULB.get(), 1).placementContext(),
+                    optProperty(FEBlocks.INVERTED_FLUX_BULB.get(), 1).placementContext(),
+                    optProperty(FEBlocks.FLUX_BULB.get(), 1).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext(),
+                    optProperty(FEBlocks.INVERTED_FLUX_BULB.get(), 1).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext()
 
-                    ).assignToItem().mode(CycleBlockItem.Mode.CYCLE_ONLY)
+                    ).assignToItem()
             );
 
     public static final DeferredItem<CycleBlockItem> RED_FLUX_BULB =
             ITEMS.register("red_flux_bulb", () -> new CycleBlockItem(
                     new Item.Properties(),
+                    CycleBlockItem.Mode.CYCLE_ONLY,
 
-                    optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.RED).get()).placementContext(),
-                    optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.RED).get()).placementContext(),
-                    optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.RED).get()).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext(),
-                    optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.RED).get()).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext()
+                    optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.RED).get(), 1).placementContext(),
+                    optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.RED).get(), 1).placementContext(),
+                    optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.RED).get(), 1).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext(),
+                    optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.RED).get(), 1).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext()
 
-                    ).assignToItem().mode(CycleBlockItem.Mode.CYCLE_ONLY)
+                    ).assignToItem()
             );
 
-    public static final DeferredItem<CycleBlockItem> INDUSTRIAL_VENT =
-            ITEMS.register("industrial_vent", () -> new CycleBlockItem(
+    public static final DeferredItem<CycleBlockItem> BLACK_INDUSTRIAL_VENT =
+            ITEMS.register("black_industrial_vent", () -> new CycleBlockItem(
                     new Item.Properties(),
+                    CycleBlockItem.Mode.CYCLE_ONLY,
 
-                    optProperty(FEBlocks.LARGE_INDUSTRIAL_VENT.get()).placementContext(),
-                    optProperty(FEBlocks.MEDIUM_INDUSTRIAL_VENT.get()).placementContext()
+                    optProperty(FEBlocks.LARGE_BLACK_VENT.get(), 9).placementContext(),
+                    optProperty(FEBlocks.MEDIUM_BLACK_VENT.get(),4).placementContext(),
+                    optProperty(FEBlocks.SMALL_BLACK_VENT.get(), 1).placementContext()
 
-                    ).assignToItem().mode(CycleBlockItem.Mode.CYCLE_ONLY)
+                    ).assignToItem()
             );
 
     /// create OptionalPropertyBlock
 
-    public static OptPropertyBlock optProperty(Block block) {
-        return new OptPropertyBlock(block);
+    public static OptPropertyBlock optProperty(Block block, int cost) {
+        return new OptPropertyBlock(block, cost);
     }
 }

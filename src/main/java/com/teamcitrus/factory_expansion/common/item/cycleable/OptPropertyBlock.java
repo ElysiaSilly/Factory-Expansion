@@ -15,11 +15,13 @@ public class OptPropertyBlock<T extends Comparable<T>, V extends T> {
 
     private final Block block;
     private boolean context = false;
+    private final int cost;
 
     public Dictionary<Property<T>, V> properties = new Hashtable<>();
 
-    public OptPropertyBlock(Block block) {
+    public OptPropertyBlock(Block block, int cost) {
         this.block = block;
+        this.cost = cost;
     }
 
     public OptPropertyBlock<T, V> setProperty(Property<T> property, V value) {
@@ -34,6 +36,10 @@ public class OptPropertyBlock<T extends Comparable<T>, V extends T> {
 
     public Block getBlock() {
         return this.block;
+    }
+
+    public int getCost() {
+        return this.cost;
     }
 
     public BlockState getState(BlockPlaceContext context) {

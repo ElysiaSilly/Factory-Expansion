@@ -1,9 +1,13 @@
 package com.teamcitrus.factory_expansion.common.item.cycleable;
 
 import net.minecraft.Util;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -16,7 +20,9 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
@@ -27,28 +33,30 @@ import java.util.Map;
 
 public class CycleBlockItem extends BlockItem {
 
-    private Mode mode = Mode.RANDOM_AND_CYCLE;
+    private final Mode mode;
     private boolean assignToItem = false;
 
-
     private final List<OptPropertyBlock> blocks = new ArrayList<>();
-    private int index = 0;
+    private int index;
     private final int max;
 
     private int random;
 
-    public CycleBlockItem(Properties properties, @Nonnull OptPropertyBlock...blocks) {
+    public CycleBlockItem(Properties properties, Mode mode, @Nonnull OptPropertyBlock...blocks) {
         super(null, properties); // hoping passing in null will be fine LOL
+
+        this.mode = mode;
+        this.index = this.mode.random ? 0 : 1;
 
         this.blocks.addAll(Arrays.asList(blocks));
         this.max = this.blocks.size();// + 1;
     }
 
-    public CycleBlockItem mode(Mode mode) {
-        this.mode = mode;
-        this.index = this.mode.random ? 0 : 1;
-        return this;
-    }
+    //public CycleBlockItem mode(Mode mode) {
+    //    this.mode = mode;
+    //    this.index = this.mode.random ? 0 : 1;
+    //    return this;
+    //}
 
     public CycleBlockItem assignToItem() {
         this.assignToItem = true;
@@ -75,6 +83,8 @@ public class CycleBlockItem extends BlockItem {
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
+        if(context.getItemInHand().getCount() < getOptStateBlock().getCost() && !context.getPlayer().hasInfiniteMaterials()) return InteractionResult.FAIL;
+
         if(context.getLevel().isClientSide) return InteractionResult.SUCCESS;
 
         this.random = context.getLevel().random.nextInt(blocks.size());
@@ -156,6 +166,55 @@ public class CycleBlockItem extends BlockItem {
                     Component.translatable("tooltip.factory_expansion.random").getString() :
                     Component.translatable(Util.makeDescriptionId("item", BuiltInRegistries.ITEM.getKey(this)) + "." + index).getString();
             return " " + "(" + string + ")";
+        }
+    }
+
+    @Override
+    public InteractionResult place(BlockPlaceContext context) {
+        if (!this.getBlock().isEnabled(context.getLevel().enabledFeatures())) {
+            return InteractionResult.FAIL;
+        } else if (!context.canPlace()) {
+            return InteractionResult.FAIL;
+        } else {
+            BlockPlaceContext blockplacecontext = this.updatePlacementContext(context);
+            if (blockplacecontext == null) {
+                return InteractionResult.FAIL;
+            } else {
+                BlockState blockstate = this.getPlacementState(blockplacecontext);
+                if (blockstate == null) {
+                    return InteractionResult.FAIL;
+                } else if (!this.placeBlock(blockplacecontext, blockstate)) {
+                    return InteractionResult.FAIL;
+                } else {
+                    BlockPos blockpos = blockplacecontext.getClickedPos();
+                    Level level = blockplacecontext.getLevel();
+                    Player player = blockplacecontext.getPlayer();
+                    ItemStack itemstack = blockplacecontext.getItemInHand();
+                    BlockState blockstate1 = level.getBlockState(blockpos);
+                    if (blockstate1.is(blockstate.getBlock())) {
+                        blockstate1 = this.updateBlockStateFromTag(blockpos, level, itemstack, blockstate1);
+                        this.updateCustomBlockEntityTag(blockpos, level, player, itemstack, blockstate1);
+                        updateBlockEntityComponents(level, blockpos, itemstack);
+                        blockstate1.getBlock().setPlacedBy(level, blockpos, blockstate1, player, itemstack);
+                        if (player instanceof ServerPlayer) {
+                            CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer)player, blockpos, itemstack);
+                        }
+                    }
+
+                    SoundType soundtype = blockstate1.getSoundType(level, blockpos, context.getPlayer());
+                    level.playSound(
+                            player,
+                            blockpos,
+                            this.getPlaceSound(blockstate1, level, blockpos, context.getPlayer()),
+                            SoundSource.BLOCKS,
+                            (soundtype.getVolume() + 1.0F) / 2.0F,
+                            soundtype.getPitch() * 0.8F
+                    );
+                    level.gameEvent(GameEvent.BLOCK_PLACE, blockpos, GameEvent.Context.of(player, blockstate1));
+                    itemstack.consume(getOptStateBlock().getCost(), player);
+                    return InteractionResult.sidedSuccess(level.isClientSide);
+                }
+            }
         }
     }
 
