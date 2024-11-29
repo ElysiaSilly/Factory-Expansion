@@ -27,6 +27,7 @@ public class FauxMultiBlock<T extends Enum<T> & BlockPosRepresentable & StringRe
 
     public static EnumProperty getProperty() { // cooked rn hopefully i remember where i wanted to go with this
         return EnumProperty.create("block", TestMulti.class);
+        //return null;
     }
 
     public FauxMultiBlock(Properties properties, Class<T> c) {

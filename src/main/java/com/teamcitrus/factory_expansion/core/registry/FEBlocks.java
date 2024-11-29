@@ -22,25 +22,90 @@ public class FEBlocks {
 
     public static final Supplier<? extends Block> BRASS_ALLOY_BLOCK
             = registerBlockItem("brass_alloy_block", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
+    public static final Supplier<? extends Block> BRASS_GRATE
+            = registerBlockItem("brass_grate", () -> new WaterloggedTransparentBlock(getProperties(Blocks.COPPER_GRATE)));
+    public static final Supplier<? extends Block> CUT_BRASS_ALLOY
+            = registerBlockItem("cut_brass_alloy", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
+    public static final Supplier<? extends Block> BRASS_GIRDER
+            = registerBlockItem("brass_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
+
     public static final Supplier<? extends Block> ARID_ALLOY_BLOCK
             = registerBlockItem("arid_alloy_block", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
+    public static final Supplier<? extends Block> ARID_GRATE
+            = registerBlockItem("arid_grate", () -> new WaterloggedTransparentBlock(getProperties(Blocks.COPPER_GRATE)));
+    public static final Supplier<? extends Block> CUT_ARID_ALLOY
+            = registerBlockItem("cut_arid_alloy", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
+    public static final Supplier<? extends Block> ARID_GIRDER
+            = registerBlockItem("arid_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
+
     public static final Supplier<? extends Block> PALE_ALLOY_BLOCK
             = registerBlockItem("pale_alloy_block", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
+    public static final Supplier<? extends Block> PALE_GRATE
+            = registerBlockItem("pale_grate", () -> new WaterloggedTransparentBlock(getProperties(Blocks.COPPER_GRATE)));
+    public static final Supplier<? extends Block> CUT_PALE_ALLOY
+            = registerBlockItem("cut_pale_alloy", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
+    public static final Supplier<? extends Block> PALE_GIRDER
+            = registerBlockItem("pale_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
+
     public static final Supplier<? extends Block> BLACK_ALLOY_BLOCK
             = registerBlockItem("black_alloy_block", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
+    public static final Supplier<? extends Block> BLACK_GRATE
+            = registerBlockItem("black_grate", () -> new WaterloggedTransparentBlock(getProperties(Blocks.COPPER_GRATE)));
+    public static final Supplier<? extends Block> CUT_BLACK_ALLOY
+            = registerBlockItem("cut_black_alloy", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
+    public static final Supplier<? extends Block> BLACK_GIRDER
+            = registerBlockItem("black_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
-    public static final Supplier<? extends Block> SHS_PIPE_BUNDLE
-            = registerBlockItem("shs_pipe_bundle", () -> new RotatedPillarBlock(getProperties(Blocks.NETHERITE_BLOCK)));
-    public static final Supplier<? extends Block> CHS_PIPE_BUNDLE
-            = registerBlockItem("chs_pipe_bundle", () -> new RotatedPillarBlock(getProperties(Blocks.NETHERITE_BLOCK)));
+    public static final Supplier<? extends Block> SCRAP_METAL_BLOCK
+            = registerBlockItem("scrap_metal_block", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
+    public static final Supplier<? extends Block> SCRAP_METAL_STAIRS
+            = registerBlockItem("scrap_metal_stairs", () -> new StairBlock(SCRAP_METAL_BLOCK.get().defaultBlockState(), getProperties(SCRAP_METAL_BLOCK.get())));
+    public static final Supplier<? extends Block> SCRAP_METAL_SLAB
+            = registerBlockItem("scrap_metal_slab", () -> new SlabBlock(getProperties(SCRAP_METAL_BLOCK.get())));
+
+    public static final Supplier<? extends Block> ORNATE_SCRAP_METAL
+            = registerBlockItem("ornate_scrap_metal", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
+    public static final Supplier<? extends Block> ORNATE_SCRAP_METAL_STAIRS
+            = registerBlockItem("ornate_scrap_metal_stairs", () -> new StairBlock(ORNATE_SCRAP_METAL.get().defaultBlockState(), getProperties(ORNATE_SCRAP_METAL.get())));
+    public static final Supplier<? extends Block> ORNATE_SCRAP_METAL_SLAB
+            = registerBlockItem("ornate_scrap_metal_slab", () -> new SlabBlock(getProperties(ORNATE_SCRAP_METAL.get())));
+
+    public static final Supplier<? extends Block> SHS_PIPING
+            = registerBlockItem("shs_piping", () -> new RotatedPillarBlock(getProperties(Blocks.NETHERITE_BLOCK)));
+    public static final Supplier<? extends Block> CHS_PIPING
+            = registerBlockItem("chs_piping", () -> new RotatedPillarBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
     public static final Supplier<? extends Block> DRYWALL
-            = registerBlockItem("drywall", () -> new Block(BlockBehaviour.Properties.of().strength(0.5f).destroyTime(0.5f)));
+            = registerBlockItem("drywall", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().strength(0.5f).destroyTime(0.5f)));
     public static final Supplier<? extends Block> DRYWALL_STAIRS
             = registerBlockItem("drywall_stairs", () -> new StairBlock(DRYWALL.get().defaultBlockState(), getProperties(DRYWALL.get())));
     public static final Supplier<? extends Block> DRYWALL_SLAB
             = registerBlockItem("drywall_slab", () -> new SlabBlock(getProperties(DRYWALL.get())));
 
+    public static final Supplier<? extends Block> BLACK_INDUSTRY_CONCRETE
+            = registerBlockItem("black_industry_concrete", () -> new Block(getProperties(Blocks.BLACK_CONCRETE)));
+    public static final Supplier<? extends Block> CARVED_BLACK_INDUSTRY_CONCRETE
+            = registerBlockItem("carved_black_industry_concrete", () -> new Block(getProperties(Blocks.BLACK_CONCRETE)));
+    public static final Supplier<? extends Block> BLACK_INDUSTRY_CONCRETE_TILE
+            = registerBlockItem("black_industry_concrete_tile", () -> new Block(getProperties(Blocks.BLACK_CONCRETE)));
+
+    public static final Supplier<? extends Block> WARM_INDUSTRY_CONCRETE
+            = registerBlockItem("warm_industry_concrete", () -> new Block(getProperties(Blocks.BLACK_CONCRETE)));
+
+    public static final Supplier<? extends Block> COLD_INDUSTRY_CONCRETE
+            = registerBlockItem("cold_industry_concrete", () -> new Block(getProperties(Blocks.BLACK_CONCRETE)));
+
+    public static final Supplier<? extends Block> RED_CLINKER_BRICKS
+            = registerBlockItem("red_clinker_bricks", () -> new Block(getProperties(Blocks.BRICKS)));
+
+    public static final Supplier<? extends Block> BROWN_CLINKER_BRICKS
+            = registerBlockItem("brown_clinker_bricks", () -> new Block(getProperties(Blocks.BRICKS)));
+
+    public static final Supplier<? extends Block> GREEN_CLINKER_BRICKS
+            = registerBlockItem("green_clinker_bricks", () -> new Block(getProperties(Blocks.BRICKS)));
+
+    public static final Supplier<? extends Block> BLACK_CLINKER_BRICKS
+            = registerBlockItem("black_clinker_bricks", () -> new Block(getProperties(Blocks.BRICKS)));
     // vent
 
     public static final Supplier<? extends Block> LARGE_INDUSTRIAL_VENT
@@ -50,8 +115,8 @@ public class FEBlocks {
             = registerBlock("medium_industrial_vent", () -> new MediumVentBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
 
-    public static final Supplier<? extends Block> TEST
-            = registerBlockItem("test", () -> new FauxMultiBlock<>(getProperties(Blocks.NETHERITE_BLOCK), TestMulti.class));
+    //public static final Supplier<? extends Block> TEST
+    //        = registerBlockItem("test", () -> new FauxMultiBlock<>(getProperties(Blocks.NETHERITE_BLOCK), TestMulti.class));
 
     // lamps
 
@@ -75,17 +140,6 @@ public class FEBlocks {
 
     public static final Dictionary<DyeColor, Supplier<? extends Block>> INVERTED_FLUX_BULBS
             = registerDyeableBlocks("inverted_flux_bulb", () -> new InvertedFluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 12, false), false);
-
-    // girder
-
-    public static final Supplier<? extends Block> BRASS_GIRDER
-            = registerBlockItem("brass_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
-    public static final Supplier<? extends Block> ARID_GIRDER
-            = registerBlockItem("arid_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
-    public static final Supplier<? extends Block> PALE_GIRDER
-            = registerBlockItem("pale_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
-    public static final Supplier<? extends Block> BLACK_GIRDER
-            = registerBlockItem("black_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
     // other
 

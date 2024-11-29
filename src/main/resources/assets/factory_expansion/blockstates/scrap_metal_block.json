@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "factory_expansion:block/scrap_metal_block"
+    }
+  }
+}

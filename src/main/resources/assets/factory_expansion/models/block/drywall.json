@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_column",
   "textures": {
-    "all": "factory_expansion:block/drywall"
+    "end": "factory_expansion:block/drywall_end",
+    "side": "factory_expansion:block/drywall_side"
   }
 }

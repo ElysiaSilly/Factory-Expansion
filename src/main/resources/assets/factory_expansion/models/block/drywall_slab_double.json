@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "factory_expansion:block/drywall_end",
+    "side": "factory_expansion:block/drywall_slab"
+  }
+}

@@ -1,7 +1,16 @@
 {
   "variants": {
-    "": {
+    "axis=x": {
+      "model": "factory_expansion:block/drywall",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
       "model": "factory_expansion:block/drywall"
+    },
+    "axis=z": {
+      "model": "factory_expansion:block/drywall",
+      "x": 90
     }
   }
 }

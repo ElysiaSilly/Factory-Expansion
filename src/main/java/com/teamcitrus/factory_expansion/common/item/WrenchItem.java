@@ -51,6 +51,7 @@ public class WrenchItem extends Item {
             }
         }
 
+
         if(!override && (!isWrenchableBlock || !player.isShiftKeyDown())) {
 
             if(state.getOptionalValue(BlockStateProperties.FACING).isPresent()) {

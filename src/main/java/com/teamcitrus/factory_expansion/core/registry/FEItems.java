@@ -67,6 +67,7 @@ public class FEItems {
     public static final Supplier<Item> ARID_ALLOY = ITEMS.registerSimpleItem("arid_alloy", new Item.Properties());
     public static final Supplier<Item> BRASS_ALLOY = ITEMS.registerSimpleItem("brass_alloy", new Item.Properties());
 
+    public static final Supplier<Item> SCRAP_METAL = ITEMS.registerSimpleItem("scrap_metal", new Item.Properties());
 
     /// CYCLE ITEMS
 

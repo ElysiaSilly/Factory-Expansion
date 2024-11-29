@@ -1,0 +1,39 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "factory_expansion:block/red_clinker_bricks/1"
+      },{
+        "model": "factory_expansion:block/red_clinker_bricks/2"
+      },{
+        "model": "factory_expansion:block/red_clinker_bricks/3"
+      },{
+        "model": "factory_expansion:block/red_clinker_bricks/4"
+      },{
+        "model": "factory_expansion:block/red_clinker_bricks/5"
+      },{
+        "model": "factory_expansion:block/red_clinker_bricks/6"
+      },{
+        "model": "factory_expansion:block/red_clinker_bricks/7"
+      },{
+        "model": "factory_expansion:block/red_clinker_bricks/8"
+      },{
+        "model": "factory_expansion:block/red_clinker_bricks/9"
+      },{
+        "model": "factory_expansion:block/red_clinker_bricks/10"
+      },{
+        "model": "factory_expansion:block/red_clinker_bricks/11"
+      },{
+        "model": "factory_expansion:block/red_clinker_bricks/12"
+      },{
+        "model": "factory_expansion:block/red_clinker_bricks/13"
+      },{
+        "model": "factory_expansion:block/red_clinker_bricks/14"
+      },{
+        "model": "factory_expansion:block/red_clinker_bricks/15"
+      },{
+        "model": "factory_expansion:block/red_clinker_bricks/16"
+      }
+    ]
+  }
+}
