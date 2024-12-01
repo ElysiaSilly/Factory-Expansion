@@ -22,6 +22,7 @@ public class DisplayBlockBE extends BlockEntity {
     private int colour = ColourUtils.RGBAToDec(new RGBA(242, 189, 116, 0));
     private int seededColour = 10;
     private float seed = 10;
+    private String font = "default";
 
     public DisplayBlockBE(BlockPos pos, BlockState blockState) {
         super(FEBlockEntities.DISPLAY_BE.get(), pos, blockState);
@@ -64,6 +65,15 @@ public class DisplayBlockBE extends BlockEntity {
 
     public int getColour() {
         return this.colour;
+    }
+
+    public void setFont(String font) {
+        this.font = font;
+        markUpdated();
+    }
+
+    public String getFont() {
+        return this.font;
     }
 
     public int getSeededColour() {
@@ -145,6 +155,7 @@ public class DisplayBlockBE extends BlockEntity {
         tag.putInt("colour", this.colour);
         tag.putString("string", this.string);
         tag.putFloat("seed", this.seed);
+        tag.putString("font", this.font);
 
         return tag;
     }
@@ -155,6 +166,7 @@ public class DisplayBlockBE extends BlockEntity {
         this.string = tag.getString("string");
         this.colour = tag.getInt("colour");
         this.seed = tag.getFloat("seed");
+        this.font = tag.getString("font");
 
         return tag;
     }

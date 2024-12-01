@@ -9,6 +9,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -39,7 +40,7 @@ public class InvertedFluxBulbBlock extends DirectionalBlock implements SimpleWat
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final EnumProperty<FluxBulbMode> MODE = FEProperties.FLUX_BULB_MODE;
 
-    private final boolean emitParticles;
+    private final ParticleOptions particle;
 
     private static final VoxelShape[] SHAPE = {
             Block.box(4,4,5,12,12,16), // NORTH
@@ -55,9 +56,9 @@ public class InvertedFluxBulbBlock extends DirectionalBlock implements SimpleWat
         return state.getValue(LIT);
     }
 
-    public InvertedFluxBulbBlock(Properties properties, int light, boolean emitParticles) {
+    public InvertedFluxBulbBlock(Properties properties, int light, @Nullable ParticleOptions particle) {
         super(properties.lightLevel((state) -> state.getValue(LIT) ?  light : 0).emissiveRendering(InvertedFluxBulbBlock::lit));
-        this.emitParticles = emitParticles;
+        this.particle = particle;
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(LIT, false)
                 .setValue(WATERLOGGED, false)
@@ -157,11 +158,11 @@ public class InvertedFluxBulbBlock extends DirectionalBlock implements SimpleWat
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        if(state.getValue(LIT) && emitParticles) {
+        if (state.getValue(LIT) && this.particle != null) {
             double d0 = (double)pos.getX() + 0.5 + (random.nextDouble() - 0.4) * 0.2;
             double d1 = (double)pos.getY() + 0.7 + (random.nextDouble() - 0.9) * 0.2;
             double d2 = (double)pos.getZ() + 0.5 + (random.nextDouble() - 0.4) * 0.2;
-            level.addParticle(DustParticleOptions.REDSTONE, d0, d1, d2, 0.0, 0.0, 0.0);
+            level.addParticle(this.particle, d0, d1, d2, 0.0, 0.0, 0.0);
         }
     }
 }

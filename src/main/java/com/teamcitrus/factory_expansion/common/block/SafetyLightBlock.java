@@ -25,7 +25,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class WarningLightBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
+public class SafetyLightBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
 
     public static final EnumProperty<WarningLightState> STATE = FEProperties.WARNING_LIGHT_STATE;
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -38,8 +38,12 @@ public class WarningLightBlock extends DirectionalBlock implements SimpleWaterlo
 
     };
 
-    public WarningLightBlock(Properties properties) {
-        super(properties.noOcclusion().lightLevel((state) -> state.getValue(STATE).lightLevel()));
+    private static boolean lit(BlockState state, BlockGetter blockGetter, BlockPos pos) {
+        return state.getValue(STATE).lightLevel() != 0;
+    }
+
+    public SafetyLightBlock(Properties properties) {
+        super(properties.noOcclusion().lightLevel((state) -> state.getValue(STATE).lightLevel()).emissiveRendering(SafetyLightBlock::lit));
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(STATE, WarningLightState.OFF)
                 .setValue(WATERLOGGED, false)

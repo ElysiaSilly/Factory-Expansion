@@ -139,9 +139,9 @@ public class FEItems {
                     new Item.Properties(),
                     CycleBlockItem.Mode.CYCLE_ONLY,
 
-                    optProperty(FEBlocks.LARGE_BLACK_VENT.get(), 9).placementContext(),
+                    optProperty(FEBlocks.SMALL_BLACK_VENT.get(), 1).placementContext(),
                     optProperty(FEBlocks.MEDIUM_BLACK_VENT.get(),4).placementContext(),
-                    optProperty(FEBlocks.SMALL_BLACK_VENT.get(), 1).placementContext()
+                    optProperty(FEBlocks.LARGE_BLACK_VENT.get(), 9).placementContext()
 
                     ).assignToItem()
             );

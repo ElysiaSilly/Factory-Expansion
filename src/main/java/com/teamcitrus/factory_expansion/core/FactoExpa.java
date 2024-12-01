@@ -5,6 +5,7 @@ import com.teamcitrus.factory_expansion.core.registry.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import org.slf4j.Logger;
 
 import java.util.Random;
@@ -37,5 +38,8 @@ public class FactoExpa {
 
         /// Remember to add Capabilites in the listener
         bus.addListener(FECapabilities::registerCapabilities);
+
+        container.registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
+        container.registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
     }
 }

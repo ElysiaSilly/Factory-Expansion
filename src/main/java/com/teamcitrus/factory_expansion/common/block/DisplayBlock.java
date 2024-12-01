@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -103,6 +104,22 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
                 be.setColour(dye.getDyeColor().getTextColor());
             }
         }
+        if(item.getItem().getDefaultInstance().is(Items.EXPERIENCE_BOTTLE)) {
+            if(level.getBlockEntity(pos) instanceof  DisplayBlockBE be) {
+                be.setFont("alt");
+            }
+        }
+        if(item.getItem().getDefaultInstance().is(Items.OMINOUS_BOTTLE)) {
+            if(level.getBlockEntity(pos) instanceof  DisplayBlockBE be) {
+                be.setFont("illageralt");
+            }
+        }
+        if(item.getItem() instanceof DyeItem dye) {
+            if(level.getBlockEntity(pos) instanceof  DisplayBlockBE be) {
+                flag = true;
+                be.setColour(dye.getDyeColor().getTextColor());
+            }
+        }
         if(player.isShiftKeyDown() && item.isEmpty()) {
             if(level.getBlockEntity(pos) instanceof DisplayBlockBE be) {
                 flag = true;
@@ -112,12 +129,6 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
         if(!player.isShiftKeyDown() && item.isEmpty()) {
             if(level.getBlockEntity(pos) instanceof DisplayBlockBE be && !level.isClientSide) {
                 be.seed(level);
-            }
-        }
-
-        if(level.getBlockEntity(pos) instanceof DisplayBlockBE be) {
-            if(!player.isShiftKeyDown()) {
-                //Minecraft.getInstance().setScreen(new DisplayEditScreen(Component.literal("edit display"), be));
             }
         }
 

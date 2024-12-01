@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.teamcitrus.factory_expansion.common.block.DisplayBlock;
 import com.teamcitrus.factory_expansion.common.block.be.DisplayBlockBE;
+import com.teamcitrus.factory_expansion.core.Config;
 import com.teamcitrus.factory_expansion.core.util.ColourUtils;
 import com.teamcitrus.factory_expansion.core.util.RGBA;
 import net.minecraft.client.Camera;
@@ -12,6 +13,9 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ColorRGBA;
 import org.joml.Matrix4f;
 
@@ -34,17 +38,17 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockBE>
 
         float f2 = (float)(-Minecraft.getInstance().font.width(be.getString()) / 2);
 
-        int colour = false ? be.getColour() : be.getSeededColour(); // todo: config option for seeded colour
+        int colour = Config.DISPLAY_COLOUR_VARIATION.get() ? be.getSeededColour() : be.getColour();
 
-        if(true) colour = flickering(colour, be); // todo: config option for colour flickering
+        if(Config.DISPLAY_FLICKERING.get()) colour = flickering(colour, be);
 
-        Minecraft.getInstance().font.drawInBatch(be.getString(), f2, 0, colour, true, matrix4f, bufferSource, Font.DisplayMode.NORMAL, 0, 15728880);
+        Minecraft.getInstance().font.drawInBatch(Component.literal(be.getString()).withStyle(Style.EMPTY.withFont(ResourceLocation.fromNamespaceAndPath("minecraft", be.getFont()))), f2, 0, colour, true, matrix4f, bufferSource, Font.DisplayMode.NORMAL, 0, 15728880);
     }
 
     private int flickering(int c, DisplayBlockBE be) {
         RGBA colour = ColourUtils.DecToRGBA(c);
 
-        int ran = be.getLevel().random.nextIntBetweenInclusive(-1000, 100);
+        int ran = be.getLevel().random.nextIntBetweenInclusive(-10000, 100);
         ran = ran >= 98 ? ran : 1;
 
         colour.shade((float) (ran));

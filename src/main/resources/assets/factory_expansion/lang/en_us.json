@@ -4,8 +4,8 @@
   "item.factory_expansion.transgender_block": "Transgender Block",
   "item.factory_expansion.flux_bulb": "Flux Bulb",
   "item.factory_expansion.red_flux_bulb": "Red Flux Bulb",
-  "item.factory_expansion.industrial_vent": "Industrial Vent",
-
+  "item.factory_expansion.uv_flux_bulb": "Glow Flux Bulb",
+  "item.factory_expansion.black_industrial_vent": "Black Industrial Vent",
 
   "item.factory_expansion.flux_bulb.1": "Normal",
   "item.factory_expansion.flux_bulb.2": "Inverted",
@@ -17,9 +17,14 @@
   "item.factory_expansion.red_flux_bulb.3": "Normal Pulsing",
   "item.factory_expansion.red_flux_bulb.4": "Inverted Pulsing",
 
-  "item.factory_expansion.industrial_vent.1": "3x3",
-  "item.factory_expansion.industrial_vent.2": "2x2",
+  "item.factory_expansion.uv_flux_bulb.1": "Normal",
+  "item.factory_expansion.uv_flux_bulb.2": "Inverted",
+  "item.factory_expansion.uv_flux_bulb.3": "Normal Pulsing",
+  "item.factory_expansion.uv_flux_bulb.4": "Inverted Pulsing",
 
+  "item.factory_expansion.black_industrial_vent.1": "1x1",
+  "item.factory_expansion.black_industrial_vent.2": "2x2",
+  "item.factory_expansion.black_industrial_vent.3": "3x3",
 
   "tooltip.factory_expansion.random": "Random",
 

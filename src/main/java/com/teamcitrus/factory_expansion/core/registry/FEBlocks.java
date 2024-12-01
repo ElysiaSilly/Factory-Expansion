@@ -1,9 +1,9 @@
 package com.teamcitrus.factory_expansion.core.registry;
 
 import com.teamcitrus.factory_expansion.common.block.*;
-import com.teamcitrus.factory_expansion.common.block.fauxmultiblock.FauxMultiBlock;
-import com.teamcitrus.factory_expansion.common.block.fauxmultiblock.TestMulti;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
+import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.*;
@@ -65,7 +65,7 @@ public class FEBlocks {
     public static final Supplier<? extends Block> MEDIUM_BLACK_VENT
             = registerBlock("medium_black_vent", () -> new MediumVentBlock(getProperties(BLACK_ALLOY_BLOCK.get())));
     public static final Supplier<? extends Block> SMALL_BLACK_VENT
-            = registerBlock("small_black_vent", () -> new RotatedPillarBlock(getProperties(BLACK_ALLOY_BLOCK.get())));
+            = registerBlock("small_black_vent", () -> new SmallVentBlock(getProperties(BLACK_ALLOY_BLOCK.get())));
 
     // scrap metal
     public static final Supplier<? extends Block> SCRAP_METAL_BLOCK
@@ -129,26 +129,26 @@ public class FEBlocks {
 
     // lamps
 
-    public static final Supplier<? extends Block> WARNING_LIGHT
-            = registerBlockItem("warning_light", () -> new WarningLightBlock(getProperties(Blocks.NETHERITE_BLOCK)));
+    public static final Supplier<? extends Block> SAFETY_LIGHT
+            = registerBlockItem("safety_light", () -> new SafetyLightBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
     public static final Supplier<? extends Block> FLUX_BULB
-            = registerBlock("flux_bulb", () -> new FluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 7, true));
+            = registerBlock("flux_bulb", () -> new FluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 7, DustParticleOptions.REDSTONE));
 
     public static final Supplier<? extends Block> INVERTED_FLUX_BULB
-            = registerBlock("inverted_flux_bulb", () -> new InvertedFluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 7, true));
+            = registerBlock("inverted_flux_bulb", () -> new InvertedFluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 7, DustParticleOptions.REDSTONE));
 
     public static final Supplier<? extends Block> UV_FLUX_BULB
-            = registerBlock("uv_flux_bulb", () -> new FluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 1, false));
+            = registerBlock("uv_flux_bulb", () -> new FluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 1, ParticleTypes.GLOW));
 
     public static final Supplier<? extends Block> INVERTED_UV_FLUX_BULB
-            = registerBlock("uv_inverted_flux_bulb", () -> new InvertedFluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 1, false));
+            = registerBlock("uv_inverted_flux_bulb", () -> new InvertedFluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 1, ParticleTypes.GLOW));
 
     public static final Dictionary<DyeColor, Supplier<? extends Block>> FLUX_BULBS
-            = registerDyeableBlocks("flux_bulb", () -> new FluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 12, false), false);
+            = registerDyeableBlocks("flux_bulb", () -> new FluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 12, null), false);
 
     public static final Dictionary<DyeColor, Supplier<? extends Block>> INVERTED_FLUX_BULBS
-            = registerDyeableBlocks("inverted_flux_bulb", () -> new InvertedFluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 12, false), false);
+            = registerDyeableBlocks("inverted_flux_bulb", () -> new InvertedFluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 12, null), false);
 
     // other
 

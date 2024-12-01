@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "factory_expansion:block/industrial_fan/small",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "factory_expansion:block/industrial_fan/small"
+    },
+    "axis=z": {
+      "model": "factory_expansion:block/industrial_fan/small",
+      "x": 90
+    }
+  }
+}

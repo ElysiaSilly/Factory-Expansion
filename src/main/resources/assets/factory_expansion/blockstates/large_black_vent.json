@@ -1,0 +1,36 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "factory_expansion:block/industrial_fan/large",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "block": "5",
+        "axis": "x"
+      }
+    },{
+      "apply": {
+        "model": "factory_expansion:block/industrial_fan/large"
+      },
+      "when": {
+        "block": "5",
+        "axis": "y"
+      }
+    },{
+      "apply": {
+        "model": "factory_expansion:block/industrial_fan/large",
+        "x": 90
+      },
+      "when": {
+        "block": "5",
+        "axis": "z"
+      }
+    },{
+      "apply": {
+        "model": "factory_expansion:block/industrial_fan/empty"
+      }
+    }
+  ]
+}
