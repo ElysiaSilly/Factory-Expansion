@@ -36,10 +36,10 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     private static final VoxelShape[] SHAPE = {
-            Block.box(0.0, 0.0, 14.0, 16.0, 16.0, 16.0), // NORTH
-            Block.box(0.0, 0.0, 13.0, 16.0, 16.0, 16.0),
-            Block.box(0.0, 0.0, 13.0, 16.0, 16.0, 16.0),
-            Block.box(0.0, 0.0, 13.0, 16.0, 16.0, 16.0),
+            Block.box(0, 0, 14, 16, 16, 16),
+            Block.box(0, 0, 0, 2, 16, 16),
+            Block.box(0, 0, 0, 16, 16, 2),
+            Block.box(14, 0, 0, 16, 16, 16),
     };
 
     public DisplayBlock(Properties properties) {
@@ -63,7 +63,13 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE[0];
+        return switch(state.getValue(FACING)) {
+            case DOWN, UP -> null;
+            case NORTH -> SHAPE[0];
+            case EAST  -> SHAPE[1];
+            case SOUTH -> SHAPE[2];
+            case WEST  -> SHAPE[3];
+        };
     }
 
     @Override
@@ -101,6 +107,11 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
             if(level.getBlockEntity(pos) instanceof DisplayBlockBE be) {
                 flag = true;
                 be.setCharacter(' ');
+            }
+        }
+        if(!player.isShiftKeyDown() && item.isEmpty()) {
+            if(level.getBlockEntity(pos) instanceof DisplayBlockBE be && !level.isClientSide) {
+                be.seed(level);
             }
         }
 
@@ -180,6 +191,11 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
         if(item.getItem() instanceof DyeItem dye) {
             if(level.getBlockEntity(pos) instanceof DisplayBlockBE be) {
                 player.displayClientMessage(Component.literal("change colour to " + dye.getDyeColor().name()).withStyle(ChatFormatting.GRAY), true);
+            }
+        }
+        if(!player.isShiftKeyDown() && item.isEmpty()) {
+            if(level.getBlockEntity(pos) instanceof DisplayBlockBE be) {
+                player.displayClientMessage(Component.literal(String.valueOf(be.getSeed())).withStyle(ChatFormatting.GRAY), true);
             }
         }
 

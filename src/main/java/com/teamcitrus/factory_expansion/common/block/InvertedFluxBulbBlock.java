@@ -51,8 +51,12 @@ public class InvertedFluxBulbBlock extends DirectionalBlock implements SimpleWat
 
     };
 
+    private static boolean lit(BlockState state, BlockGetter blockGetter, BlockPos pos) {
+        return state.getValue(LIT);
+    }
+
     public InvertedFluxBulbBlock(Properties properties, int light, boolean emitParticles) {
-        super(properties.lightLevel((state) -> state.getValue(LIT) ?  light : 0));
+        super(properties.lightLevel((state) -> state.getValue(LIT) ?  light : 0).emissiveRendering(InvertedFluxBulbBlock::lit));
         this.emitParticles = emitParticles;
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(LIT, false)
@@ -153,7 +157,7 @@ public class InvertedFluxBulbBlock extends DirectionalBlock implements SimpleWat
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        if (state.getValue(LIT) && emitParticles) {
+        if(state.getValue(LIT) && emitParticles) {
             double d0 = (double)pos.getX() + 0.5 + (random.nextDouble() - 0.4) * 0.2;
             double d1 = (double)pos.getY() + 0.7 + (random.nextDouble() - 0.9) * 0.2;
             double d2 = (double)pos.getZ() + 0.5 + (random.nextDouble() - 0.4) * 0.2;

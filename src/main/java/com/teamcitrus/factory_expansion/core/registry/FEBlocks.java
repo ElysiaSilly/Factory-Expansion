@@ -139,10 +139,10 @@ public class FEBlocks {
             = registerBlock("inverted_flux_bulb", () -> new InvertedFluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 7, true));
 
     public static final Supplier<? extends Block> UV_FLUX_BULB
-            = registerBlock("uv_flux_bulb", () -> new FluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 0, false));
+            = registerBlock("uv_flux_bulb", () -> new FluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 1, false));
 
     public static final Supplier<? extends Block> INVERTED_UV_FLUX_BULB
-            = registerBlock("inverted_uv_flux_bulb", () -> new InvertedFluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 0, false));
+            = registerBlock("uv_inverted_flux_bulb", () -> new InvertedFluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 1, false));
 
     public static final Dictionary<DyeColor, Supplier<? extends Block>> FLUX_BULBS
             = registerDyeableBlocks("flux_bulb", () -> new FluxBulbBlock(getProperties(Blocks.NETHERITE_BLOCK), 12, false), false);

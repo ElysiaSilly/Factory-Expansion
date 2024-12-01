@@ -108,6 +108,19 @@ public class FEItems {
                     ).assignToItem()
             );
 
+    public static final DeferredItem<CycleBlockItem> UV_FLUX_BULB =
+            ITEMS.register("uv_flux_bulb", () -> new CycleBlockItem(
+                            new Item.Properties(),
+                            CycleBlockItem.Mode.CYCLE_ONLY,
+
+                            optProperty(FEBlocks.UV_FLUX_BULB.get(), 1).placementContext(),
+                            optProperty(FEBlocks.INVERTED_UV_FLUX_BULB.get(), 1).placementContext(),
+                            optProperty(FEBlocks.UV_FLUX_BULB.get(), 1).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext(),
+                            optProperty(FEBlocks.INVERTED_UV_FLUX_BULB.get(), 1).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext()
+
+                    ).assignToItem()
+            );
+
     public static final DeferredItem<CycleBlockItem> RED_FLUX_BULB =
             ITEMS.register("red_flux_bulb", () -> new CycleBlockItem(
                     new Item.Properties(),

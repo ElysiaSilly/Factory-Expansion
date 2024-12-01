@@ -51,8 +51,12 @@ public class FluxBulbBlock extends DirectionalBlock implements SimpleWaterlogged
 
     };
 
+    private static boolean lit(BlockState state, BlockGetter blockGetter, BlockPos pos) {
+        return state.getValue(LIT);
+    }
+
     public FluxBulbBlock(Properties properties, int light, boolean emitParticles) {
-        super(properties.lightLevel((state) -> state.getValue(LIT) ?  light : 0));
+        super(properties.lightLevel((state) -> state.getValue(LIT) ?  light : 0).emissiveRendering(FluxBulbBlock::lit));
         this.emitParticles = emitParticles;
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(LIT, false)
