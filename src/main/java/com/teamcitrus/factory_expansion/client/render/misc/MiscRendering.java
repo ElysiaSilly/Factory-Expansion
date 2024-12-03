@@ -31,28 +31,5 @@ public class MiscRendering {
         graphics.fill(RenderType.guiOverlay(), x, y, x + l,  y + 1, 0, i | 0xFF000000); // idk how this works, the bar always appears yellow ?
     }
 
-    public static void renderGhostBlock(Block block, BlockPlaceContext context, PoseStack stack) {
 
-        BlockState placement = block.getStateForPlacement(context);
-        if(placement == null) return;
-
-        if(Minecraft.getInstance().level instanceof BlockAndTintGetter tint) {
-
-            RenderSystem.enableBlend();
-            RenderSystem.blendFunc(GlStateManager.SourceFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.4F);
-
-            Minecraft.getInstance().getBlockRenderer().renderBatched(
-                    placement,
-                    context.getClickedPos(),
-                    tint,
-                    stack,
-                    Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(RenderType.translucent()),
-                    true,
-                    Minecraft.getInstance().level.getRandom()
-            );
-
-            RenderSystem.disableBlend();
-        }
-    }
 }

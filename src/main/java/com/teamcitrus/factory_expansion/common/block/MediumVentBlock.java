@@ -1,6 +1,7 @@
 package com.teamcitrus.factory_expansion.common.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.teamcitrus.factory_expansion.client.render.misc.BlockPreviewRenderer;
 import com.teamcitrus.factory_expansion.client.render.misc.MiscRendering;
 import com.teamcitrus.factory_expansion.common.block.interfaces.block.IPreviewBlock;
 import com.teamcitrus.factory_expansion.core.properties.FEProperties;
@@ -154,6 +155,6 @@ public class MediumVentBlock extends RotatedPillarBlock implements IPreviewBlock
 
         if(context.getItemInHand().getCount() < 4 && !context.getPlayer().hasInfiniteMaterials()) return;
 
-        MiscRendering.renderGhostBlock(block, context, stack);
+        BlockPreviewRenderer.renderGhostBlock(block, context, stack);
     }
 }

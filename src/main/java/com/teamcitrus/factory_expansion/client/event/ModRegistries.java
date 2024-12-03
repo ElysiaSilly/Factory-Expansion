@@ -2,7 +2,7 @@ package com.teamcitrus.factory_expansion.client.event;
 
 import com.teamcitrus.factory_expansion.client.render.FlamethrowerExtension;
 import com.teamcitrus.factory_expansion.client.render.be.DisplayBlockRenderer;
-import com.teamcitrus.factory_expansion.client.render.misc.CycleItemIcon;
+import com.teamcitrus.factory_expansion.client.render.misc.CycleHudRenderer;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
 import com.teamcitrus.factory_expansion.core.registry.FEBlockEntities;
 import com.teamcitrus.factory_expansion.core.registry.FEItems;
@@ -30,6 +30,6 @@ public class ModRegistries {
 
     @SubscribeEvent
     public static void onRegisterGuiLayersEvent(RegisterGuiLayersEvent event) {
-        event.registerBelowAll(ResourceLocation.fromNamespaceAndPath(FactoExpa.MODID, "cycle_item_icon"), CycleItemIcon.LAYER);
+        event.registerBelowAll(ResourceLocation.fromNamespaceAndPath(FactoExpa.MODID, "cycle_item_icon"), CycleHudRenderer.LAYER);
     }
 }

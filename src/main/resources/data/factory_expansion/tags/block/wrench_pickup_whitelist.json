@@ -1,6 +1,9 @@
 {
   "values": [
     "#factory_expansion:girders",
-    "#factory_expansion:redstone_components"
+    "#factory_expansion:redstone_components",
+    "#factory_expansion:lamps",
+    "#factory_expansion:vents",
+    "factory_expansion:display"
   ]
 }

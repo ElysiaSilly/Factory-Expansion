@@ -9,9 +9,9 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.resources.ResourceLocation;
 
-public class CycleItemIcon implements LayeredDraw.Layer {
+public class CycleHudRenderer implements LayeredDraw.Layer {
 
-    public static final LayeredDraw.Layer LAYER = new CycleItemIcon();
+    public static final LayeredDraw.Layer LAYER = new CycleHudRenderer();
 
     @Override
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {

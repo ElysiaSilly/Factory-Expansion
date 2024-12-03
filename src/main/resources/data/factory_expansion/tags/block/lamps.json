@@ -1,0 +1,11 @@
+{
+  "values": [
+    "factory_expansion:safety_light",
+    "factory_expansion:flux_bulb",
+    "factory_expansion:uv_flux_bulb",
+    "factory_expansion:red_flux_bulb",
+    "factory_expansion:inverted_flux_bulb",
+    "factory_expansion:uv_inverted_flux_bulb",
+    "factory_expansion:red_inverted_flux_bulb"
+  ]
+}
