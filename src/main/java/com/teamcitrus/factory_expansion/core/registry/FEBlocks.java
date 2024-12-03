@@ -28,7 +28,7 @@ public class FEBlocks {
     public static final Supplier<? extends Block> CUT_BRASS_ALLOY
             = registerBlockItem("cut_brass_alloy", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
     public static final Supplier<? extends Block> BRASS_GIRDER
-            = registerBlockItem("brass_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
+            = registerBlock("brass_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
     // arid alloy
     public static final Supplier<? extends Block> ARID_ALLOY_BLOCK
@@ -38,7 +38,7 @@ public class FEBlocks {
     public static final Supplier<? extends Block> CUT_ARID_ALLOY
             = registerBlockItem("cut_arid_alloy", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
     public static final Supplier<? extends Block> ARID_GIRDER
-            = registerBlockItem("arid_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
+            = registerBlock("arid_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
     // pale alloy
     public static final Supplier<? extends Block> PALE_ALLOY_BLOCK
@@ -48,7 +48,7 @@ public class FEBlocks {
     public static final Supplier<? extends Block> CUT_PALE_ALLOY
             = registerBlockItem("cut_pale_alloy", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
     public static final Supplier<? extends Block> PALE_GIRDER
-            = registerBlockItem("pale_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
+            = registerBlock("pale_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
     // black alloy
     public static final Supplier<? extends Block> BLACK_ALLOY_BLOCK
@@ -58,7 +58,7 @@ public class FEBlocks {
     public static final Supplier<? extends Block> CUT_BLACK_ALLOY
             = registerBlockItem("cut_black_alloy", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));
     public static final Supplier<? extends Block> BLACK_GIRDER
-            = registerBlockItem("black_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
+            = registerBlock("black_girder", () -> new GirderBlock(getProperties(Blocks.NETHERITE_BLOCK)));
 
     public static final Supplier<? extends Block> LARGE_BLACK_VENT
             = registerBlock("large_black_vent", () -> new LargeVentBlock(getProperties(BLACK_ALLOY_BLOCK.get())));

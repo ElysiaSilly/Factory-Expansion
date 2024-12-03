@@ -8,14 +8,22 @@ public class Config {
 
     public static ModConfigSpec.BooleanValue DISPLAY_FLICKERING;
     public static ModConfigSpec.BooleanValue DISPLAY_COLOUR_VARIATION;
+    public static ModConfigSpec.BooleanValue DISPLAY_CHROMATIC_ABERRATION;
+
+    public static ModConfigSpec.BooleanValue BLOCK_PLACEMENT_PREVIEW;
 
     static {
         ModConfigSpec.Builder CLIENT = new ModConfigSpec.Builder();
 
-        CLIENT.push("visual");
+        CLIENT.push("displays");
 
         DISPLAY_FLICKERING = CLIENT.comment("if displays should flicker").define("displayFlickering", true);
         DISPLAY_COLOUR_VARIATION = CLIENT.comment("if display colours should vary").define("displayColourVariation", true);
+        DISPLAY_CHROMATIC_ABERRATION = CLIENT.comment("if display should apply chromatic aberration").define("displayChromaticAberration", true);
+
+        CLIENT.push("block placement");
+
+        BLOCK_PLACEMENT_PREVIEW = CLIENT.comment("if blocks can have a placement preview").define("placementPreview", true);
 
         CLIENT.pop();
 

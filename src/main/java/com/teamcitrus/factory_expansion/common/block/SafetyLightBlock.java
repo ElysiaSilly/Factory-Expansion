@@ -30,7 +30,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class SafetyLightBlock extends DirectionalBlock implements SimpleWaterloggedBlock, IPreviewBlock {
+public class SafetyLightBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
 
     public static final EnumProperty<WarningLightState> STATE = FEProperties.WARNING_LIGHT_STATE;
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -124,10 +124,5 @@ public class SafetyLightBlock extends DirectionalBlock implements SimpleWaterlog
     @Override
     protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         return (15 / 3) * state.getValue(STATE).ordinal();
-    }
-
-    @Override
-    public void renderPreview(BlockHitResult hitResult, BlockPlaceContext context, Block block, Minecraft minecraft, PoseStack stack) {
-        MiscRendering.renderGhostBlock(block, context, stack);
     }
 }

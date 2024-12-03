@@ -1,0 +1,26 @@
+{
+  "values": [
+    "minecraft:redstone_wire",
+    "minecraft:redstone_torch",
+    "minecraft:redstone_wall_torch",
+    "minecraft:redstone_block",
+    "minecraft:repeater",
+    "minecraft:comparator",
+    "#minecraft:buttons",
+    "#minecraft:pressure_plates",
+    "minecraft:lever",
+    "#minecraft:rails",
+    "minecraft:daylight_detector",
+    "minecraft:sticky_piston",
+    "minecraft:dropper",
+    "minecraft:observer",
+    "minecraft:hopper",
+    "minecraft:piston",
+    "minecraft:dispenser",
+    "minecraft:target",
+    "minecraft:redstone_lamp",
+    "minecraft:note_block",
+    "minecraft:jukebox",
+    "minecraft:calibrated_sculk_sensor"
+  ]
+}

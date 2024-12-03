@@ -20,7 +20,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class SmallVentBlock extends RotatedPillarBlock implements IPreviewBlock {
+public class SmallVentBlock extends RotatedPillarBlock {
 
     public SmallVentBlock(Properties properties) {
         super(properties.noOcclusion().pushReaction(PushReaction.DESTROY));
@@ -52,11 +52,5 @@ public class SmallVentBlock extends RotatedPillarBlock implements IPreviewBlock 
     @Override
     protected boolean propagatesSkylightDown(BlockState p_309084_, BlockGetter p_309133_, BlockPos p_309097_) {
         return true;
-    }
-
-    @Override
-    public void renderPreview(BlockHitResult hitResult, BlockPlaceContext context, Block block, Minecraft minecraft, PoseStack stack) {
-
-        MiscRendering.renderGhostBlock(block, context, stack);
     }
 }

@@ -38,7 +38,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class InvertedFluxBulbBlock extends DirectionalBlock implements SimpleWaterloggedBlock, IWrenchableBlock, IPreviewBlock {
+public class InvertedFluxBulbBlock extends DirectionalBlock implements SimpleWaterloggedBlock, IWrenchableBlock {
 
     private static final BooleanProperty LIT = BlockStateProperties.LIT;
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -168,10 +168,5 @@ public class InvertedFluxBulbBlock extends DirectionalBlock implements SimpleWat
             double d2 = (double)pos.getZ() + 0.5 + (random.nextDouble() - 0.4) * 0.2;
             level.addParticle(this.particle, d0, d1, d2, 0.0, 0.0, 0.0);
         }
-    }
-
-    @Override
-    public void renderPreview(BlockHitResult hitResult, BlockPlaceContext context, Block block, Minecraft minecraft, PoseStack stack) {
-        MiscRendering.renderGhostBlock(block, context, stack);
     }
 }

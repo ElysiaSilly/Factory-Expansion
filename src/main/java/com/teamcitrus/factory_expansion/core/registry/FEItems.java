@@ -1,5 +1,6 @@
 package com.teamcitrus.factory_expansion.core.registry;
 
+import com.teamcitrus.factory_expansion.common.block.GirderBlock;
 import com.teamcitrus.factory_expansion.common.item.DrywallFoodItem;
 import com.teamcitrus.factory_expansion.common.item.FlamethrowerItem;
 import com.teamcitrus.factory_expansion.common.item.PoppedDrywallFoodItem;
@@ -94,6 +95,54 @@ public class FEItems {
                     optProperty(Blocks.OAK_LOG, 1, FELocations.TEMP).setProperty(BlockStateProperties.AXIS, Direction.Axis.Z)
 
                     )
+            );
+
+    public static final DeferredItem<CycleBlockItem> BLACK_GIRDER =
+            ITEMS.register("black_girder", () -> new CycleBlockItem(
+                            new Item.Properties(),
+                            CycleBlockItem.Mode.CYCLE_ONLY,
+
+                            optProperty(FEBlocks.BLACK_GIRDER.get(), 1, FELocations.CYCLE_GIRDER)
+                                    .placementContext(),
+                            optProperty(FEBlocks.BLACK_GIRDER.get(), 1, FELocations.CYCLE_GIRDER_VERTICAL)
+                                    .setProperty(GirderBlock.Y_AXIS, true)
+                    ).assignToItem()
+            );
+
+    public static final DeferredItem<CycleBlockItem> BRASS_GIRDER =
+            ITEMS.register("brass_girder", () -> new CycleBlockItem(
+                            new Item.Properties(),
+                            CycleBlockItem.Mode.CYCLE_ONLY,
+
+                            optProperty(FEBlocks.BRASS_GIRDER.get(), 1, FELocations.CYCLE_GIRDER)
+                                    .placementContext(),
+                            optProperty(FEBlocks.BRASS_GIRDER.get(), 1, FELocations.CYCLE_GIRDER_VERTICAL)
+                                    .setProperty(GirderBlock.Y_AXIS, true)
+                    ).assignToItem()
+            );
+
+    public static final DeferredItem<CycleBlockItem> PALE_GIRDER =
+            ITEMS.register("pale_girder", () -> new CycleBlockItem(
+                            new Item.Properties(),
+                            CycleBlockItem.Mode.CYCLE_ONLY,
+
+                            optProperty(FEBlocks.PALE_GIRDER.get(), 1, FELocations.CYCLE_GIRDER)
+                                    .placementContext(),
+                            optProperty(FEBlocks.PALE_GIRDER.get(), 1, FELocations.CYCLE_GIRDER_VERTICAL)
+                                    .setProperty(GirderBlock.Y_AXIS, true)
+                    ).assignToItem()
+            );
+
+    public static final DeferredItem<CycleBlockItem> ARID_GIRDER =
+            ITEMS.register("arid_girder", () -> new CycleBlockItem(
+                            new Item.Properties(),
+                            CycleBlockItem.Mode.CYCLE_ONLY,
+
+                            optProperty(FEBlocks.ARID_GIRDER.get(), 1, FELocations.CYCLE_GIRDER)
+                                    .placementContext(),
+                            optProperty(FEBlocks.ARID_GIRDER.get(), 1, FELocations.CYCLE_GIRDER_VERTICAL)
+                                    .setProperty(GirderBlock.Y_AXIS, true)
+                    ).assignToItem()
             );
 
     public static final DeferredItem<CycleBlockItem> FLUX_BULB =

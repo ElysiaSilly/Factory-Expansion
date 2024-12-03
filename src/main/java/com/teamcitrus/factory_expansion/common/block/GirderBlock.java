@@ -31,7 +31,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Objects;
 
-public class GirderBlock extends Block implements SimpleWaterloggedBlock, IWrenchableBlock, IPreviewBlock {
+public class GirderBlock extends Block implements SimpleWaterloggedBlock, IWrenchableBlock {
 
     private static final VoxelShape SHAPE_X = Block.box(0, 0, 4, 16, 16, 12);
     private static final VoxelShape SHAPE_Y = Block.box(4, 0, 4, 12, 16, 12);
@@ -185,10 +185,5 @@ public class GirderBlock extends Block implements SimpleWaterloggedBlock, IWrenc
     @Override
     public boolean overrideDefaultWrenchBehaviour() {
         return true;
-    }
-
-    @Override
-    public void renderPreview(BlockHitResult hitResult, BlockPlaceContext context, Block block, Minecraft minecraft, PoseStack stack) {
-        MiscRendering.renderGhostBlock(block, context, stack);
     }
 }

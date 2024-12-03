@@ -2,9 +2,13 @@ package com.teamcitrus.factory_expansion.common.item;
 
 import com.teamcitrus.factory_expansion.common.block.interfaces.block.IWrenchableBlock;
 import com.teamcitrus.factory_expansion.core.keys.FEBlockTags;
+import com.teamcitrus.factory_expansion.core.util.RegistryUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
@@ -14,11 +18,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
@@ -77,34 +85,53 @@ public class WrenchItem extends Item {
     @Override
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
         Level level = context.getLevel();
+
         BlockPos pos = context.getClickedPos();
 
         BlockState state = level.getBlockState(pos);
 
-        boolean successful = false;
+        boolean flag = false;
 
         Player player = context.getPlayer();
 
-        if(player == null) return InteractionResult.SUCCESS;
+        if(player == null) return InteractionResult.PASS;
 
         if(!player.isShiftKeyDown() &&!state.is(FEBlockTags.WRENCH_CONFIGURE_BLACKLIST)) {
             if(state.getOptionalValue(BlockStateProperties.FACING).isPresent()) {
-                level.setBlockAndUpdate(pos, state.cycle(BlockStateProperties.FACING));
-                successful = true;
+                level.setBlockAndUpdate(pos, check(state, level, pos, BlockStateProperties.FACING));
+                flag = true;
             }
             if(state.getOptionalValue(BlockStateProperties.AXIS).isPresent()) {
-                level.setBlockAndUpdate(pos, state.cycle(BlockStateProperties.AXIS));
-                successful = true;
+                level.setBlockAndUpdate(pos, check(state, level, pos, BlockStateProperties.AXIS));
+                flag = true;
             }
             if(state.getOptionalValue(BlockStateProperties.HORIZONTAL_FACING).isPresent()) {
-                level.setBlockAndUpdate(pos, state.cycle(BlockStateProperties.HORIZONTAL_FACING));
-                successful = true;
+                level.setBlockAndUpdate(pos, check(state, level, pos, BlockStateProperties.HORIZONTAL_FACING));
+                flag = true;
+            }
+            if(state.getOptionalValue(BlockStateProperties.ROTATION_16).isPresent()) {
+                level.setBlockAndUpdate(pos, check(state, level, pos, BlockStateProperties.ROTATION_16));
+                flag = true;
             }
         }
 
-        if(successful) level.levelEvent(2001, pos, Block.getId(state));
+        if(flag) level.levelEvent(2001, pos, Block.getId(level.getBlockState(pos)));
 
-        return successful ? InteractionResult.SUCCESS : InteractionResult.FAIL;
+        return flag ? InteractionResult.SUCCESS : InteractionResult.FAIL;
+    }
+
+    public static BlockState check(BlockState state, Level level, BlockPos pos, Property property) {
+        int throttle = 0;
+
+        state = state.cycle(property);
+
+        while(!state.canSurvive(level, pos)) {
+            state = state.cycle(property);
+            throttle++;
+            if(state.canSurvive(level, pos) || throttle > 16) break;
+        }
+
+        return state;
     }
 
     @Override
@@ -115,12 +142,15 @@ public class WrenchItem extends Item {
                 if(level instanceof ServerLevel serverLevel) {
                     BlockEntity blockentity = serverLevel.getBlockEntity(pos);
 
+                    ItemStack temp = stack.copy();
+                    temp.enchant(RegistryUtils.getEnchantment(level, Enchantments.SILK_TOUCH), 1);
+
                     LootParams.Builder lootparams$builder = new LootParams.Builder(serverLevel)
                             .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
                             .withParameter(LootContextParams.BLOCK_STATE, state)
                             .withOptionalParameter(LootContextParams.BLOCK_ENTITY, blockentity)
                             .withOptionalParameter(LootContextParams.THIS_ENTITY, player)
-                            .withParameter(LootContextParams.TOOL, stack);
+                            .withParameter(LootContextParams.TOOL, temp);
 
                     List<ItemStack> items = state.getDrops(lootparams$builder);
                     for(ItemStack item : items) {

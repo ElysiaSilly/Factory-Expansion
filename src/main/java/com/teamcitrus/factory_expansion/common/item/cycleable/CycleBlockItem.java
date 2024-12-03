@@ -73,12 +73,9 @@ public class CycleBlockItem extends BlockItem {
 
         boolean flag = cycleBlock();
 
-        if(!flag) return InteractionResultHolder.pass(item);
+        if(flag) player.setItemInHand(usedHand, item);
 
-        //String string = index == 0 ? getBlockDescription(index) : "(" + index + "/" + blocks.size() + ") " + getBlockDescription(index);
-        //player.displayClientMessage(Component.literal(string), true);
-
-        return InteractionResultHolder.success(item);
+        return flag ? InteractionResultHolder.success(item) : InteractionResultHolder.pass(item);
     }
 
     @Override

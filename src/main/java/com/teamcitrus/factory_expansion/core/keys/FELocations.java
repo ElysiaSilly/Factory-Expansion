@@ -14,6 +14,8 @@ public class FELocations {
     public static final ResourceLocation CYCLE_BULB_BLINKING = FactoExpa.location("cycle/bulb_blinking");
     public static final ResourceLocation CYCLE_BULB_INVERTED = FactoExpa.location("cycle/bulb_inverted");
     public static final ResourceLocation CYCLE_BULB_BLINKING_INVERTED = FactoExpa.location("cycle/bulb_blinking_inverted");
+    public static final ResourceLocation CYCLE_GIRDER = FactoExpa.location("cycle/girder");
+    public static final ResourceLocation CYCLE_GIRDER_VERTICAL = FactoExpa.location("cycle/girder_vertical");
 
     public static final ResourceLocation TEMP = FactoExpa.location("cycle/1");
 

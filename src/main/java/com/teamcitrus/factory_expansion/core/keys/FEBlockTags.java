@@ -15,6 +15,9 @@ public class FEBlockTags {
     public static final TagKey<Block> WRENCH_PICKUP_WHITELIST
             = RegistryUtils.createBlockTag("wrench_pickup_whitelist");
 
+    public static final TagKey<Block> HAS_PLACEMENT_PREVIEW
+            = RegistryUtils.createBlockTag("has_placement_preview");
+
     /* todo
     public static final TagKey<Block> GIRDERS
             = RegistryUtils.createBlockTag("girders");

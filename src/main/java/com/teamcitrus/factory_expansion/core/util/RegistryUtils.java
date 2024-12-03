@@ -1,11 +1,15 @@
 package com.teamcitrus.factory_expansion.core.util;
 
 import com.teamcitrus.factory_expansion.core.FactoExpa;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -14,13 +18,13 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 public class RegistryUtils {
 
-    // TODO : ResourceKeys
+    /// ResourceKeys
 
     public static ResourceKey<ConfiguredFeature<?, ?>> createFeatureKey(String name) {
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(FactoExpa.MODID, name));
     }
 
-    // TODO : TagKeys
+    /// TagKeys
 
     public static TagKey<Biome> createBiomeTag(String name) {
         return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(FactoExpa.MODID, name));
@@ -32,7 +36,7 @@ public class RegistryUtils {
         return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(FactoExpa.MODID, name));
     }
 
-    // TODO : Registries
+    /// Registries
 
     public static BlockSetType blockSetType(String name) {
         return BlockSetType.register(new BlockSetType(FactoExpa.prefix(name)));
@@ -40,5 +44,11 @@ public class RegistryUtils {
 
     public static WoodType woodType(String name, BlockSetType blockSet) {
         return WoodType.register(new WoodType(FactoExpa.prefix(name), blockSet));
+    }
+
+    /// Helpers
+
+    public static Holder<Enchantment> getEnchantment(Level level, ResourceKey<Enchantment> resourceKey) {
+        return level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(resourceKey);
     }
 }
