@@ -1,8 +1,6 @@
 package com.teamcitrus.factory_expansion.common.block;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -12,9 +10,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.gameevent.GameEvent;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
 import java.util.function.Supplier;
 
 public class BlastAxisBlock<T extends Comparable<T>, V extends T> extends RotatedPillarBlock {

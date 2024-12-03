@@ -1,8 +1,12 @@
 package com.teamcitrus.factory_expansion.common.block;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.serialization.MapCodec;
+import com.teamcitrus.factory_expansion.client.render.misc.MiscRendering;
+import com.teamcitrus.factory_expansion.common.block.interfaces.block.IPreviewBlock;
 import com.teamcitrus.factory_expansion.core.properties.FEProperties;
 import com.teamcitrus.factory_expansion.core.properties.properties.WarningLightState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -21,11 +25,12 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class SafetyLightBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
+public class SafetyLightBlock extends DirectionalBlock implements SimpleWaterloggedBlock, IPreviewBlock {
 
     public static final EnumProperty<WarningLightState> STATE = FEProperties.WARNING_LIGHT_STATE;
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -35,7 +40,6 @@ public class SafetyLightBlock extends DirectionalBlock implements SimpleWaterlog
             Block.box(4,4,0,12,12,16), // NORTH, SOUTH
             Block.box(0,4,4,16,12,12), // EAST, WEST
             Block.box(4,0,4,12,16,12), // UP, DOWN
-
     };
 
     private static boolean lit(BlockState state, BlockGetter blockGetter, BlockPos pos) {
@@ -120,5 +124,10 @@ public class SafetyLightBlock extends DirectionalBlock implements SimpleWaterlog
     @Override
     protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         return (15 / 3) * state.getValue(STATE).ordinal();
+    }
+
+    @Override
+    public void renderPreview(BlockHitResult hitResult, BlockPlaceContext context, Block block, Minecraft minecraft, PoseStack stack) {
+        MiscRendering.renderGhostBlock(block, context, stack);
     }
 }

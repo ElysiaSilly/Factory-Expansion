@@ -1,23 +1,31 @@
 package com.teamcitrus.factory_expansion.common.item;
 
 import com.teamcitrus.factory_expansion.common.block.interfaces.block.IWrenchableBlock;
+import com.teamcitrus.factory_expansion.core.keys.FEBlockTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
 
 public class WrenchItem extends Item {
     public WrenchItem(Properties properties) {
@@ -67,36 +75,19 @@ public class WrenchItem extends Item {
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext context) {
-
-        if(context.getLevel().isClientSide) return InteractionResult.SUCCESS;
-
+    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
 
         BlockState state = level.getBlockState(pos);
 
         boolean successful = false;
-        boolean override = false;
-        boolean isWrenchableBlock = false;
 
         Player player = context.getPlayer();
 
         if(player == null) return InteractionResult.SUCCESS;
 
-        if(state.getBlock() instanceof IWrenchableBlock block) {
-
-            override = block.overrideDefaultWrenchBehaviour();
-            isWrenchableBlock = true;
-
-            if(override || player.isShiftKeyDown()) {
-                Direction direction = context.getClickedFace();
-                Vec3 posSpecific = context.getClickLocation();
-
-                successful = block.onWrenchUse(level, pos, state, direction, posSpecific, player);
-            }
-        }
-        if(!override && (!isWrenchableBlock || !player.isShiftKeyDown())) {
+        if(!player.isShiftKeyDown() &&!state.is(FEBlockTags.WRENCH_CONFIGURE_BLACKLIST)) {
             if(state.getOptionalValue(BlockStateProperties.FACING).isPresent()) {
                 level.setBlockAndUpdate(pos, state.cycle(BlockStateProperties.FACING));
                 successful = true;
@@ -111,6 +102,39 @@ public class WrenchItem extends Item {
             }
         }
 
-        return successful ? InteractionResult.SUCCESS : super.useOn(context);
+        if(successful) level.levelEvent(2001, pos, Block.getId(state));
+
+        return successful ? InteractionResult.SUCCESS : InteractionResult.FAIL;
+    }
+
+    @Override
+    public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity miningEntity) {
+        if(miningEntity instanceof Player player) {
+            if(state.is(FEBlockTags.WRENCH_PICKUP_WHITELIST)) {
+                level.destroyBlock(pos, false);
+                if(level instanceof ServerLevel serverLevel) {
+                    BlockEntity blockentity = serverLevel.getBlockEntity(pos);
+
+                    LootParams.Builder lootparams$builder = new LootParams.Builder(serverLevel)
+                            .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
+                            .withParameter(LootContextParams.BLOCK_STATE, state)
+                            .withOptionalParameter(LootContextParams.BLOCK_ENTITY, blockentity)
+                            .withOptionalParameter(LootContextParams.THIS_ENTITY, player)
+                            .withParameter(LootContextParams.TOOL, stack);
+
+                    List<ItemStack> items = state.getDrops(lootparams$builder);
+                    for(ItemStack item : items) {
+                        if(!player.getInventory().add(item)) player.drop(item, false);
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public float getDestroySpeed(ItemStack stack, BlockState state) {
+        return state.is(FEBlockTags.WRENCH_PICKUP_WHITELIST) ? Float.MAX_VALUE : super.getDestroySpeed(stack, state);
     }
 }

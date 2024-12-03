@@ -2,6 +2,7 @@ package com.teamcitrus.factory_expansion.core;
 
 import com.mojang.logging.LogUtils;
 import com.teamcitrus.factory_expansion.core.registry.*;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -19,6 +20,7 @@ public class FactoExpa {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static String prefix(String string) { return MODID + ":" + string; }
+    public static ResourceLocation location(String string) { return ResourceLocation.fromNamespaceAndPath(MODID, string); }
 
     public static int drywall = random.nextInt(10);
 

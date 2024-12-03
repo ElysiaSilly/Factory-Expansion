@@ -1,0 +1,10 @@
+{
+  "values": [
+    "#factory_expansion:girders",
+    "minecraft:redstone_wire",
+    "minecraft:redstone_torch",
+    "minecraft:redstone_block",
+    "minecraft:repeater",
+    "minecraft:comparator"
+  ]
+}

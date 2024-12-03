@@ -1,14 +1,18 @@
 package com.teamcitrus.factory_expansion.common.block;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.serialization.MapCodec;
+import com.teamcitrus.factory_expansion.client.render.misc.MiscRendering;
+import com.teamcitrus.factory_expansion.common.block.interfaces.block.IPreviewBlock;
 import com.teamcitrus.factory_expansion.common.block.interfaces.block.IWrenchableBlock;
 import com.teamcitrus.factory_expansion.core.properties.FEProperties;
 import com.teamcitrus.factory_expansion.core.properties.properties.FluxBulbMode;
 import com.teamcitrus.factory_expansion.core.registry.FEBlocks;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.*;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -28,12 +32,13 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class FluxBulbBlock extends DirectionalBlock implements SimpleWaterloggedBlock, IWrenchableBlock {
+public class FluxBulbBlock extends DirectionalBlock implements SimpleWaterloggedBlock, IWrenchableBlock, IPreviewBlock {
 
     private static final BooleanProperty LIT = BlockStateProperties.LIT;
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -164,5 +169,10 @@ public class FluxBulbBlock extends DirectionalBlock implements SimpleWaterlogged
             double d2 = (double)pos.getZ() + 0.5 + (random.nextDouble() - 0.4) * 0.2;
             level.addParticle(this.particle, d0, d1, d2, 0.0, 0.0, 0.0);
         }
+    }
+
+    @Override
+    public void renderPreview(BlockHitResult hitResult, BlockPlaceContext context, Block block, Minecraft minecraft, PoseStack stack) {
+        MiscRendering.renderGhostBlock(block, context, stack);
     }
 }

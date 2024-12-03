@@ -67,6 +67,11 @@ public class FEBlocks {
     public static final Supplier<? extends Block> SMALL_BLACK_VENT
             = registerBlock("small_black_vent", () -> new SmallVentBlock(getProperties(BLACK_ALLOY_BLOCK.get())));
 
+    public static final Supplier<? extends Block> BLACK_CATWALK
+            = registerBlock("black_catwalk", () -> new CatwalkBlock(getProperties(Blocks.NETHERITE_BLOCK)));
+    public static final Supplier<? extends Block> BLACK_CATWALK_STAIRS
+            = registerBlock("black_catwalk_stairs", () -> new CatwalkStairBlock(getProperties(Blocks.NETHERITE_BLOCK)));
+
     // scrap metal
     public static final Supplier<? extends Block> SCRAP_METAL_BLOCK
             = registerBlockItem("scrap_metal_block", () -> new Block(getProperties(Blocks.NETHERITE_BLOCK)));

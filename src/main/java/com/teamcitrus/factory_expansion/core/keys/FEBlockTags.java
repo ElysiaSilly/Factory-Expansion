@@ -9,6 +9,11 @@ public class FEBlockTags {
     public static final TagKey<Block> GIRDERS_CONNECT
             = RegistryUtils.createBlockTag("girders_connect");
 
+    public static final TagKey<Block> WRENCH_CONFIGURE_BLACKLIST
+            = RegistryUtils.createBlockTag("wrench_configure_blacklist");
+
+    public static final TagKey<Block> WRENCH_PICKUP_WHITELIST
+            = RegistryUtils.createBlockTag("wrench_pickup_whitelist");
 
     /* todo
     public static final TagKey<Block> GIRDERS

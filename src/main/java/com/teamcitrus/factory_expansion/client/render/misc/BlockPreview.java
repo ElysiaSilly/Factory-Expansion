@@ -5,27 +5,16 @@ import com.teamcitrus.factory_expansion.common.block.interfaces.block.IPreviewBl
 import com.teamcitrus.factory_expansion.core.FactoExpa;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.BlockModelShaper;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
-import net.neoforged.neoforge.client.model.data.ModelData;
-import org.joml.Matrix4f;
-
-import java.util.Iterator;
 
 @EventBusSubscriber(modid = FactoExpa.MODID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
 
@@ -55,38 +44,6 @@ public class BlockPreview {
         stack.translate(pos.getX() - cam.getPosition().x, pos.getY() - cam.getPosition().y, pos.getZ() - cam.getPosition().z);
         stack.pushPose();
 
-
         block.renderPreview(hitResult, context, item.getBlock(), minecraft, stack);
-
-
-
-
-
-
-        //BlockModelShaper modelShaper = new BlockModelShaper(Minecraft.getInstance().getModelManager());
-//
-        //BakedModel model = modelShaper.getBlockModel(block);
-//
-        ////System.out.println(MusicaRenderTypes.getTestingShader().outline());
-//
-        //Iterator<RenderType> renderTypeIterator = model.getRenderTypes(block, RandomSource.create(42L), ModelData.EMPTY).iterator();
-//
-        //while(renderTypeIterator.hasNext()) {
-        //    RenderType rt = renderTypeIterator.next();
-        //    if(Minecraft.getInstance().level instanceof BlockAndTintGetter tint) {
-//
-        //        Minecraft.getInstance().getBlockRenderer().renderBatched(
-        //                block,
-        //                blockPos,
-        //                tint,
-        //                event.getPoseStack(),
-        //                Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(MusicaRenderTypes.getTestingShader()),
-        //                //Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(rt),
-        //                true,
-        //                Minecraft.getInstance().level.getRandom()
-        //        );
-        //    }}
-//
-//
     }
 }

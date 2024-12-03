@@ -1,20 +1,18 @@
 package com.teamcitrus.factory_expansion.common.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.teamcitrus.factory_expansion.client.render.misc.MiscRendering;
 import com.teamcitrus.factory_expansion.common.block.interfaces.block.IPreviewBlock;
 import com.teamcitrus.factory_expansion.core.properties.FEProperties;
 import com.teamcitrus.factory_expansion.core.properties.properties.LargeVentBlocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -155,22 +153,6 @@ public class LargeVentBlock extends RotatedPillarBlock implements IPreviewBlock 
 
         if(context.getItemInHand().getCount() < 9 && !context.getPlayer().hasInfiniteMaterials()) return;
 
-        BlockState placement = block.getStateForPlacement(context);
-        if(placement == null) return;
-
-        if(Minecraft.getInstance().level instanceof BlockAndTintGetter tint) {
-
-            ResourceLocation texture = ResourceLocation.parse("minecraft:textures/block/white_concrete.png");
-
-            Minecraft.getInstance().getBlockRenderer().renderBatched(
-                    placement,
-                    context.getClickedPos(),
-                    tint,
-                    stack,
-                    Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(RenderType.crumbling(texture)),
-                    true,
-                    Minecraft.getInstance().level.getRandom()
-            );
-        }
+        MiscRendering.renderGhostBlock(block, context, stack);
     }
 }

@@ -75,8 +75,8 @@ public class CycleBlockItem extends BlockItem {
 
         if(!flag) return InteractionResultHolder.pass(item);
 
-        String string = index == 0 ? getBlockDescription(index) : "(" + index + "/" + blocks.size() + ") " + getBlockDescription(index);
-        player.displayClientMessage(Component.literal(string), true);
+        //String string = index == 0 ? getBlockDescription(index) : "(" + index + "/" + blocks.size() + ") " + getBlockDescription(index);
+        //player.displayClientMessage(Component.literal(string), true);
 
         return InteractionResultHolder.success(item);
     }
@@ -117,6 +117,34 @@ public class CycleBlockItem extends BlockItem {
         }
     }
 
+    public int getIndex() {
+        return this.index;
+    }
+
+    public int getNextIndex(int index) {
+        int min = this.mode.random ? 0 : 1;
+
+        if(index < this.max) {
+            index++;
+        } else if (index > min) {
+            index = min;
+        }
+
+        return index;
+    }
+
+    public int getPreviousIndex(int index) {
+        int min = this.mode.random ? 0 : 1;
+
+        if(index > min) {
+            index--;
+        } else if (index <= min) {
+            index = this.max;
+        }
+
+        return index;
+    }
+
     public Block getRandomBlock(Level level) {
         return this.blocks.get(level.random.nextInt(blocks.size())).getBlock();
     }
@@ -124,13 +152,7 @@ public class CycleBlockItem extends BlockItem {
     public boolean cycleBlock() {
         if(this.mode == Mode.RANDOM_ONLY) return false;
 
-        int min = this.mode.random ? 0 : 1;
-
-        if(index < max) {
-            index++;
-        } else if (index > min) {
-            index = min;
-        }
+        this.index = getNextIndex(this.index);
 
         return true;
     }

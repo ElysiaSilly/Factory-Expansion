@@ -18,11 +18,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.Vec3;
@@ -34,7 +34,7 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
 
     public static final BooleanProperty RIGHT = BooleanProperty.create("right");
     public static final BooleanProperty LEFT = BooleanProperty.create("left");
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     private static final VoxelShape[] SHAPE = {
             Block.box(0, 0, 14, 16, 16, 16),
@@ -136,8 +136,8 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
     }
 
     @Override
-    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-        if(context.getClickedFace().getAxis() == Direction.Axis.Y) return null;
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) { // todo
+        if(context.getClickedFace().getAxis() == Direction.Axis.Y) return null; //this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
         return this.defaultBlockState().setValue(FACING, context.getClickedFace());
     }
 

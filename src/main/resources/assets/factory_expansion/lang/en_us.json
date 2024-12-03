@@ -12,6 +12,12 @@
   "item.factory_expansion.flux_bulb.3": "Normal Pulsing",
   "item.factory_expansion.flux_bulb.4": "Inverted Pulsing",
 
+  "item.factory_expansion.black_catwalk": "Black Catwalk",
+
+  "item.factory_expansion.black_catwalk.1": "Slab",
+  "item.factory_expansion.black_catwalk.2": "Full",
+  "item.factory_expansion.black_catwalk.3": "Stairs",
+
   "item.factory_expansion.red_flux_bulb.1": "Normal",
   "item.factory_expansion.red_flux_bulb.2": "Inverted",
   "item.factory_expansion.red_flux_bulb.3": "Normal Pulsing",

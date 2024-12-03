@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "factory_expansion:block/catwalk/bottom"
+    },
+    "type=double,up=false": {
+      "model": "factory_expansion:block/catwalk/full"
+    },
+    "type=double,up=true": {
+      "model": "factory_expansion:block/catwalk/support"
+    },
+    "type=top": {
+      "model": "factory_expansion:block/catwalk/top"
+    }
+  }
+}

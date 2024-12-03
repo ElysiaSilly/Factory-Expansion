@@ -1,7 +1,11 @@
 package com.teamcitrus.factory_expansion.common.block;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.teamcitrus.factory_expansion.client.render.misc.MiscRendering;
+import com.teamcitrus.factory_expansion.common.block.interfaces.block.IPreviewBlock;
 import com.teamcitrus.factory_expansion.common.block.interfaces.block.IWrenchableBlock;
 import com.teamcitrus.factory_expansion.core.keys.FEBlockTags;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
@@ -18,6 +22,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -26,7 +31,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Objects;
 
-public class GirderBlock extends Block implements SimpleWaterloggedBlock, IWrenchableBlock {
+public class GirderBlock extends Block implements SimpleWaterloggedBlock, IWrenchableBlock, IPreviewBlock {
 
     private static final VoxelShape SHAPE_X = Block.box(0, 0, 4, 16, 16, 12);
     private static final VoxelShape SHAPE_Y = Block.box(4, 0, 4, 12, 16, 12);
@@ -180,5 +185,10 @@ public class GirderBlock extends Block implements SimpleWaterloggedBlock, IWrenc
     @Override
     public boolean overrideDefaultWrenchBehaviour() {
         return true;
+    }
+
+    @Override
+    public void renderPreview(BlockHitResult hitResult, BlockPlaceContext context, Block block, Minecraft minecraft, PoseStack stack) {
+        MiscRendering.renderGhostBlock(block, context, stack);
     }
 }
