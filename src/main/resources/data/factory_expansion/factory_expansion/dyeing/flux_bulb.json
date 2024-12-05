@@ -1,0 +1,22 @@
+{
+  "map": {
+    "factory_expansion:black": "factory_expansion:black_flux_bulb",
+    "factory_expansion:blue": "factory_expansion:blue_flux_bulb",
+    "factory_expansion:brown": "factory_expansion:brown_flux_bulb",
+    "factory_expansion:cyan": "factory_expansion:cyan_flux_bulb",
+    "factory_expansion:gray": "factory_expansion:gray_flux_bulb",
+    "factory_expansion:green": "factory_expansion:green_flux_bulb",
+    "factory_expansion:light_blue": "factory_expansion:light_blue_flux_bulb",
+    "factory_expansion:light_gray": "factory_expansion:light_gray_flux_bulb",
+    "factory_expansion:lime": "factory_expansion:lime_flux_bulb",
+    "factory_expansion:magenta": "factory_expansion:magenta_flux_bulb",
+    "factory_expansion:orange": "factory_expansion:orange_flux_bulb",
+    "factory_expansion:pink": "factory_expansion:pink_flux_bulb",
+    "factory_expansion:purple": "factory_expansion:purple_flux_bulb",
+    "factory_expansion:red": "factory_expansion:red_flux_bulb",
+    "factory_expansion:white": "factory_expansion:white_flux_bulb",
+    "factory_expansion:yellow": "factory_expansion:yellow_flux_bulb",
+    "factory_expansion:redstone": "factory_expansion:flux_bulb",
+    "factory_expansion:glow_ink": "factory_expansion:uv_flux_bulb"
+  }
+}

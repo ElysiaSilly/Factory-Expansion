@@ -1,0 +1,20 @@
+{
+  "map": {
+    "factory_expansion:black": "minecraft:black_wool",
+    "factory_expansion:blue": "minecraft:blue_wool",
+    "factory_expansion:brown": "minecraft:brown_wool",
+    "factory_expansion:cyan": "minecraft:cyan_wool",
+    "factory_expansion:gray": "minecraft:gray_wool",
+    "factory_expansion:green": "minecraft:green_wool",
+    "factory_expansion:light_blue": "minecraft:light_blue_wool",
+    "factory_expansion:light_gray": "minecraft:light_gray_wool",
+    "factory_expansion:lime": "minecraft:lime_wool",
+    "factory_expansion:magenta": "minecraft:magenta_wool",
+    "factory_expansion:orange": "minecraft:orange_wool",
+    "factory_expansion:pink": "minecraft:pink_wool",
+    "factory_expansion:purple": "minecraft:purple_wool",
+    "factory_expansion:red": "minecraft:red_wool",
+    "factory_expansion:white": "minecraft:white_wool",
+    "factory_expansion:yellow": "minecraft:yellow_wool"
+  }
+}

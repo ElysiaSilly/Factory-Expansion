@@ -1,7 +1,10 @@
 package com.teamcitrus.factory_expansion.common.event.misc;
 
-import com.teamcitrus.factory_expansion.core.FERegistries;
+import com.teamcitrus.factory_expansion.common.data.dyeing.DyeData;
+import com.teamcitrus.factory_expansion.common.data.dyeing.DyeingData;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
+import com.teamcitrus.factory_expansion.core.keys.FEResourceKeys;
+import com.teamcitrus.factory_expansion.core.util.RegistryUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.item.DyeItem;
@@ -12,6 +15,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 
+import java.util.Arrays;
+
 @EventBusSubscriber(modid = FactoExpa.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class DyeStuff {
 
@@ -19,27 +24,23 @@ public class DyeStuff {
     public static void onUseItemOnBlockEvent(UseItemOnBlockEvent event) {
 
         Level level = event.getLevel();
+
         BlockPos pos = event.getPos();
         BlockState state = event.getLevel().getBlockState(pos);
+        DyeData dyeData = RegistryUtils.getDyeData(level, event.getItemStack().getItem());
 
-        if(event.getItemStack().getItem() instanceof DyeItem item) {
-            if(!level.isClientSide) {
+        if(dyeData != null) {
+            DyeingData dyeingData = RegistryUtils.getDyeingData(level, state.getBlock());
 
-                level.registryAccess().registry(FERegistries.COLOUR_MAPPING).get().stream().forEach(mapping -> {
-
-                    if(mapping.isPresent(state.getBlock()) != null) {
-
-                        Block block = mapping.get(item.getDyeColor()).getBlock();
-                        BlockState newState = block.withPropertiesOf(state);
-
-                        if(newState != null) {
-                            level.setBlockAndUpdate(pos, newState);
-                            event.cancelWithResult(ItemInteractionResult.SUCCESS);
-                            level.levelEvent(2001, pos, Block.getId(state));
-                            level.levelEvent(2001, pos, Block.getId(level.getBlockState(pos)));
-                        }
-                    }
-                });
+            if(dyeingData != null) {
+                Block block = dyeingData.getBlock(event.getItemStack().getItem());
+                if(block != null) {
+                    BlockState newState = block.withPropertiesOf(state);
+                    level.setBlockAndUpdate(pos, newState);
+                    event.cancelWithResult(ItemInteractionResult.SUCCESS);
+                    level.levelEvent(2001, pos, Block.getId(state));
+                    level.levelEvent(2001, pos, Block.getId(level.getBlockState(pos)));
+                }
             }
         }
     }

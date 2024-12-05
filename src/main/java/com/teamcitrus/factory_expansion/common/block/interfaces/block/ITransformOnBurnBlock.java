@@ -9,9 +9,4 @@ public interface ITransformOnBurnBlock {
 
     // called when the block is burnt
     void onBurn(Level level, BlockPos pos, Direction face, BlockState state);
-
-    // whether to spawn the block's destroy particles when burnt
-    default boolean spawnDestroyParticles() {
-        return true;
-    }
 }

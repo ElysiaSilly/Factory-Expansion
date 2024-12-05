@@ -1,0 +1,20 @@
+{
+  "map": {
+    "factory_expansion:black": "minecraft:black_shulker_box",
+    "factory_expansion:blue": "minecraft:blue_shulker_box",
+    "factory_expansion:brown": "minecraft:brown_shulker_box",
+    "factory_expansion:cyan": "minecraft:cyan_shulker_box",
+    "factory_expansion:gray": "minecraft:gray_shulker_box",
+    "factory_expansion:green": "minecraft:green_shulker_box",
+    "factory_expansion:light_blue": "minecraft:light_blue_shulker_box",
+    "factory_expansion:light_gray": "minecraft:light_gray_shulker_box",
+    "factory_expansion:lime": "minecraft:lime_shulker_box",
+    "factory_expansion:magenta": "minecraft:magenta_shulker_box",
+    "factory_expansion:orange": "minecraft:orange_shulker_box",
+    "factory_expansion:pink": "minecraft:pink_shulker_box",
+    "factory_expansion:purple": "minecraft:purple_shulker_box",
+    "factory_expansion:red": "minecraft:red_shulker_box",
+    "factory_expansion:white": "minecraft:white_shulker_box",
+    "factory_expansion:yellow": "minecraft:yellow_shulker_box"
+  }
+}

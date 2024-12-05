@@ -1,0 +1,20 @@
+{
+  "map": {
+    "factory_expansion:black": "minecraft:black_glazed_terracotta",
+    "factory_expansion:blue": "minecraft:blue_glazed_terracotta",
+    "factory_expansion:brown": "minecraft:brown_glazed_terracotta",
+    "factory_expansion:cyan": "minecraft:cyan_glazed_terracotta",
+    "factory_expansion:gray": "minecraft:gray_glazed_terracotta",
+    "factory_expansion:green": "minecraft:green_glazed_terracotta",
+    "factory_expansion:light_blue": "minecraft:light_blue_glazed_terracotta",
+    "factory_expansion:light_gray": "minecraft:light_gray_glazed_terracotta",
+    "factory_expansion:lime": "minecraft:lime_glazed_terracotta",
+    "factory_expansion:magenta": "minecraft:magenta_glazed_terracotta",
+    "factory_expansion:orange": "minecraft:orange_glazed_terracotta",
+    "factory_expansion:pink": "minecraft:pink_glazed_terracotta",
+    "factory_expansion:purple": "minecraft:purple_glazed_terracotta",
+    "factory_expansion:red": "minecraft:red_glazed_terracotta",
+    "factory_expansion:white": "minecraft:white_glazed_terracotta",
+    "factory_expansion:yellow": "minecraft:yellow_glazed_terracotta"
+  }
+}

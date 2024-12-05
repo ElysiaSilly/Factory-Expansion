@@ -1,0 +1,6 @@
+{
+  "item": "minecraft:tnt",
+  "type": "factory_expansion:nitro",
+  "capacity": 1,
+  "canBreak": true
+}

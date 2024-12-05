@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.joml.Matrix4f;
 
 public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockBE> {
@@ -25,6 +26,8 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockBE>
 
     @Override
     public void render(DisplayBlockBE be, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+
+        if(!be.getBlockState().getValue(BlockStateProperties.POWERED)) return;
 
         poseStack.translate(0.5, 0.55, 0.5);
         poseStack.mulPose(Axis.YN.rotationDegrees(be.getBlockState().getValue(DisplayBlock.FACING).getOpposite().toYRot()));

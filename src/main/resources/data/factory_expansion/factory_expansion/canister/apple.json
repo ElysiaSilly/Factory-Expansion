@@ -1,0 +1,6 @@
+{
+  "item": "minecraft:apple",
+  "type": "factory_expansion:blaze",
+  "capacity": -1,
+  "canBreak": false
+}

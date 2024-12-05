@@ -1,0 +1,20 @@
+{
+  "map": {
+    "factory_expansion:black": "minecraft:black_candle",
+    "factory_expansion:blue": "minecraft:blue_candle",
+    "factory_expansion:brown": "minecraft:brown_candle",
+    "factory_expansion:cyan": "minecraft:cyan_candle",
+    "factory_expansion:gray": "minecraft:gray_candle",
+    "factory_expansion:green": "minecraft:green_candle",
+    "factory_expansion:light_blue": "minecraft:light_blue_candle",
+    "factory_expansion:light_gray": "minecraft:light_gray_candle",
+    "factory_expansion:lime": "minecraft:lime_candle",
+    "factory_expansion:magenta": "minecraft:magenta_candle",
+    "factory_expansion:orange": "minecraft:orange_candle",
+    "factory_expansion:pink": "minecraft:pink_candle",
+    "factory_expansion:purple": "minecraft:purple_candle",
+    "factory_expansion:red": "minecraft:red_candle",
+    "factory_expansion:white": "minecraft:white_candle",
+    "factory_expansion:yellow": "minecraft:yellow_candle"
+  }
+}

@@ -31,7 +31,6 @@ public class FireBlockMixin {
     private void FactoExpa$checkBurnOut(Level level, BlockPos pos, int chance, RandomSource random, int age, Direction face, CallbackInfo ci, @Local BlockState before) {
         if(before.getBlock() instanceof ITransformOnBurnBlock block) {
             block.onBurn(level, pos, face, before);
-            if(block.spawnDestroyParticles()) level.levelEvent(2001, pos, Block.getId(before));
         }
     }
 }

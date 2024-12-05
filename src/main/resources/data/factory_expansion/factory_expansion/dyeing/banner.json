@@ -1,0 +1,20 @@
+{
+  "map": {
+    "factory_expansion:black": "minecraft:black_banner",
+    "factory_expansion:blue": "minecraft:blue_banner",
+    "factory_expansion:brown": "minecraft:brown_banner",
+    "factory_expansion:cyan": "minecraft:cyan_banner",
+    "factory_expansion:gray": "minecraft:gray_banner",
+    "factory_expansion:green": "minecraft:green_banner",
+    "factory_expansion:light_blue": "minecraft:light_blue_banner",
+    "factory_expansion:light_gray": "minecraft:light_gray_banner",
+    "factory_expansion:lime": "minecraft:lime_banner",
+    "factory_expansion:magenta": "minecraft:magenta_banner",
+    "factory_expansion:orange": "minecraft:orange_banner",
+    "factory_expansion:pink": "minecraft:pink_banner",
+    "factory_expansion:purple": "minecraft:purple_banner",
+    "factory_expansion:red": "minecraft:red_banner",
+    "factory_expansion:white": "minecraft:white_banner",
+    "factory_expansion:yellow": "minecraft:yellow_banner"
+  }
+}

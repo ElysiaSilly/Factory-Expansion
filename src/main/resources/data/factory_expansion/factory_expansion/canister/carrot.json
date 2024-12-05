@@ -1,0 +1,6 @@
+{
+  "item": "minecraft:carrot",
+  "type": "factory_expansion:blaze",
+  "capacity": 16,
+  "canBreak": true
+}

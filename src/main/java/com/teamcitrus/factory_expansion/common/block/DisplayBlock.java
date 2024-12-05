@@ -3,11 +3,15 @@ package com.teamcitrus.factory_expansion.common.block;
 import com.mojang.serialization.MapCodec;
 import com.teamcitrus.factory_expansion.common.block.be.DisplayBlockBE;
 import com.teamcitrus.factory_expansion.common.block.interfaces.block.IWrenchableBlock;
+import com.teamcitrus.factory_expansion.common.data.dyeing.DyeData;
+import com.teamcitrus.factory_expansion.core.util.RegistryUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -33,11 +37,14 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+
 public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
 
     public static final BooleanProperty RIGHT = BooleanProperty.create("right");
     public static final BooleanProperty LEFT = BooleanProperty.create("left");
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
     private static final VoxelShape[] SHAPE = {
             Block.box(0, 0, 14, 16, 16, 16),
@@ -52,6 +59,7 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
                 .setValue(RIGHT, false)
                 .setValue(LEFT, false)
                 .setValue(FACING, Direction.NORTH)
+                .setValue(POWERED, false)
         );
     }
 
@@ -78,18 +86,39 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if(stack.getItem() instanceof DyeItem dye) {
-            if(level.getBlockEntity(pos) instanceof  DisplayBlockBE be) {
-                be.setColour(dye.getDyeColor().getTextColor());
-                return ItemInteractionResult.SUCCESS;
+
+        if(stack.has(DataComponents.CUSTOM_NAME)) {
+            String name = stack.get(DataComponents.CUSTOM_NAME).getString();
+            BlockPos relative = pos;
+            int index = 0;
+
+            while(level.getBlockEntity(relative) instanceof DisplayBlockBE neighbour) {
+                if(index >= name.length()) break;
+                neighbour.setCharacter(name.charAt(index));
+
+                relative = relative.relative(state.getValue(FACING).getCounterClockWise());
+                index++;
+            }
+            return ItemInteractionResult.SUCCESS;
+        }
+
+        DyeData data = RegistryUtils.getDyeData(level, stack.getItem());
+        if(data != null) {
+            if(data.getColour() != 0) {
+                if(level.getBlockEntity(pos) instanceof  DisplayBlockBE be) {
+                    be.setColour(data.getColour());
+                    return ItemInteractionResult.SUCCESS;
+                }
             }
         }
+
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override
     public boolean onWrenchUse(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
 
+        /*
         boolean flag = false;
 
         ItemStack item = player.getOffhandItem();
@@ -147,6 +176,10 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
         }
 
         return flag;
+
+         */
+
+        return false;
     }
 
     @Override
@@ -159,35 +192,45 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
     protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
 
         if(direction == state.getValue(FACING).getCounterClockWise()) {
-
             if(neighborState.is(this)) {
                 if(state.getValue(FACING) != neighborState.getValue(FACING)) return state;
-
                 level.setBlock(pos, state.setValue(LEFT, true), 3);
             } else {
                 level.setBlock(pos, state.setValue(LEFT, false), 3);
             }
-
         }
 
         if(direction == state.getValue(FACING).getClockWise()) {
-
             if(neighborState.is(this)) {
                 if(state.getValue(FACING) != neighborState.getValue(FACING)) return state;
-
                 level.setBlock(pos, state.setValue(RIGHT, true), 3);
             } else {
                 level.setBlock(pos, state.setValue(RIGHT, false), 3);
             }
+        }
 
+        if(state.getValue(POWERED) != level.hasNeighborSignal(pos)) {
+            if(state.getValue(POWERED)) {
+                level.scheduleTick(pos, this, 2);
+            } else {
+                level.setBlock(pos, state.cycle(POWERED), 2);
+            }
         }
 
         return state;
     }
 
     @Override
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if(state.getValue(POWERED) && !level.hasNeighborSignal(pos)) {
+            level.setBlock(pos, state.cycle(POWERED), 2);
+        }
+    }
+
+    @Override
     public void onWrenchHover(Level level, BlockPos pos, BlockState state, Direction direction, Vec3 posSpecific, Player player) {
 
+        /*
         ItemStack item = player.getOffhandItem();
 
         if(item.has(DataComponents.CUSTOM_NAME)) {
@@ -224,6 +267,7 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
             }
         }
 
+         */
     }
 
     @Override
@@ -238,6 +282,6 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(RIGHT, LEFT, FACING);
+        builder.add(RIGHT, LEFT, FACING, POWERED);
     }
 }

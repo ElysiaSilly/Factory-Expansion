@@ -1,7 +1,6 @@
 package com.teamcitrus.factory_expansion.core.registry;
 
 import com.teamcitrus.factory_expansion.common.block.GirderBlock;
-import com.teamcitrus.factory_expansion.common.data.flamethrower.canisterData.FlamethrowerComponent;
 import com.teamcitrus.factory_expansion.common.item.DrywallFoodItem;
 import com.teamcitrus.factory_expansion.common.item.FlamethrowerItem;
 import com.teamcitrus.factory_expansion.common.item.PoppedDrywallFoodItem;
@@ -13,7 +12,6 @@ import com.teamcitrus.factory_expansion.core.keys.FELocations;
 import com.teamcitrus.factory_expansion.core.properties.FEProperties;
 import com.teamcitrus.factory_expansion.core.properties.properties.FluxBulbMode;
 import net.minecraft.core.Direction;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.DyeColor;
@@ -31,18 +29,19 @@ public class FEItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(FactoExpa.MODID);
 
     public static final DeferredItem<FlamethrowerItem> FLAMETHROWER =
-            ITEMS.register("flamethrower", () ->
-                    new FlamethrowerItem(new Item.Properties()
-                            .stacksTo(1)
-                            .component(FEComponents.FLAMETHROWER, FlamethrowerComponent.EMPTY)
-                    )
-            );
+            ITEMS.register("flamethrower", FlamethrowerItem::new);
 
     public static final DeferredItem<WrenchItem> WRENCH =
-            ITEMS.register("wrench", () ->
-                    new WrenchItem(new Item.Properties()
-                            .stacksTo(1))
-            );
+            ITEMS.register("wrench", WrenchItem::new);
+
+    /*
+    public static final DeferredItem<CanisterItem> BLAZE_CANISTER =
+            ITEMS.register("blaze_canister", () -> new CanisterItem(512, false));
+
+    public static final DeferredItem<CanisterItem> SOUL_CANISTER =
+            ITEMS.register("soul_canister", () -> new CanisterItem(512, false));
+
+     */
 
     /// OTHER
 

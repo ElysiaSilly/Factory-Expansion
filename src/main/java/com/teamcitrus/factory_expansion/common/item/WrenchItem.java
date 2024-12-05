@@ -25,8 +25,8 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 
 public class WrenchItem extends Item {
-    public WrenchItem(Properties properties) {
-        super(properties);
+    public WrenchItem() {
+        super(new Item.Properties().stacksTo(1));
     }
 
     @Override

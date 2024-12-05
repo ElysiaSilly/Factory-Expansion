@@ -1,0 +1,20 @@
+{
+  "map": {
+    "factory_expansion:black": "minecraft:black_carpet",
+    "factory_expansion:blue": "minecraft:blue_carpet",
+    "factory_expansion:brown": "minecraft:brown_carpet",
+    "factory_expansion:cyan": "minecraft:cyan_carpet",
+    "factory_expansion:gray": "minecraft:gray_carpet",
+    "factory_expansion:green": "minecraft:green_carpet",
+    "factory_expansion:light_blue": "minecraft:light_blue_carpet",
+    "factory_expansion:light_gray": "minecraft:light_gray_carpet",
+    "factory_expansion:lime": "minecraft:lime_carpet",
+    "factory_expansion:magenta": "minecraft:magenta_carpet",
+    "factory_expansion:orange": "minecraft:orange_carpet",
+    "factory_expansion:pink": "minecraft:pink_carpet",
+    "factory_expansion:purple": "minecraft:purple_carpet",
+    "factory_expansion:red": "minecraft:red_carpet",
+    "factory_expansion:white": "minecraft:white_carpet",
+    "factory_expansion:yellow": "minecraft:yellow_carpet"
+  }
+}

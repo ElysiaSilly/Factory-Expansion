@@ -1,8 +1,8 @@
 package com.teamcitrus.factory_expansion.client.event;
 
-import com.teamcitrus.factory_expansion.client.render.model.FlamethrowerExtension;
 import com.teamcitrus.factory_expansion.client.render.be.DisplayBlockRenderer;
 import com.teamcitrus.factory_expansion.client.render.misc.CycleHudRenderer;
+import com.teamcitrus.factory_expansion.client.render.model.FlamethrowerExtension;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
 import com.teamcitrus.factory_expansion.core.registry.FEBlockEntities;
 import com.teamcitrus.factory_expansion.core.registry.FEItems;

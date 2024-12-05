@@ -1,0 +1,20 @@
+{
+  "map": {
+    "factory_expansion:black": "minecraft:black_concrete_powder",
+    "factory_expansion:blue": "minecraft:blue_concrete_powder",
+    "factory_expansion:brown": "minecraft:brown_concrete_powder",
+    "factory_expansion:cyan": "minecraft:cyan_concrete_powder",
+    "factory_expansion:gray": "minecraft:gray_concrete_powder",
+    "factory_expansion:green": "minecraft:green_concrete_powder",
+    "factory_expansion:light_blue": "minecraft:light_blue_concrete_powder",
+    "factory_expansion:light_gray": "minecraft:light_gray_concrete_powder",
+    "factory_expansion:lime": "minecraft:lime_concrete_powder",
+    "factory_expansion:magenta": "minecraft:magenta_concrete_powder",
+    "factory_expansion:orange": "minecraft:orange_concrete_powder",
+    "factory_expansion:pink": "minecraft:pink_concrete_powder",
+    "factory_expansion:purple": "minecraft:purple_concrete_powder",
+    "factory_expansion:red": "minecraft:red_concrete_powder",
+    "factory_expansion:white": "minecraft:white_concrete_powder",
+    "factory_expansion:yellow": "minecraft:yellow_concrete_powder"
+  }
+}
