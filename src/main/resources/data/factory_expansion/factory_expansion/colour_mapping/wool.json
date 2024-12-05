@@ -1,0 +1,50 @@
+{
+  "white": {
+    "Name": "minecraft:white_wool"
+  },
+  "orange": {
+    "Name": "minecraft:orange_wool"
+  },
+  "magenta": {
+    "Name": "minecraft:magenta_wool"
+  },
+  "light_blue": {
+    "Name": "minecraft:light_blue_wool"
+  },
+  "yellow": {
+    "Name": "minecraft:yellow_wool"
+  },
+  "lime": {
+    "Name": "minecraft:lime_wool"
+  },
+  "pink": {
+    "Name": "minecraft:pink_wool"
+  },
+  "gray": {
+    "Name": "minecraft:gray_wool"
+  },
+  "light_gray": {
+    "Name": "minecraft:light_gray_wool"
+  },
+  "purple": {
+    "Name": "minecraft:purple_wool"
+  },
+  "blue": {
+    "Name": "minecraft:blue_wool"
+  },
+  "brown": {
+    "Name": "minecraft:brown_wool"
+  },
+  "green": {
+    "Name": "minecraft:green_wool"
+  },
+  "red": {
+    "Name": "minecraft:red_wool"
+  },
+  "black": {
+    "Name": "minecraft:black_wool"
+  },
+  "cyan": {
+    "Name": "minecraft:cyan_wool"
+  }
+}

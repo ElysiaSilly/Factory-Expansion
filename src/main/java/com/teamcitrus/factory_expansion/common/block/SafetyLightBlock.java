@@ -1,12 +1,8 @@
 package com.teamcitrus.factory_expansion.common.block;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.serialization.MapCodec;
-import com.teamcitrus.factory_expansion.client.render.misc.MiscRendering;
-import com.teamcitrus.factory_expansion.common.block.interfaces.block.IPreviewBlock;
 import com.teamcitrus.factory_expansion.core.properties.FEProperties;
 import com.teamcitrus.factory_expansion.core.properties.properties.WarningLightState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -25,7 +21,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;

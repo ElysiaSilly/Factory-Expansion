@@ -1,0 +1,23 @@
+{
+	"credit": "an ElysiaSilly creation :D",
+	"texture_size": [48, 48],
+	"textures": {
+		"21": "factory_expansion:special/flamethrower",
+		"particle": "factory_expansion:special/flamethrower"
+	},
+	"elements": [
+		{
+			"from": [6, 0, -16],
+			"to": [10, 4, 32],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 0]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 0], "texture": "#21"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#21"},
+				"south": {"uv": [0, 0, 16, 15.5], "texture": "#21"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#21"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#21"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#21"}
+			}
+		}
+	]
+}

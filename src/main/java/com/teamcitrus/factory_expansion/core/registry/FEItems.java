@@ -1,6 +1,7 @@
 package com.teamcitrus.factory_expansion.core.registry;
 
 import com.teamcitrus.factory_expansion.common.block.GirderBlock;
+import com.teamcitrus.factory_expansion.common.data.flamethrower.canisterData.FlamethrowerComponent;
 import com.teamcitrus.factory_expansion.common.item.DrywallFoodItem;
 import com.teamcitrus.factory_expansion.common.item.FlamethrowerItem;
 import com.teamcitrus.factory_expansion.common.item.PoppedDrywallFoodItem;
@@ -12,6 +13,7 @@ import com.teamcitrus.factory_expansion.core.keys.FELocations;
 import com.teamcitrus.factory_expansion.core.properties.FEProperties;
 import com.teamcitrus.factory_expansion.core.properties.properties.FluxBulbMode;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.DyeColor;
@@ -32,8 +34,9 @@ public class FEItems {
             ITEMS.register("flamethrower", () ->
                     new FlamethrowerItem(new Item.Properties()
                             .stacksTo(1)
-                            // this might not be needed for now // .component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
-                    ));
+                            .component(FEComponents.FLAMETHROWER, FlamethrowerComponent.EMPTY)
+                    )
+            );
 
     public static final DeferredItem<WrenchItem> WRENCH =
             ITEMS.register("wrench", () ->

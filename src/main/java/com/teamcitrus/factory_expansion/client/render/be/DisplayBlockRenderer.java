@@ -1,12 +1,10 @@
 package com.teamcitrus.factory_expansion.client.render.be;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.teamcitrus.factory_expansion.common.block.DisplayBlock;
 import com.teamcitrus.factory_expansion.common.block.be.DisplayBlockBE;
-import com.teamcitrus.factory_expansion.core.Config;
+import com.teamcitrus.factory_expansion.core.FEConfig;
 import com.teamcitrus.factory_expansion.core.util.ColourUtils;
 import com.teamcitrus.factory_expansion.core.util.RGBA;
 import net.minecraft.client.Minecraft;
@@ -34,13 +32,13 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockBE>
         matrix4f.scale(magicNumber, magicNumber, magicNumber);
         matrix4f.translate(0, -3f, -4.5f);
 
-        int colour = Config.DISPLAY_COLOUR_VARIATION.get() ? be.getSeededColour() : be.getColour();
+        int colour = FEConfig.DISPLAY_COLOUR_VARIATION.get() ? be.getSeededColour() : be.getColour();
 
-        if(Config.DISPLAY_FLICKERING.get()) colour = flickering(colour, be);
+        if(FEConfig.DISPLAY_FLICKERING.get()) colour = flickering(colour, be);
 
-        drawText(be, colour, matrix4f, bufferSource, true);
+        drawText(be, colour, matrix4f, bufferSource, false);
 
-        if(Config.DISPLAY_CHROMATIC_ABERRATION.get()) {
+        if(FEConfig.DISPLAY_CHROMATIC_ABERRATION.get()) {
             matrix4f.translate(-0.3f, -0.3f, -0.05f);
 
             RGBA c = ColourUtils.DecToRGBA(colour);

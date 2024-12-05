@@ -4,8 +4,8 @@ import com.teamcitrus.factory_expansion.common.data.flamethrower.BlazeCanisterTy
 import com.teamcitrus.factory_expansion.common.data.flamethrower.NitroCanisterType;
 import com.teamcitrus.factory_expansion.common.data.flamethrower.SoulCanisterType;
 import com.teamcitrus.factory_expansion.common.data.flamethrower.canisterData.CanisterType;
+import com.teamcitrus.factory_expansion.core.FERegistries;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
-import com.teamcitrus.factory_expansion.core.FactoExpaRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -13,7 +13,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class FECanisterTypes {
 
-    public static final DeferredRegister<CanisterType> CANISTER = DeferredRegister.create(FactoExpaRegistries.CANISTER_TYPE, FactoExpa.MODID);
+    public static final DeferredRegister<CanisterType> CANISTER = DeferredRegister.create(FERegistries.CANISTER_TYPE, FactoExpa.MODID);
 
     public static final DeferredHolder<CanisterType, BlazeCanisterType> BLAZE =
             CANISTER.register("blaze", () -> new BlazeCanisterType(

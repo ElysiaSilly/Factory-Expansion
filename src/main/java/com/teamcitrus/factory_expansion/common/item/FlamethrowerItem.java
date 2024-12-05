@@ -2,6 +2,7 @@ package com.teamcitrus.factory_expansion.common.item;
 
 import com.teamcitrus.factory_expansion.common.data.flamethrower.canisterData.CanisterComponent;
 import com.teamcitrus.factory_expansion.common.data.flamethrower.canisterData.CanisterData;
+import com.teamcitrus.factory_expansion.common.data.flamethrower.canisterData.FlamethrowerComponent;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
 import com.teamcitrus.factory_expansion.core.registry.FEComponents;
 import net.minecraft.core.Holder;
@@ -16,26 +17,18 @@ import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.ItemCapability;
 import net.neoforged.neoforge.items.IItemHandler;
 
+import java.util.List;
+
 public class FlamethrowerItem extends Item {
     public FlamethrowerItem(Properties properties) {
         super(properties);
     }
-
-    /// inventory
-    private final int SIZE = 3, CAN_A = 0, CAN_B = 1, CAN_C = 2;
-    private static final String INV_NAME = "flamethrower";
-    private static final ItemCapability<IItemHandler, Void> ITEM_HANDLER =
-            ItemCapability.createVoid(
-                    ResourceLocation.fromNamespaceAndPath(FactoExpa.MODID, INV_NAME),
-                    IItemHandler.class
-            );
-
-    public ItemCapability<IItemHandler, Void> getItemHandler() { return ITEM_HANDLER; }
 
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
@@ -72,51 +65,50 @@ public class FlamethrowerItem extends Item {
         }
     }
 
-    
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        ItemStack mainStack = player.getMainHandItem();
-
-        /// some checks that need to be changed
-        if(!level.isClientSide()) return super.use(level, player, usedHand);
-        if(!(usedHand == InteractionHand.MAIN_HAND)) return super.use(level, player, usedHand);
-        if(!(mainStack.getItem() instanceof FlamethrowerItem)) return super.use(level, player, usedHand);
-
-        /// get the Component ( I added the default during item registration, no need for getOrDefault)
-        // this works but... // ItemContainerContents contents = mainStack.get(DataComponents.CONTAINER);
-        // this works but... // if(contents != null) {
-        // this works but... //     var list = new ArrayList<ItemStack>();
-        // this works but... //     list.add(player.getOffhandItem());
-        // this works but... //     var newComp = ItemContainerContents.fromItems(list);
-        // this works but... //     mainStack.set(DataComponents.CONTAINER, newComp);
-        // this works but... // }
-        // this works but... // /// re-fetching stuff
-        // this works but... // contents = mainStack.get(DataComponents.CONTAINER);
-        // this works but... // FactoExpa.LOGGER.info("info: " + contents.getSlots());
-
-        /// this works but is still jank
-        /// it won't save on world loading XD... packets and nbt?
-        /// https://docs.neoforged.net/docs/networking/
-        IItemHandler itemHandler = mainStack.getCapability(Capabilities.ItemHandler.ITEM);
-        if(itemHandler != null) {
-            var itemA = itemHandler.getStackInSlot(CAN_A);
-            if(itemA.isEmpty()) {
-                itemHandler.insertItem(CAN_A, player.getOffhandItem(), false);
-                player.setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
-            }
-            else {
-                var item = itemHandler.extractItem(CAN_A, 1/*this might be size?*/, false);
-                player.setItemSlot(EquipmentSlot.OFFHAND, item);
-            }
-            itemA = itemHandler.getStackInSlot(CAN_A);
-            FactoExpa.LOGGER.info(itemA.isEmpty() ? "stack: none" : "stack: " + itemA.getItem().toString());
-        }
-        return super.use(level, player, usedHand); // change this
-    }
-
-    /// this is where the magic is gonna happen
     @Override
     public boolean overrideStackedOnOther(ItemStack stack, Slot slot, ClickAction action, Player player) {
-        return super.overrideStackedOnOther(stack, slot, action, player);
+
+        System.out.println(stack.has(FEComponents.FLAMETHROWER));
+
+        FlamethrowerComponent component = stack.get(FEComponents.FLAMETHROWER);
+
+        if(action == ClickAction.SECONDARY) {
+
+            ItemStack item = slot.getItem();
+
+            if(slot.hasItem()) {
+
+                if(item.has(FEComponents.CANISTER)) {
+                    component.addCanister(item.copy());
+                    item.shrink(1);
+                } else {
+                    component.addNozzle(item.copy());
+                    item.shrink(1);
+                }
+                return true;
+
+            } else {
+                if(!component.getNozzle().isEmpty()) {
+                    slot.safeInsert(component.removeNozzle());
+                } else {
+                    slot.safeInsert(component.removeLastCanister());
+                }
+                return true;
+
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        FlamethrowerComponent component = stack.get(FEComponents.FLAMETHROWER);
+
+        if(!component.getNozzle().isEmpty()) { tooltipComponents.add(Component.literal("nozzle: " + component.getNozzle())); } else { tooltipComponents.add(Component.literal("nozzle: *")); }
+        if(!component.getCanisterAtIndex(0).isEmpty()) { tooltipComponents.add(Component.literal("canister: " + component.getCanisterAtIndex(0))); } else { tooltipComponents.add(Component.literal("canister: *")); }
+        if(!component.getCanisterAtIndex(1).isEmpty()) { tooltipComponents.add(Component.literal("canister: " + component.getCanisterAtIndex(1))); } else { tooltipComponents.add(Component.literal("canister: *")); }
+        if(!component.getCanisterAtIndex(2).isEmpty()) { tooltipComponents.add(Component.literal("canister: " + component.getCanisterAtIndex(2))); } else { tooltipComponents.add(Component.literal("canister: *")); }
+
     }
 }

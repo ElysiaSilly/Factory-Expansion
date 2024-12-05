@@ -2,7 +2,7 @@ package com.teamcitrus.factory_expansion.core;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-public class Config {
+public class FEConfig {
 
     public static ModConfigSpec CLIENT_CONFIG;
 

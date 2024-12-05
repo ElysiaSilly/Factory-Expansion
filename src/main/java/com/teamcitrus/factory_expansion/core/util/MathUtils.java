@@ -19,9 +19,7 @@ public class MathUtils {
     }
 
     public static float distance(Vec3 start, Vec3 end) {
-        Vector3f startf = vec3ToVec3f(start);
-        Vector3f endf = vec3ToVec3f(end);
-        return Vector3f.distance(startf.x, startf.y, startf.z, endf.x, endf.y, endf.z);
+        return distance(vec3ToVec3f(start), vec3ToVec3f(end));
     }
 
     public static float castToRange(float oldMin, float oldMax, float newMin, float newMax, float value) {

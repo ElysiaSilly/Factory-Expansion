@@ -2,8 +2,8 @@ package com.teamcitrus.factory_expansion.common.data.flamethrower.canisterData;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamcitrus.factory_expansion.core.FERegistries;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
-import com.teamcitrus.factory_expansion.core.FactoExpaRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -33,7 +33,7 @@ public class CanisterData {
         this._modelPath = modelPath;
 
         this.capacity =  capacity;
-        this.canisterType = FactoExpaRegistries.CANISTER_TYPE.get(ResourceLocation.parse(type));
+        this.canisterType = FERegistries.CANISTER_TYPE.get(ResourceLocation.parse(type));
         this.breakWhenEmpty = breakWhenEmpty;
         this.modelPath = ResourceLocation.parse(modelPath);
 

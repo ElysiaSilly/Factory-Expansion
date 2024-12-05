@@ -2,16 +2,15 @@ package com.teamcitrus.factory_expansion.common.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamcitrus.factory_expansion.client.render.misc.BlockPreviewRenderer;
-import com.teamcitrus.factory_expansion.client.render.misc.MiscRendering;
 import com.teamcitrus.factory_expansion.common.block.interfaces.block.IPreviewBlock;
 import com.teamcitrus.factory_expansion.core.properties.FEProperties;
 import com.teamcitrus.factory_expansion.core.properties.properties.MediumVentBlocks;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -140,21 +139,20 @@ public class MediumVentBlock extends RotatedPillarBlock implements IPreviewBlock
     }
 
     @Override
-    protected float getShadeBrightness(BlockState p_308911_, BlockGetter p_308952_, BlockPos p_308918_) {
+    protected float getShadeBrightness(BlockState state, BlockGetter getter, BlockPos pos) {
         return 1.0F;
     }
 
     @Override
-    protected boolean propagatesSkylightDown(BlockState p_309084_, BlockGetter p_309133_, BlockPos p_309097_) {
+    protected boolean propagatesSkylightDown(BlockState state, BlockGetter getter, BlockPos pos) {
         return true;
     }
 
-
     @Override
-    public void renderPreview(BlockHitResult hitResult, BlockPlaceContext context, Block block, Minecraft minecraft, PoseStack stack) {
+    public void renderPreview(BlockPlaceContext context, BlockHitResult hitResult, BlockItem blockItem, BlockState state, PoseStack stack) {
 
         if(context.getItemInHand().getCount() < 4 && !context.getPlayer().hasInfiniteMaterials()) return;
 
-        BlockPreviewRenderer.renderGhostBlock(block, context, stack);
+        BlockPreviewRenderer.renderGhostBlock(state, stack, context);
     }
 }

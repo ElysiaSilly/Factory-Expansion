@@ -1,4 +1,4 @@
-package com.teamcitrus.factory_expansion.client.render;
+package com.teamcitrus.factory_expansion.client.render.model;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;

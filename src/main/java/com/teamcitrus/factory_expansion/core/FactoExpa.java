@@ -41,7 +41,7 @@ public class FactoExpa {
         /// Remember to add Capabilites in the listener
         bus.addListener(FECapabilities::registerCapabilities);
 
-        container.registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
-        container.registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
+        container.registerConfig(ModConfig.Type.COMMON, FEConfig.COMMON_CONFIG);
+        container.registerConfig(ModConfig.Type.CLIENT, FEConfig.CLIENT_CONFIG);
     }
 }

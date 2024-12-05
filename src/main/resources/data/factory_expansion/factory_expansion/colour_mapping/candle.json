@@ -1,0 +1,50 @@
+{
+  "white": {
+    "Name": "minecraft:white_candle"
+  },
+  "orange": {
+    "Name": "minecraft:orange_candle"
+  },
+  "magenta": {
+    "Name": "minecraft:magenta_candle"
+  },
+  "light_blue": {
+    "Name": "minecraft:light_blue_candle"
+  },
+  "yellow": {
+    "Name": "minecraft:yellow_candle"
+  },
+  "lime": {
+    "Name": "minecraft:lime_candle"
+  },
+  "pink": {
+    "Name": "minecraft:pink_candle"
+  },
+  "gray": {
+    "Name": "minecraft:gray_candle"
+  },
+  "light_gray": {
+    "Name": "minecraft:light_gray_candle"
+  },
+  "purple": {
+    "Name": "minecraft:purple_candle"
+  },
+  "blue": {
+    "Name": "minecraft:blue_candle"
+  },
+  "brown": {
+    "Name": "minecraft:brown_candle"
+  },
+  "green": {
+    "Name": "minecraft:green_candle"
+  },
+  "red": {
+    "Name": "minecraft:red_candle"
+  },
+  "black": {
+    "Name": "minecraft:black_candle"
+  },
+  "cyan": {
+    "Name": "minecraft:cyan_candle"
+  }
+}
