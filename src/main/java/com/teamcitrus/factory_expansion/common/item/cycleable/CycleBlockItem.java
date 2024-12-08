@@ -1,11 +1,14 @@
 package com.teamcitrus.factory_expansion.common.item.cycleable;
 
+import com.teamcitrus.factory_expansion.core.keys.FELocations;
+import com.teamcitrus.factory_expansion.core.keys.FEResourceKeys;
 import net.minecraft.Util;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -51,12 +54,6 @@ public class CycleBlockItem extends BlockItem {
         this.blocks.addAll(Arrays.asList(blocks));
         this.max = this.blocks.size();// + 1;
     }
-
-    //public CycleBlockItem mode(Mode mode) {
-    //    this.mode = mode;
-    //    this.index = this.mode.random ? 0 : 1;
-    //    return this;
-    //}
 
     public CycleBlockItem assignToItem() {
         this.assignToItem = true;
@@ -133,9 +130,9 @@ public class CycleBlockItem extends BlockItem {
     public int getPreviousIndex(int index) {
         int min = this.mode.random ? 0 : 1;
 
-        if(index > min) {
+        if(index > min && index != 0) {
             index--;
-        } else if (index <= min) {
+        } else {
             index = this.max;
         }
 
@@ -156,6 +153,14 @@ public class CycleBlockItem extends BlockItem {
 
     public OptPropertyBlock getOptStateBlock(int index) {
         return this.blocks.get(index - 1);
+    }
+
+    public ResourceLocation getIcon(int index) {
+        if(index == 0) {
+            return FELocations.gui.CYCLE_RANDOM;
+        } else {
+            return getOptStateBlock(index).getIcon();
+        }
     }
 
     @Override

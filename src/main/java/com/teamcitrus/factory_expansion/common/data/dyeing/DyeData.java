@@ -17,7 +17,7 @@ public class DyeData {
             Codec.INT.optionalFieldOf("hexCode").forGetter(i -> i.colour)
     ).apply(instance, DyeData::new));
 
-    public static final RegistryFileCodec<DyeData> HOLDER_CODEC = RegistryFileCodec.create(FEResourceKeys.DYE, CODEC);
+    public static final RegistryFileCodec<DyeData> HOLDER_CODEC = RegistryFileCodec.create(FEResourceKeys.registries.DYE, CODEC);
 
     final Ingredient ingredient;
     final Optional<Integer> colour;
@@ -36,6 +36,6 @@ public class DyeData {
     }
 
     public int getColour() {
-        return this.colour.orElse(0);
+        return this.colour.orElse(-1);
     }
 }

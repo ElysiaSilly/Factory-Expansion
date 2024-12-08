@@ -29,17 +29,10 @@ public class FactoExpa {
         FEItems.ITEMS.register(bus);
         FEBlocks.BLOCKITEMS.register(bus);
         FEBlocks.BLOCKS.register(bus);
-        FECreativeTabs.CREATIVETABS.register(bus);
+        FECreativeTabs.CREATIVE_MODE_TAB.register(bus);
         FEComponents.COMPONENTS.register(bus);
         FEBlockEntities.BLOCKENTITIES.register(bus);
-
-        //? what is this stuff?
-        //? FERecipeSerializer.RECIPE_SERIALIZERS.register(bus);
-        //? FERecipeTypes.RECIPE_TYPES.register(bus);
         FECanisterTypes.CANISTER.register(bus);
-
-        /// Remember to add Capabilites in the listener
-        bus.addListener(FECapabilities::registerCapabilities);
 
         container.registerConfig(ModConfig.Type.COMMON, FEConfig.COMMON_CONFIG);
         container.registerConfig(ModConfig.Type.CLIENT, FEConfig.CLIENT_CONFIG);

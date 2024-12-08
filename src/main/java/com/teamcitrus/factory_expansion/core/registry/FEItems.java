@@ -11,7 +11,6 @@ import com.teamcitrus.factory_expansion.core.FactoExpa;
 import com.teamcitrus.factory_expansion.core.keys.FELocations;
 import com.teamcitrus.factory_expansion.core.properties.FEProperties;
 import com.teamcitrus.factory_expansion.core.properties.properties.FluxBulbMode;
-import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.DyeColor;
@@ -23,8 +22,7 @@ import net.minecraft.world.level.block.state.properties.SlabType;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.function.Supplier;
-
+@SuppressWarnings({"unchecked"}) // yeah i should prolly fix the generics stuff lol
 public class FEItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(FactoExpa.MODID);
 
@@ -34,14 +32,7 @@ public class FEItems {
     public static final DeferredItem<WrenchItem> WRENCH =
             ITEMS.register("wrench", WrenchItem::new);
 
-    /*
-    public static final DeferredItem<CanisterItem> BLAZE_CANISTER =
-            ITEMS.register("blaze_canister", () -> new CanisterItem(512, false));
 
-    public static final DeferredItem<CanisterItem> SOUL_CANISTER =
-            ITEMS.register("soul_canister", () -> new CanisterItem(512, false));
-
-     */
 
     /// OTHER
 
@@ -66,12 +57,18 @@ public class FEItems {
             );
 
 
-    public static final Supplier<Item> BLACK_ALLOY = ITEMS.registerSimpleItem("black_alloy", new Item.Properties());
-    public static final Supplier<Item> PALE_ALLOY = ITEMS.registerSimpleItem("pale_alloy", new Item.Properties());
-    public static final Supplier<Item> ARID_ALLOY = ITEMS.registerSimpleItem("arid_alloy", new Item.Properties());
-    public static final Supplier<Item> BRASS_ALLOY = ITEMS.registerSimpleItem("brass_alloy", new Item.Properties());
+    public static final DeferredItem<Item> BLACK_ALLOY
+            = ITEMS.registerSimpleItem("black_alloy", new Item.Properties());
+    public static final DeferredItem<Item> PALE_ALLOY
+            = ITEMS.registerSimpleItem("pale_alloy", new Item.Properties());
+    public static final DeferredItem<Item> ARID_ALLOY
+            = ITEMS.registerSimpleItem("arid_alloy", new Item.Properties());
 
-    public static final Supplier<Item> SCRAP_METAL = ITEMS.registerSimpleItem("scrap_metal", new Item.Properties());
+    public static final DeferredItem<Item> SCRAP_METAL
+            = ITEMS.registerSimpleItem("scrap_metal", new Item.Properties());
+
+    public static final DeferredItem<Item> SCORCHED_BRICK
+            = ITEMS.registerSimpleItem("scorched_brick", new Item.Properties());
 
     /// CYCLE ITEMS
 
@@ -80,21 +77,9 @@ public class FEItems {
                     new Item.Properties(),
                     CycleBlockItem.Mode.RANDOM_AND_CYCLE,
 
-                    optProperty(Blocks.LIGHT_BLUE_WOOL, 1, FELocations.TEMP).placementContext(),
-                    optProperty(Blocks.WHITE_WOOL, 1, FELocations.TEMP).placementContext(),
-                    optProperty(Blocks.PINK_WOOL, 1, FELocations.TEMP).placementContext()
-
-                    )
-            );
-
-    public static final DeferredItem<CycleBlockItem> RANDOM_LOG =
-            ITEMS.register("random_log", () -> new CycleBlockItem(
-                    new Item.Properties(),
-                    CycleBlockItem.Mode.RANDOM_ONLY,
-
-                    optProperty(Blocks.OAK_LOG, 1, FELocations.TEMP).setProperty(BlockStateProperties.AXIS, Direction.Axis.X),
-                    optProperty(Blocks.OAK_LOG, 1, FELocations.TEMP).setProperty(BlockStateProperties.AXIS, Direction.Axis.Y),
-                    optProperty(Blocks.OAK_LOG, 1, FELocations.TEMP).setProperty(BlockStateProperties.AXIS, Direction.Axis.Z)
+                    optProperty(Blocks.LIGHT_BLUE_WOOL, 1, FELocations.gui.TEMP).placementContext(),
+                    optProperty(Blocks.WHITE_WOOL, 1, FELocations.gui.TEMP).placementContext(),
+                    optProperty(Blocks.PINK_WOOL, 1, FELocations.gui.TEMP).placementContext()
 
                     )
             );
@@ -104,21 +89,9 @@ public class FEItems {
                             new Item.Properties(),
                             CycleBlockItem.Mode.CYCLE_ONLY,
 
-                            optProperty(FEBlocks.BLACK_GIRDER.get(), 1, FELocations.CYCLE_GIRDER)
+                            optProperty(FEBlocks.BLACK_GIRDER.get(), 1, FELocations.gui.CYCLE_GIRDER)
                                     .placementContext(),
-                            optProperty(FEBlocks.BLACK_GIRDER.get(), 1, FELocations.CYCLE_GIRDER_VERTICAL)
-                                    .setProperty(GirderBlock.Y_AXIS, true)
-                    ).assignToItem()
-            );
-
-    public static final DeferredItem<CycleBlockItem> BRASS_GIRDER =
-            ITEMS.register("brass_girder", () -> new CycleBlockItem(
-                            new Item.Properties(),
-                            CycleBlockItem.Mode.CYCLE_ONLY,
-
-                            optProperty(FEBlocks.BRASS_GIRDER.get(), 1, FELocations.CYCLE_GIRDER)
-                                    .placementContext(),
-                            optProperty(FEBlocks.BRASS_GIRDER.get(), 1, FELocations.CYCLE_GIRDER_VERTICAL)
+                            optProperty(FEBlocks.BLACK_GIRDER.get(), 1, FELocations.gui.CYCLE_GIRDER_VERTICAL)
                                     .setProperty(GirderBlock.Y_AXIS, true)
                     ).assignToItem()
             );
@@ -128,9 +101,9 @@ public class FEItems {
                             new Item.Properties(),
                             CycleBlockItem.Mode.CYCLE_ONLY,
 
-                            optProperty(FEBlocks.PALE_GIRDER.get(), 1, FELocations.CYCLE_GIRDER)
+                            optProperty(FEBlocks.PALE_GIRDER.get(), 1, FELocations.gui.CYCLE_GIRDER)
                                     .placementContext(),
-                            optProperty(FEBlocks.PALE_GIRDER.get(), 1, FELocations.CYCLE_GIRDER_VERTICAL)
+                            optProperty(FEBlocks.PALE_GIRDER.get(), 1, FELocations.gui.CYCLE_GIRDER_VERTICAL)
                                     .setProperty(GirderBlock.Y_AXIS, true)
                     ).assignToItem()
             );
@@ -140,9 +113,9 @@ public class FEItems {
                             new Item.Properties(),
                             CycleBlockItem.Mode.CYCLE_ONLY,
 
-                            optProperty(FEBlocks.ARID_GIRDER.get(), 1, FELocations.CYCLE_GIRDER)
+                            optProperty(FEBlocks.ARID_GIRDER.get(), 1, FELocations.gui.CYCLE_GIRDER)
                                     .placementContext(),
-                            optProperty(FEBlocks.ARID_GIRDER.get(), 1, FELocations.CYCLE_GIRDER_VERTICAL)
+                            optProperty(FEBlocks.ARID_GIRDER.get(), 1, FELocations.gui.CYCLE_GIRDER_VERTICAL)
                                     .setProperty(GirderBlock.Y_AXIS, true)
                     ).assignToItem()
             );
@@ -152,14 +125,14 @@ public class FEItems {
                     new Item.Properties(),
                     CycleBlockItem.Mode.CYCLE_ONLY,
 
-                    optProperty(FEBlocks.FLUX_BULB.get(), 1, FELocations.CYCLE_BULB_NORMAL)
+                    optProperty(FEBlocks.FLUX_BULB.get(), 1, FELocations.gui.CYCLE_BULB_NORMAL)
                             .placementContext(),
-                    optProperty(FEBlocks.INVERTED_FLUX_BULB.get(), 1, FELocations.CYCLE_BULB_INVERTED)
+                    optProperty(FEBlocks.INVERTED_FLUX_BULB.get(), 1, FELocations.gui.CYCLE_BULB_INVERTED)
                             .placementContext(),
-                    optProperty(FEBlocks.FLUX_BULB.get(), 1, FELocations.CYCLE_BULB_BLINKING)
+                    optProperty(FEBlocks.FLUX_BULB.get(), 1, FELocations.gui.CYCLE_BULB_BLINKING)
                             .setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).
                             placementContext(),
-                    optProperty(FEBlocks.INVERTED_FLUX_BULB.get(), 1, FELocations.CYCLE_BULB_BLINKING_INVERTED)
+                    optProperty(FEBlocks.INVERTED_FLUX_BULB.get(), 1, FELocations.gui.CYCLE_BULB_BLINKING_INVERTED)
                             .setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING)
                             .placementContext()
 
@@ -171,14 +144,14 @@ public class FEItems {
                             new Item.Properties(),
                             CycleBlockItem.Mode.CYCLE_ONLY,
 
-                            optProperty(FEBlocks.UV_FLUX_BULB.get(), 1, FELocations.CYCLE_BULB_NORMAL)
+                            optProperty(FEBlocks.UV_FLUX_BULB.get(), 1, FELocations.gui.CYCLE_BULB_NORMAL)
                                     .placementContext(),
-                            optProperty(FEBlocks.INVERTED_UV_FLUX_BULB.get(), 1, FELocations.CYCLE_BULB_INVERTED)
+                            optProperty(FEBlocks.INVERTED_UV_FLUX_BULB.get(), 1, FELocations.gui.CYCLE_BULB_INVERTED)
                                     .placementContext(),
-                            optProperty(FEBlocks.UV_FLUX_BULB.get(), 1, FELocations.CYCLE_BULB_BLINKING)
+                            optProperty(FEBlocks.UV_FLUX_BULB.get(), 1, FELocations.gui.CYCLE_BULB_BLINKING)
                                     .setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING)
                                     .placementContext(),
-                            optProperty(FEBlocks.INVERTED_UV_FLUX_BULB.get(), 1, FELocations.CYCLE_BULB_BLINKING_INVERTED)
+                            optProperty(FEBlocks.INVERTED_UV_FLUX_BULB.get(), 1, FELocations.gui.CYCLE_BULB_BLINKING_INVERTED)
                                     .setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING)
                                     .placementContext()
 
@@ -190,10 +163,10 @@ public class FEItems {
                             new Item.Properties(),
                             CycleBlockItem.Mode.CYCLE_ONLY,
 
-                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.WHITE).get(), 1, FELocations.TEMP).placementContext(),
-                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.WHITE).get(), 1, FELocations.TEMP).placementContext(),
-                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.WHITE).get(), 1, FELocations.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext(),
-                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.WHITE).get(), 1, FELocations.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext()
+                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.WHITE).get(), 1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.WHITE).get(), 1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.WHITE).get(), 1, FELocations.gui.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext(),
+                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.WHITE).get(), 1, FELocations.gui.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext()
 
                     ).assignToItem()
             );
@@ -203,10 +176,10 @@ public class FEItems {
                             new Item.Properties(),
                             CycleBlockItem.Mode.CYCLE_ONLY,
 
-                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.ORANGE).get(), 1, FELocations.TEMP).placementContext(),
-                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.ORANGE).get(), 1, FELocations.TEMP).placementContext(),
-                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.ORANGE).get(), 1, FELocations.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext(),
-                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.ORANGE).get(), 1, FELocations.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext()
+                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.ORANGE).get(), 1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.ORANGE).get(), 1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.ORANGE).get(), 1, FELocations.gui.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext(),
+                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.ORANGE).get(), 1, FELocations.gui.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext()
 
                     ).assignToItem()
             );
@@ -216,10 +189,10 @@ public class FEItems {
                             new Item.Properties(),
                             CycleBlockItem.Mode.CYCLE_ONLY,
 
-                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.MAGENTA).get(), 1, FELocations.TEMP).placementContext(),
-                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.MAGENTA).get(), 1, FELocations.TEMP).placementContext(),
-                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.MAGENTA).get(), 1, FELocations.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext(),
-                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.MAGENTA).get(), 1, FELocations.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext()
+                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.MAGENTA).get(), 1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.MAGENTA).get(), 1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.MAGENTA).get(), 1, FELocations.gui.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext(),
+                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.MAGENTA).get(), 1, FELocations.gui.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext()
 
                     ).assignToItem()
             );
@@ -229,10 +202,10 @@ public class FEItems {
                             new Item.Properties(),
                             CycleBlockItem.Mode.CYCLE_ONLY,
 
-                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.LIGHT_BLUE).get(), 1, FELocations.TEMP).placementContext(),
-                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.LIGHT_BLUE).get(), 1, FELocations.TEMP).placementContext(),
-                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.LIGHT_BLUE).get(), 1, FELocations.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext(),
-                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.LIGHT_BLUE).get(), 1, FELocations.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext()
+                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.LIGHT_BLUE).get(), 1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.LIGHT_BLUE).get(), 1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.LIGHT_BLUE).get(), 1, FELocations.gui.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext(),
+                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.LIGHT_BLUE).get(), 1, FELocations.gui.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext()
 
                     ).assignToItem()
             );
@@ -242,10 +215,10 @@ public class FEItems {
                             new Item.Properties(),
                             CycleBlockItem.Mode.CYCLE_ONLY,
 
-                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.YELLOW).get(), 1, FELocations.TEMP).placementContext(),
-                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.YELLOW).get(), 1, FELocations.TEMP).placementContext(),
-                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.YELLOW).get(), 1, FELocations.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext(),
-                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.YELLOW).get(), 1, FELocations.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext()
+                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.YELLOW).get(), 1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.YELLOW).get(), 1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.YELLOW).get(), 1, FELocations.gui.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext(),
+                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.YELLOW).get(), 1, FELocations.gui.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext()
 
                     ).assignToItem()
             );
@@ -255,10 +228,10 @@ public class FEItems {
                             new Item.Properties(),
                             CycleBlockItem.Mode.CYCLE_ONLY,
 
-                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.LIME).get(), 1, FELocations.TEMP).placementContext(),
-                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.LIME).get(), 1, FELocations.TEMP).placementContext(),
-                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.LIME).get(), 1, FELocations.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext(),
-                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.LIME).get(), 1, FELocations.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext()
+                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.LIME).get(), 1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.LIME).get(), 1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.LIME).get(), 1, FELocations.gui.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext(),
+                            optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.LIME).get(), 1, FELocations.gui.TEMP).setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING).placementContext()
 
                     ).assignToItem()
             );
@@ -268,14 +241,14 @@ public class FEItems {
                     new Item.Properties(),
                     CycleBlockItem.Mode.CYCLE_ONLY,
 
-                    optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.RED).get(), 1, FELocations.CYCLE_BULB_NORMAL)
+                    optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.RED).get(), 1, FELocations.gui.CYCLE_BULB_NORMAL)
                             .placementContext(),
-                    optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.RED).get(), 1, FELocations.CYCLE_BULB_INVERTED)
+                    optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.RED).get(), 1, FELocations.gui.CYCLE_BULB_INVERTED)
                             .placementContext(),
-                    optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.RED).get(), 1, FELocations.CYCLE_BULB_BLINKING)
+                    optProperty(FEBlocks.FLUX_BULBS.get(DyeColor.RED).get(), 1, FELocations.gui.CYCLE_BULB_BLINKING)
                             .setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING)
                             .placementContext(),
-                    optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.RED).get(), 1, FELocations.CYCLE_BULB_BLINKING_INVERTED)
+                    optProperty(FEBlocks.INVERTED_FLUX_BULBS.get(DyeColor.RED).get(), 1, FELocations.gui.CYCLE_BULB_BLINKING_INVERTED)
                             .setProperty(FEProperties.FLUX_BULB_MODE, FluxBulbMode.BLINKING)
                             .placementContext()
 
@@ -287,11 +260,11 @@ public class FEItems {
                     new Item.Properties(),
                     CycleBlockItem.Mode.CYCLE_ONLY,
 
-                    optProperty(FEBlocks.SMALL_BLACK_VENT.get(), 1, FELocations.CYCLE_BLOCK)
+                    optProperty(FEBlocks.SMALL_BLACK_VENT.get(), 1, FELocations.gui.CYCLE_BLOCK)
                             .placementContext(),
-                    optProperty(FEBlocks.MEDIUM_BLACK_VENT.get(),4, FELocations.CYCLE_BLOCK_2_2)
+                    optProperty(FEBlocks.MEDIUM_BLACK_VENT.get(),4, FELocations.gui.CYCLE_BLOCK_2X2)
                             .placementContext(),
-                    optProperty(FEBlocks.LARGE_BLACK_VENT.get(), 9, FELocations.CYCLE_BLOCK_3_3)
+                    optProperty(FEBlocks.LARGE_BLACK_VENT.get(), 9, FELocations.gui.CYCLE_BLOCK_3X3)
                             .placementContext()
 
                     ).assignToItem()
@@ -302,14 +275,130 @@ public class FEItems {
                             new Item.Properties(),
                             CycleBlockItem.Mode.CYCLE_ONLY,
 
-                            optProperty(FEBlocks.BLACK_CATWALK.get(), 1, FELocations.CYCLE_SLAB)
+                            optProperty(FEBlocks.BLACK_CATWALK.get(), 1, FELocations.gui.CYCLE_SLAB)
                                     .placementContext(),
-                            optProperty(FEBlocks.BLACK_CATWALK.get(),2, FELocations.CYCLE_BLOCK)
+                            /*optProperty(FEBlocks.BLACK_CATWALK.get(),2, FELocations.gui.CYCLE_BLOCK)
                                     .setProperty(BlockStateProperties.SLAB_TYPE, SlabType.DOUBLE)
-                                    .placementContext(),
-                            optProperty(FEBlocks.BLACK_CATWALK_STAIRS.get(), 1, FELocations.CYCLE_STAIRS)
+                                    .placementContext(),*/
+                            optProperty(FEBlocks.BLACK_CATWALK_STAIRS.get(), 1, FELocations.gui.CYCLE_STAIRS)
                                     .placementContext()
 
+                    ).assignToItem()
+            );
+
+    public static final DeferredItem<CycleBlockItem> SCORCHED_TILE =
+            ITEMS.register("scorched_tile", () -> new CycleBlockItem(
+                    new Item.Properties(),
+                    CycleBlockItem.Mode.RANDOM_AND_CYCLE,
+
+                    optProperty(FEBlocks.SCORCHED_TILE.get(0).get(),1, FELocations.gui.TEMP).placementContext(),
+                    optProperty(FEBlocks.SCORCHED_TILE.get(1).get(),1, FELocations.gui.TEMP).placementContext(),
+                    optProperty(FEBlocks.SCORCHED_TILE.get(2).get(),1, FELocations.gui.TEMP).placementContext(),
+                    optProperty(FEBlocks.SCORCHED_TILE.get(3).get(),1, FELocations.gui.TEMP).placementContext()
+                    ).assignToItem()
+            );
+
+    public static final DeferredItem<CycleBlockItem> SCORCHED_TILE_STAIRS =
+            ITEMS.register("scorched_tile_stairs", () -> new CycleBlockItem(
+                            new Item.Properties(),
+                            CycleBlockItem.Mode.RANDOM_AND_CYCLE,
+
+                            optProperty(FEBlocks.SCORCHED_TILE_STAIRS.get(0).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_TILE_STAIRS.get(1).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_TILE_STAIRS.get(2).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_TILE_STAIRS.get(3).get(),1, FELocations.gui.TEMP).placementContext()
+                    ).assignToItem()
+            );
+
+    public static final DeferredItem<CycleBlockItem> SCORCHED_TILE_SLAB =
+            ITEMS.register("scorched_tile_slab", () -> new CycleBlockItem(
+                            new Item.Properties(),
+                            CycleBlockItem.Mode.RANDOM_AND_CYCLE,
+
+                            optProperty(FEBlocks.SCORCHED_TILE_SLAB.get(0).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_TILE_SLAB.get(1).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_TILE_SLAB.get(2).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_TILE_SLAB.get(3).get(),1, FELocations.gui.TEMP).placementContext()
+                    ).assignToItem()
+            );
+
+    public static final DeferredItem<CycleBlockItem> SCORCHED_TILE_WALL =
+            ITEMS.register("scorched_tile_wall", () -> new CycleBlockItem(
+                            new Item.Properties(),
+                            CycleBlockItem.Mode.RANDOM_AND_CYCLE,
+
+                            optProperty(FEBlocks.SCORCHED_TILE_WALL.get(0).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_TILE_WALL.get(1).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_TILE_WALL.get(2).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_TILE_WALL.get(3).get(),1, FELocations.gui.TEMP).placementContext()
+                    ).assignToItem()
+            );
+
+    public static final DeferredItem<CycleBlockItem> SCORCHED_BRICKS =
+            ITEMS.register("scorched_bricks", () -> new CycleBlockItem(
+                            new Item.Properties(),
+                            CycleBlockItem.Mode.RANDOM_ONLY,
+
+                            optProperty(FEBlocks.SCORCHED_BRICKS.get(0).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICKS.get(1).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICKS.get(2).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICKS.get(3).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICKS.get(4).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICKS.get(5).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICKS.get(6).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICKS.get(7).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICKS.get(8).get(),1, FELocations.gui.TEMP).placementContext()
+                    ).assignToItem()
+            );
+
+    public static final DeferredItem<CycleBlockItem> SCORCHED_BRICK_STAIRS =
+            ITEMS.register("scorched_brick_stairs", () -> new CycleBlockItem(
+                            new Item.Properties(),
+                            CycleBlockItem.Mode.RANDOM_ONLY,
+
+                            optProperty(FEBlocks.SCORCHED_BRICK_STAIRS.get(0).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_STAIRS.get(1).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_STAIRS.get(2).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_STAIRS.get(3).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_STAIRS.get(4).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_STAIRS.get(5).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_STAIRS.get(6).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_STAIRS.get(7).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_STAIRS.get(8).get(),1, FELocations.gui.TEMP).placementContext()
+                    ).assignToItem()
+            );
+
+    public static final DeferredItem<CycleBlockItem> SCORCHED_BRICK_SLAB =
+            ITEMS.register("scorched_brick_slab", () -> new CycleBlockItem(
+                            new Item.Properties(),
+                            CycleBlockItem.Mode.RANDOM_ONLY,
+
+                            optProperty(FEBlocks.SCORCHED_BRICK_SLAB.get(0).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_SLAB.get(1).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_SLAB.get(2).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_SLAB.get(3).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_SLAB.get(4).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_SLAB.get(5).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_SLAB.get(6).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_SLAB.get(7).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_SLAB.get(8).get(),1, FELocations.gui.TEMP).placementContext()
+                    ).assignToItem()
+            );
+
+    public static final DeferredItem<CycleBlockItem> SCORCHED_BRICK_WALL =
+            ITEMS.register("scorched_brick_wall", () -> new CycleBlockItem(
+                            new Item.Properties(),
+                            CycleBlockItem.Mode.RANDOM_ONLY,
+
+                            optProperty(FEBlocks.SCORCHED_BRICK_WALL.get(0).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_WALL.get(1).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_WALL.get(2).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_WALL.get(3).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_WALL.get(4).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_WALL.get(5).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_WALL.get(6).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_WALL.get(7).get(),1, FELocations.gui.TEMP).placementContext(),
+                            optProperty(FEBlocks.SCORCHED_BRICK_WALL.get(8).get(),1, FELocations.gui.TEMP).placementContext()
                     ).assignToItem()
             );
 

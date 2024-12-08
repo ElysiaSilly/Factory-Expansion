@@ -2,6 +2,7 @@ package com.teamcitrus.factory_expansion.core.registry;
 
 import com.teamcitrus.factory_expansion.common.data.flamethrower.CanisterComponent;
 import com.teamcitrus.factory_expansion.common.data.flamethrower.FlamethrowerComponent;
+import com.teamcitrus.factory_expansion.common.data.wrench.WrenchComponent;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
 import net.minecraft.core.component.DataComponentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -17,6 +18,9 @@ public class FEComponents {
 
     public static final Supplier<DataComponentType<FlamethrowerComponent>> FLAMETHROWER = COMPONENTS.registerComponentType("flamethrower",
             builder -> builder.persistent(FlamethrowerComponent.CODEC));
+
+    public static final Supplier<DataComponentType<WrenchComponent>> WRENCH = COMPONENTS.registerComponentType("wrench",
+            builder -> builder.persistent(WrenchComponent.CODEC));
 }
 
 

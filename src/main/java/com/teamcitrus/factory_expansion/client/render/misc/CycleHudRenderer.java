@@ -20,7 +20,7 @@ public class CycleHudRenderer implements LayeredDraw.Layer {
 
         if(Minecraft.getInstance().player.getMainHandItem().getItem() instanceof CycleBlockItem item) {
 
-            ResourceLocation sprite = item.getOptStateBlock().getIcon();
+            ResourceLocation sprite = item.getIcon(item.getIndex());
 
             guiGraphics.blitSprite(sprite,(guiGraphics.guiWidth() / 2) - 9, 1 + 5, 17, 17);
 
@@ -28,11 +28,11 @@ public class CycleHudRenderer implements LayeredDraw.Layer {
             RenderSystem.blendFunc(GlStateManager.SourceFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.7F);
 
-            sprite = item.getOptStateBlock(item.getNextIndex(item.getIndex())).getIcon();
+            sprite = item.getIcon(item.getNextIndex(item.getIndex()));
 
             guiGraphics.blitSprite(sprite,(guiGraphics.guiWidth() / 2) - 6 + 19, 5 + 5, 11, 11);
 
-            sprite = item.getOptStateBlock(item.getPreviousIndex(item.getIndex())).getIcon();
+            sprite = item.getIcon(item.getPreviousIndex(item.getIndex()));
 
             guiGraphics.blitSprite(sprite,(guiGraphics.guiWidth() / 2) - 6 - 20,  5 + 5, 11, 11);
 

@@ -25,42 +25,12 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class RegistryUtils {
 
-    /// ResourceKeys
-
-    public static ResourceKey<ConfiguredFeature<?, ?>> createFeatureKey(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(FactoExpa.MODID, name));
-    }
-
-    /// TagKeys
-
-    public static TagKey<Biome> createBiomeTag(String name) {
-        return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(FactoExpa.MODID, name));
-    }
-    public static TagKey<Item> createItemTag(String name) {
-        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(FactoExpa.MODID, name));
-    }
-    public static TagKey<Block> createBlockTag(String name) {
-        return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(FactoExpa.MODID, name));
-    }
-
-    /// Registries
-
-    public static BlockSetType blockSetType(String name) {
-        return BlockSetType.register(new BlockSetType(FactoExpa.prefix(name)));
-    }
-
-    public static WoodType woodType(String name, BlockSetType blockSet) {
-        return WoodType.register(new WoodType(FactoExpa.prefix(name), blockSet));
-    }
-
-    /// Helpers
-
     public static Holder<Enchantment> getEnchantment(Level level, ResourceKey<Enchantment> resourceKey) {
         return level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(resourceKey);
     }
 
     public static Holder<CanisterType> getCanisterType(Level level, ResourceKey<CanisterType> resourceKey) {
-        return level.registryAccess().lookupOrThrow(FEResourceKeys.CANISTER_TYPE).getOrThrow(resourceKey);
+        return level.registryAccess().lookupOrThrow(FEResourceKeys.registries.CANISTER_TYPE).getOrThrow(resourceKey);
     }
 
     // todo : im not sure exactly how performance friendly constantly doing these lookups are
@@ -68,7 +38,7 @@ public class RegistryUtils {
     public static DyeingData getDyeingData(Level level, Block block) {
         AtomicReference<DyeingData> output = new AtomicReference<>();
 
-        level.registryAccess().registry(FEResourceKeys.DYEING).get().stream().forEach(mapping -> {
+        level.registryAccess().registry(FEResourceKeys.registries.DYEING).get().stream().forEach(mapping -> {
             if(mapping.isPresent(block)) {
                 output.set(mapping);
             }
@@ -80,7 +50,7 @@ public class RegistryUtils {
     public static DyeData getDyeData(Level level, Item item) {
         AtomicReference<DyeData> output = new AtomicReference<>();
 
-        level.registryAccess().registry(FEResourceKeys.DYE).get().stream().forEach(mapping -> {
+        level.registryAccess().registry(FEResourceKeys.registries.DYE).get().stream().forEach(mapping -> {
             if(mapping.checkIngredient(item)) {
                 output.set(mapping);
             }
@@ -92,7 +62,7 @@ public class RegistryUtils {
     public static CanisterData getCanisterData(Level level, Item item) {
         AtomicReference<CanisterData> output = new AtomicReference<>();
 
-        level.registryAccess().registry(FEResourceKeys.CANISTER).get().stream().forEach(mapping -> {
+        level.registryAccess().registry(FEResourceKeys.registries.CANISTER).get().stream().forEach(mapping -> {
             if(mapping.getItem().equals(item)) {
                 output.set(mapping);
             }

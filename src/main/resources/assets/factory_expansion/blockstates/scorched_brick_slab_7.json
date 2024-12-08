@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "factory_expansion:block/scorched_bricks/slab/7/bottom"
+    },
+    "type=double": {
+      "model": "factory_expansion:block/scorched_bricks/7"
+    },
+    "type=top": {
+      "model": "factory_expansion:block/scorched_bricks/slab/7/top"
+    }
+  }
+}

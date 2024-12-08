@@ -16,9 +16,9 @@ public class ModRegistries {
 
     @SubscribeEvent
     private static void onDataPackRegistryEvent(DataPackRegistryEvent.NewRegistry event) {
-        event.dataPackRegistry(FEResourceKeys.DYEING, DyeingData.CODEC, DyeingData.CODEC);
-        event.dataPackRegistry(FEResourceKeys.CANISTER, CanisterData.CODEC, CanisterData.CODEC);
-        event.dataPackRegistry(FEResourceKeys.DYE, DyeData.CODEC, DyeData.CODEC);
+        event.dataPackRegistry(FEResourceKeys.registries.DYEING, DyeingData.CODEC, DyeingData.CODEC);
+        event.dataPackRegistry(FEResourceKeys.registries.CANISTER, CanisterData.CODEC, CanisterData.CODEC);
+        event.dataPackRegistry(FEResourceKeys.registries.DYE, DyeData.CODEC, DyeData.CODEC);
     }
 
     //@SubscribeEvent

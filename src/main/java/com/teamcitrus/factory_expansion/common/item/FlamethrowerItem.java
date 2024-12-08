@@ -6,7 +6,10 @@ import com.teamcitrus.factory_expansion.common.data.flamethrower.FlamethrowerCom
 import com.teamcitrus.factory_expansion.core.registry.FEComponents;
 import com.teamcitrus.factory_expansion.core.util.RegistryUtils;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
@@ -58,10 +61,17 @@ public class FlamethrowerItem extends Item {
     }
 
     @Override
+    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        super.onUseTick(level, livingEntity, stack, remainingUseDuration);
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+        return super.use(level, player, usedHand);
+    }
+
+    @Override
     public boolean overrideStackedOnOther(ItemStack stack, Slot slot, ClickAction action, Player player) {
-
-
-        System.out.println(stack.has(FEComponents.FLAMETHROWER));
 
         FlamethrowerComponent component = stack.get(FEComponents.FLAMETHROWER);
 

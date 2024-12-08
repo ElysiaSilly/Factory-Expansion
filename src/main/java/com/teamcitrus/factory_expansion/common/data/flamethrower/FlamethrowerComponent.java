@@ -15,9 +15,7 @@ public class FlamethrowerComponent {
             ItemStack.CODEC.listOf().fieldOf("canisters").forGetter(i -> i.canisters),
             ItemStack.CODEC.fieldOf("nozzle").forGetter(i -> i.nozzle),
             Codec.INT.fieldOf("index").forGetter(i -> i.index)
-
-            ).apply(instance, FlamethrowerComponent::new)
-    );
+    ).apply(instance, FlamethrowerComponent::new));
 
     //public static final StreamCodec<RegistryFriendlyByteBuf, FlamethrowerComponenta> STREAM_CODEC = ItemStack.STREAM_CODEC
     //        .apply(ByteBufCodecs.list())

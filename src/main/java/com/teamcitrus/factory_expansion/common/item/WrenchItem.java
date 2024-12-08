@@ -1,15 +1,27 @@
 package com.teamcitrus.factory_expansion.common.item;
 
-import com.teamcitrus.factory_expansion.core.keys.FEBlockTags;
+import com.teamcitrus.factory_expansion.common.data.wrench.WrenchComponent;
+import com.teamcitrus.factory_expansion.core.FEConfig;
+import com.teamcitrus.factory_expansion.core.keys.FETags;
+import com.teamcitrus.factory_expansion.core.registry.FEComponents;
 import com.teamcitrus.factory_expansion.core.util.RegistryUtils;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
@@ -20,98 +32,84 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
 public class WrenchItem extends Item {
     public WrenchItem() {
-        super(new Item.Properties().stacksTo(1));
+        super(new Item.Properties().stacksTo(1).component(FEComponents.WRENCH, WrenchComponent.EMPTY));
     }
 
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-
         // todo : figure out what i wanna do with this
-
-        /*
-        if(!(entity instanceof Player player && isSelected)) return;
-
-        HitResult hitResult = Minecraft.getInstance().hitResult;
-
-        if(hitResult == null) return;
-
-        if(!(hitResult instanceof BlockHitResult blockHitResult)) return;
-
-        if(level.isClientSide) return;
-
-        BlockState state = level.getBlockState(blockHitResult.getBlockPos());
-
-        boolean override = false;
-        boolean isWrenchableBlock = false;
-
-        if(state.getBlock() instanceof IWrenchableBlock block) {
-            override = block.overrideDefaultWrenchBehaviour();
-            isWrenchableBlock = true;
-
-            if(override || player.isShiftKeyDown()) {
-                block.onWrenchHover(level, blockHitResult.getBlockPos(), state, blockHitResult.getDirection(), hitResult.getLocation(), player);
-            }
-        }
-
-
-        if(!override && (!isWrenchableBlock || !player.isShiftKeyDown())) {
-
-            if(state.getOptionalValue(BlockStateProperties.FACING).isPresent()) {
-                player.displayClientMessage(Component.literal("cycling through orientation: " + state.getValue(BlockStateProperties.FACING).getSerializedName() + " -> " + state.cycle(BlockStateProperties.FACING).getValue(BlockStateProperties.FACING).getSerializedName()).withStyle(ChatFormatting.GRAY), true);
-            }
-            if(state.getOptionalValue(BlockStateProperties.AXIS).isPresent()) {
-                player.displayClientMessage(Component.literal("cycling through orientation: " + state.getValue(BlockStateProperties.AXIS).getSerializedName() + " -> " + state.cycle(BlockStateProperties.AXIS).getValue(BlockStateProperties.AXIS).getSerializedName()).withStyle(ChatFormatting.GRAY), true);
-            }
-            if(state.getOptionalValue(BlockStateProperties.HORIZONTAL_FACING).isPresent()) {
-                player.displayClientMessage(Component.literal("cycling through orientation: " + state.getValue(BlockStateProperties.HORIZONTAL_FACING).getSerializedName() + " -> " + state.cycle(BlockStateProperties.HORIZONTAL_FACING).getValue(BlockStateProperties.HORIZONTAL_FACING).getSerializedName()).withStyle(ChatFormatting.GRAY), true);
-            }
-        }
-
-         */
     }
 
     @Override
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+
+        Player player = context.getPlayer();
+        if(player == null) return InteractionResult.PASS;
+
         Level level = context.getLevel();
-
         BlockPos pos = context.getClickedPos();
-
         BlockState state = level.getBlockState(pos);
+        InteractionResult result = null;
+        WrenchComponent component = stack.get(FEComponents.WRENCH);
 
         boolean flag = false;
 
-        Player player = context.getPlayer();
+        component.cycleAppropriateWrench(state);
 
-        if(player == null) return InteractionResult.PASS;
+        if(component.getIndexWrench() != null) {
 
-        if(!player.isShiftKeyDown() &&!state.is(FEBlockTags.WRENCH_CONFIGURE_BLACKLIST)) {
-            if(state.getOptionalValue(BlockStateProperties.FACING).isPresent()) {
-                level.setBlockAndUpdate(pos, check(state, level, pos, BlockStateProperties.FACING));
-                flag = true;
-            }
-            if(state.getOptionalValue(BlockStateProperties.AXIS).isPresent()) {
-                level.setBlockAndUpdate(pos, check(state, level, pos, BlockStateProperties.AXIS));
-                flag = true;
-            }
-            if(state.getOptionalValue(BlockStateProperties.HORIZONTAL_FACING).isPresent()) {
-                level.setBlockAndUpdate(pos, check(state, level, pos, BlockStateProperties.HORIZONTAL_FACING));
-                flag = true;
-            }
-            if(state.getOptionalValue(BlockStateProperties.ROTATION_16).isPresent()) {
-                level.setBlockAndUpdate(pos, check(state, level, pos, BlockStateProperties.ROTATION_16));
-                flag = true;
-            }
+            result = component.getIndexWrench().getItem().useOn(context);
+            if(result == InteractionResult.PASS) result = component.getIndexWrench().getItem().onItemUseFirst(component.getIndexWrench(), context);
+            flag = result == InteractionResult.SUCCESS;
+
+        } else if (!player.isShiftKeyDown() &&!state.is(FETags.Blocks.WRENCH_CONFIGURE_BLACKLIST)) {
+
+            flag =  cycleState(BlockStateProperties.FACING, level, state, pos) ||
+                    cycleState(BlockStateProperties.HORIZONTAL_FACING, level, state, pos) ||
+                    cycleState(BlockStateProperties.AXIS, level, state, pos) ||
+                    cycleState(BlockStateProperties.ROTATION_16, level, state, pos);
         }
 
-        if(flag) level.levelEvent(2001, pos, Block.getId(level.getBlockState(pos)));
+        if(flag && FEConfig.BLOCK_WRENCH_PARTICLES.get()) level.levelEvent(2001, pos, Block.getId(level.getBlockState(pos)));
 
-        return flag ? InteractionResult.SUCCESS : InteractionResult.FAIL;
+        return result != null ? result : flag ? InteractionResult.SUCCESS : InteractionResult.FAIL;
+    }
+
+    public static boolean cycleState(Property property, Level level, BlockState state, BlockPos pos) {
+        if(!state.getOptionalValue(property).isPresent()) return false;
+        level.setBlockAndUpdate(pos, check(state, level, pos, property));
+        return true;
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+        ItemStack item = player.getItemInHand(usedHand);
+
+        if(!player.isShiftKeyDown()) return InteractionResultHolder.pass(item);
+
+        if(level.isClientSide) return InteractionResultHolder.success(item);
+
+        if(Minecraft.getInstance().hitResult.getType() != HitResult.Type.MISS) return InteractionResultHolder.pass(item);
+
+        WrenchComponent component = item.get(FEComponents.WRENCH);
+
+        component.cycleIndex();
+
+        ItemStack wrench = component.getIndexWrench();
+        if(wrench != null) {
+            player.displayClientMessage(wrench.getDisplayName(), true);
+        } else {
+            player.displayClientMessage(getName(item), true);
+        }
+
+        return InteractionResultHolder.success(item);
     }
 
     public static BlockState check(BlockState state, Level level, BlockPos pos, Property property) {
@@ -131,7 +129,7 @@ public class WrenchItem extends Item {
     @Override
     public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity miningEntity) {
         if(miningEntity instanceof Player player) {
-            if(state.is(FEBlockTags.WRENCH_PICKUP_WHITELIST)) {
+            if(state.is(FETags.Blocks.WRENCH_PICKUP_WHITELIST)) {
                 level.destroyBlock(pos, false);
                 if(level instanceof ServerLevel serverLevel) {
                     BlockEntity blockentity = serverLevel.getBlockEntity(pos);
@@ -159,6 +157,41 @@ public class WrenchItem extends Item {
 
     @Override
     public float getDestroySpeed(ItemStack stack, BlockState state) {
-        return state.is(FEBlockTags.WRENCH_PICKUP_WHITELIST) ? Float.MAX_VALUE : super.getDestroySpeed(stack, state);
+        return state.is(FETags.Blocks.WRENCH_PICKUP_WHITELIST) ? Float.MAX_VALUE : Float.MIN_VALUE;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        WrenchComponent component = stack.get(FEComponents.WRENCH);
+
+        int index = 0;
+        for(ItemStack wrench : component.getWrenches()) {
+            ChatFormatting format = index == component.getIndex() ? ChatFormatting.WHITE : ChatFormatting.DARK_GRAY;
+            tooltipComponents.add(Component.literal(wrench.getHoverName().getString()).withStyle(format));
+            index++;
+        }
+    }
+
+    @Override
+    public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, Slot slot, ClickAction action, Player player, SlotAccess access) {
+        return super.overrideOtherStackedOnMe(stack, other, slot, action, player, access);
+    }
+
+    @Override
+    public boolean overrideStackedOnOther(ItemStack stack, Slot slot, ClickAction action, Player player) {
+
+        WrenchComponent component = stack.get(FEComponents.WRENCH);
+
+        if(action == ClickAction.SECONDARY) {
+            if(slot.hasItem()) {
+                return component.insertWrench(slot.getItem());
+            } else {
+                ItemStack extracted = component.extractLastWrench();
+                if(extracted != null) slot.safeInsert(extracted);
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -8,7 +8,5 @@ import net.neoforged.neoforge.registries.RegistryBuilder;
 
 public class FERegistries {
 
-    public static final Registry<CanisterType> CANISTER_TYPE = new RegistryBuilder<>(FEResourceKeys.CANISTER_TYPE)
-            .defaultKey(ResourceLocation.fromNamespaceAndPath(FactoExpa.MODID, "empty")) // default value, like how items and blocks default to minecraft:air
-            .create();
+    public static final Registry<CanisterType> CANISTER_TYPE = new RegistryBuilder<>(FEResourceKeys.registries.CANISTER_TYPE).create();
 }

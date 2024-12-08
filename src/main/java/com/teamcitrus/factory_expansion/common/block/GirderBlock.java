@@ -1,7 +1,7 @@
 package com.teamcitrus.factory_expansion.common.block;
 
 import com.teamcitrus.factory_expansion.common.block.interfaces.block.IWrenchableBlock;
-import com.teamcitrus.factory_expansion.core.keys.FEBlockTags;
+import com.teamcitrus.factory_expansion.core.keys.FETags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
@@ -55,7 +55,7 @@ public class GirderBlock extends Block implements SimpleWaterloggedBlock, IWrenc
 
         if(direction.getAxis() == Direction.Axis.Y && !neighborState.is(this)) return state;
 
-        TagKey<Block> girderFriend = FEBlockTags.GIRDERS_CONNECT;
+        TagKey<Block> girderFriend = FETags.Blocks.GIRDERS_CONNECT;
 
         boolean X = state.getValue(X_AXIS);
         boolean Y = state.getValue(Y_AXIS);

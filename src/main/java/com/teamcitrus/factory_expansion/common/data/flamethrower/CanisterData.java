@@ -8,7 +8,7 @@ import net.minecraft.world.item.Item;
 
 public class CanisterData {
 
-    public static final Codec<CanisterData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static Codec<CanisterData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             BuiltInRegistries.ITEM.byNameCodec().fieldOf("item").forGetter(i -> i.item),
             CanisterType.CODEC.fieldOf("type").forGetter(i -> i.canisterType),
             Codec.INT.fieldOf("capacity").forGetter(i -> i.capacity),

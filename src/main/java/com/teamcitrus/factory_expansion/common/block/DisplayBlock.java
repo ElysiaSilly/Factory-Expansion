@@ -1,23 +1,20 @@
 package com.teamcitrus.factory_expansion.common.block;
 
 import com.mojang.serialization.MapCodec;
-import com.teamcitrus.factory_expansion.common.block.be.DisplayBlockBE;
+import com.teamcitrus.factory_expansion.common.block.be.DisplayBE;
 import com.teamcitrus.factory_expansion.common.block.interfaces.block.IWrenchableBlock;
 import com.teamcitrus.factory_expansion.common.data.dyeing.DyeData;
+import com.teamcitrus.factory_expansion.core.FEConfig;
 import com.teamcitrus.factory_expansion.core.util.RegistryUtils;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -36,8 +33,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Arrays;
 
 public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
 
@@ -70,7 +65,7 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new DisplayBlockBE(pos, state);
+        return new DisplayBE(pos, state);
     }
 
     @Override
@@ -92,7 +87,7 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
             BlockPos relative = pos;
             int index = 0;
 
-            while(level.getBlockEntity(relative) instanceof DisplayBlockBE neighbour) {
+            while(level.getBlockEntity(relative) instanceof DisplayBE neighbour) {
                 if(index >= name.length()) break;
                 neighbour.setCharacter(name.charAt(index));
 
@@ -104,10 +99,13 @@ public class DisplayBlock extends BaseEntityBlock implements IWrenchableBlock {
 
         DyeData data = RegistryUtils.getDyeData(level, stack.getItem());
         if(data != null) {
-            if(data.getColour() != 0) {
-                if(level.getBlockEntity(pos) instanceof  DisplayBlockBE be) {
-                    be.setColour(data.getColour());
-                    return ItemInteractionResult.SUCCESS;
+            if(data.getColour() != -1) {
+                if(level.getBlockEntity(pos) instanceof  DisplayBE be) {
+                    if(data.getColour() != be.getColour()) {
+                        be.setColour(data.getColour());
+                        if(FEConfig.BLOCK_CONSUME_DYE.get() && !player.hasInfiniteMaterials()) stack.shrink(1);
+                        return ItemInteractionResult.SUCCESS;
+                    }
                 }
             }
         }

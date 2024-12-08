@@ -16,7 +16,7 @@ public class MultiBlock<T extends Enum<T> & BlockPosRepresentable & StringRepres
     private final Class<T> multi;
     private final FauxMultiBlock<T> block;
 
-    protected MultiBlock(Class<T> multi, FauxMultiBlock<T> block) {
+    public MultiBlock(Class<T> multi, FauxMultiBlock<T> block) {
         this.multi = multi;
         this.block = block;
     }

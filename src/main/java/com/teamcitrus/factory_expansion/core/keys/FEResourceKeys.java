@@ -10,15 +10,19 @@ import net.minecraft.resources.ResourceKey;
 
 public class FEResourceKeys {
 
-    public static final ResourceKey<Registry<DyeingData>> DYEING
-            = ResourceKey.createRegistryKey(FactoExpa.location("dyeing"));
+    public static class registries{
 
-    public static final ResourceKey<Registry<DyeData>> DYE
-            = ResourceKey.createRegistryKey(FactoExpa.location("dye"));
+        public static final ResourceKey<Registry<DyeingData>> DYEING
+                = ResourceKey.createRegistryKey(FactoExpa.location("dyeing"));
 
-    public static final ResourceKey<Registry<CanisterData>> CANISTER
-            = ResourceKey.createRegistryKey(FactoExpa.location("canister"));
+        public static final ResourceKey<Registry<DyeData>> DYE
+                = ResourceKey.createRegistryKey(FactoExpa.location("dye"));
 
-    public static final ResourceKey<Registry<CanisterType>> CANISTER_TYPE
-            = ResourceKey.createRegistryKey(FactoExpa.location("canister_type"));
+        public static final ResourceKey<Registry<CanisterData>> CANISTER
+                = ResourceKey.createRegistryKey(FactoExpa.location("canister"));
+
+        public static final ResourceKey<Registry<CanisterType>> CANISTER_TYPE
+                = ResourceKey.createRegistryKey(FactoExpa.location("canister_type"));
+
+    }
 }

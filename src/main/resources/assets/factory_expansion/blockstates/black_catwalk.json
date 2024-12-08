@@ -2,194 +2,128 @@
   "multipart": [
     {
       "apply": {
-        "model": "factory_expansion:block/catwalk/top"
+        "model": "factory_expansion:block/catwalk/rework/top"
       },
       "when": {
-        "type": "double",
-        "up": "false"
+        "OR": [
+          {
+            "OR": [
+              {
+                "up": "false"
+              },{
+                "OR": [
+                  {
+                    "north": "true"
+                  },{
+                    "east": "true"
+                  },{
+                    "south": "true"
+                  },{
+                    "west": "true"
+                  }
+                ]
+              }
+            ]
+          },{
+            "down": "false"
+          }
+        ]
       }
     },
     {
       "apply": {
-        "model": "factory_expansion:block/catwalk/bottom"
+        "model": "factory_expansion:block/catwalk/rework/support"
       },
       "when": {
-        "type": "bottom",
-        "up": "false"
+        "OR": [
+          {
+            "OR": [
+              {
+                "down": "true"
+              },{
+                "up": "false",
+                "north": "false",
+                "east": "false",
+                "south": "false",
+                "west": "false",
+                "down": "false"
+              }
+            ]
+          },{
+            "up": "true",
+            "north": "false",
+            "east": "false",
+            "south": "false",
+            "west": "false"
+          }
+        ]
       }
     },
     {
       "apply": {
-        "model": "factory_expansion:block/catwalk/top"
+        "model": "factory_expansion:block/catwalk/rework/frame"
       },
       "when": {
-        "type": "top",
-        "up": "false"
+        "OR": [
+          {
+            "north": "false",
+            "up": "false"
+          },{
+            "north": "false",
+            "down": "false"
+          }
+        ]
       }
     },
     {
       "apply": {
-        "model": "factory_expansion:block/catwalk/double_support"
-      },
-      "when": {
-        "type": "double",
-        "down": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "factory_expansion:block/catwalk/top_support"
-      },
-      "when": {
-        "type": "top",
-        "down": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "factory_expansion:block/catwalk/bottom_support"
-      },
-      "when": {
-        "type": "bottom",
-        "down": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "factory_expansion:block/catwalk/scaffold"
-      },
-      "when": {
-        "type": "double",
-        "up": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "factory_expansion:block/catwalk/double_frame"
-      },
-      "when": {
-        "type": "double",
-        "up": "false",
-        "north": "false"
-      }
-    },
-    {
-      "apply": {
-        "model": "factory_expansion:block/catwalk/double_frame",
+        "model": "factory_expansion:block/catwalk/rework/frame",
         "y": 90
       },
       "when": {
-        "type": "double",
-        "up": "false",
-        "east": "false"
+        "OR": [
+          {
+            "east": "false",
+            "up": "false"
+          },{
+            "east": "false",
+            "down": "false"
+          }
+        ]
       }
     },
     {
       "apply": {
-        "model": "factory_expansion:block/catwalk/double_frame",
+        "model": "factory_expansion:block/catwalk/rework/frame",
         "y": 180
       },
       "when": {
-        "type": "double",
-        "up": "false",
-        "south": "false"
+        "OR": [
+          {
+            "south": "false",
+            "up": "false"
+          },{
+            "south": "false",
+            "down": "false"
+          }
+        ]
       }
     },
     {
       "apply": {
-        "model": "factory_expansion:block/catwalk/double_frame",
-        "y": -90
+        "model": "factory_expansion:block/catwalk/rework/frame",
+        "y": 270
       },
       "when": {
-        "type": "double",
-        "up": "false",
-        "west": "false"
-      }
-    },
-    {
-      "apply": {
-        "model": "factory_expansion:block/catwalk/top_frame"
-      },
-      "when": {
-        "type": "top",
-        "up": "false",
-        "north": "false"
-      }
-    },
-    {
-      "apply": {
-        "model": "factory_expansion:block/catwalk/top_frame",
-        "y": 90
-      },
-      "when": {
-        "type": "top",
-        "up": "false",
-        "east": "false"
-      }
-    },
-    {
-      "apply": {
-        "model": "factory_expansion:block/catwalk/top_frame",
-        "y": 180
-      },
-      "when": {
-        "type": "top",
-        "up": "false",
-        "south": "false"
-      }
-    },
-    {
-      "apply": {
-        "model": "factory_expansion:block/catwalk/top_frame",
-        "y": -90
-      },
-      "when": {
-        "type": "top",
-        "up": "false",
-        "west": "false"
-      }
-    },
-    {
-      "apply": {
-        "model": "factory_expansion:block/catwalk/bottom_frame"
-      },
-      "when": {
-        "type": "bottom",
-        "up": "false",
-        "north": "false"
-      }
-    },
-    {
-      "apply": {
-        "model": "factory_expansion:block/catwalk/bottom_frame",
-        "y": 90
-      },
-      "when": {
-        "type": "bottom",
-        "up": "false",
-        "east": "false"
-      }
-    },
-    {
-      "apply": {
-        "model": "factory_expansion:block/catwalk/bottom_frame",
-        "y": 180
-      },
-      "when": {
-        "type": "bottom",
-        "up": "false",
-        "south": "false"
-      }
-    },
-    {
-      "apply": {
-        "model": "factory_expansion:block/catwalk/bottom_frame",
-        "y": -90
-      },
-      "when": {
-        "type": "bottom",
-        "up": "false",
-        "west": "false"
+        "OR": [
+          {
+            "west": "false",
+            "up": "false"
+          },{
+            "west": "false",
+            "down": "false"
+          }
+        ]
       }
     }
   ]

@@ -1,12 +1,11 @@
 {
 	"credit": "an ElysiaSilly creation :D",
-	"render_type": "translucent",
+	"render_type": "cutout",
 	"textures": {
-		"blade": "factory_expansion:block/industrial_fan/large_blade",
-		"particle": "factory_expansion:block/black_alloy_block",
 		"extra": "factory_expansion:block/industrial_fan/extra",
 		"inside": "factory_expansion:block/industrial_fan/large_inside",
-		"outside": "factory_expansion:block/industrial_fan/large_outside"
+		"outside": "factory_expansion:block/industrial_fan/large_outside",
+		"particle": "factory_expansion:block/black_alloy_block"
 	},
 	"elements": [
 		{
@@ -37,38 +36,15 @@
 			}
 		},
 		{
-			"name": "fan",
-			"from": [-16, 7, -16],
-			"to": [32, 9, 32],
-			"shade": false,
-			"rotation": {"angle": 0, "axis": "y", "origin": [0, 8, 0]},
-			"faces": {
-				"up": {"uv": [0, 0, 16, 16], "texture": "#blade"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#blade"}
-			}
-		},
-		{
-			"name": "support",
-			"from": [6, 8, 6],
-			"to": [10, 16, 10],
-			"rotation": {"angle": 0, "axis": "y", "origin": [6, 0, 8]},
-			"faces": {
-				"north": {"uv": [0, 10.66667, 1.33333, 13.33333], "texture": "#extra"},
-				"east": {"uv": [0, 10.66667, 1.33333, 13.33333], "texture": "#extra"},
-				"south": {"uv": [0, 10.66667, 1.33333, 13.33333], "texture": "#extra"},
-				"west": {"uv": [0, 10.66667, 1.33333, 13.33333], "texture": "#extra"}
-			}
-		},
-		{
 			"name": "support",
 			"from": [6, 0, 6],
-			"to": [10, 8, 10],
+			"to": [10, 16, 10],
 			"rotation": {"angle": 0, "axis": "y", "origin": [6, -8, 8]},
 			"faces": {
-				"north": {"uv": [0, 13.33334, 1.33333, 16], "texture": "#extra"},
-				"east": {"uv": [0, 13.33334, 1.33333, 16], "texture": "#extra"},
-				"south": {"uv": [0, 13.33334, 1.33333, 16], "texture": "#extra"},
-				"west": {"uv": [0, 13.33334, 1.33333, 16], "texture": "#extra"}
+				"north": {"uv": [0, 10.66667, 1.33333, 16], "texture": "#extra"},
+				"east": {"uv": [0, 10.66667, 1.33333, 16], "texture": "#extra"},
+				"south": {"uv": [0, 10.66667, 1.33333, 16], "texture": "#extra"},
+				"west": {"uv": [0, 10.66667, 1.33333, 16], "texture": "#extra"}
 			}
 		}
 	]

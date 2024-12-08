@@ -2,6 +2,7 @@ package com.teamcitrus.factory_expansion.common.event.misc;
 
 import com.teamcitrus.factory_expansion.common.data.dyeing.DyeData;
 import com.teamcitrus.factory_expansion.common.data.dyeing.DyeingData;
+import com.teamcitrus.factory_expansion.core.FEConfig;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
 import com.teamcitrus.factory_expansion.core.keys.FEResourceKeys;
 import com.teamcitrus.factory_expansion.core.util.RegistryUtils;
@@ -23,6 +24,8 @@ public class DyeStuff {
     @SubscribeEvent
     public static void onUseItemOnBlockEvent(UseItemOnBlockEvent event) {
 
+        if(!FEConfig.BLOCK_APPLY_DYE.get()) return;
+
         Level level = event.getLevel();
 
         BlockPos pos = event.getPos();
@@ -36,10 +39,16 @@ public class DyeStuff {
                 Block block = dyeingData.getBlock(event.getItemStack().getItem());
                 if(block != null) {
                     BlockState newState = block.withPropertiesOf(state);
+                    if(block == state.getBlock()) return;
                     level.setBlockAndUpdate(pos, newState);
                     event.cancelWithResult(ItemInteractionResult.SUCCESS);
-                    level.levelEvent(2001, pos, Block.getId(state));
-                    level.levelEvent(2001, pos, Block.getId(level.getBlockState(pos)));
+                    if(FEConfig.BLOCK_DYE_PARTICLES.get()) {
+                        level.levelEvent(2001, pos, Block.getId(state));
+                        level.levelEvent(2001, pos, Block.getId(level.getBlockState(pos)));
+                    }
+                    if(FEConfig.BLOCK_CONSUME_DYE.get() && !event.getPlayer().hasInfiniteMaterials()) {
+                        event.getItemStack().shrink(1);
+                    }
                 }
             }
         }

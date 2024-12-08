@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "factory_expansion:block/scorched_bricks/4",
+    "side": "factory_expansion:block/scorched_bricks/4",
+    "top": "factory_expansion:block/scorched_bricks/4"
+  }
+}

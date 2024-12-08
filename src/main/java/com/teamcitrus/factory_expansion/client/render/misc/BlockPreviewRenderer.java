@@ -7,7 +7,7 @@ import com.teamcitrus.factory_expansion.common.block.interfaces.block.IPreviewBl
 import com.teamcitrus.factory_expansion.common.item.cycleable.CycleBlockItem;
 import com.teamcitrus.factory_expansion.core.FEConfig;
 import com.teamcitrus.factory_expansion.core.FactoExpa;
-import com.teamcitrus.factory_expansion.core.keys.FEBlockTags;
+import com.teamcitrus.factory_expansion.core.keys.FETags;
 import com.teamcitrus.factory_expansion.core.util.MathUtils;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -32,6 +32,7 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 public class BlockPreviewRenderer {
 
     // todo : particles also become transparent when block preview is present
+    // todo : change this to use the blockitem's place function instead of the block's placement context
 
     @SubscribeEvent
     public static void onRenderLevelStageEvent(RenderLevelStageEvent event) {
@@ -57,7 +58,7 @@ public class BlockPreviewRenderer {
 
             if(state == null) return;
 
-            if(state.is(FEBlockTags.HAS_PLACEMENT_PREVIEW)) {
+            if(state.is(FETags.Blocks.HAS_PLACEMENT_PREVIEW)) {
 
                 PoseStack stack = event.getPoseStack();
 

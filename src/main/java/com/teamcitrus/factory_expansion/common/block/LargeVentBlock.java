@@ -2,12 +2,16 @@ package com.teamcitrus.factory_expansion.common.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamcitrus.factory_expansion.client.render.misc.BlockPreviewRenderer;
+import com.teamcitrus.factory_expansion.common.block.be.VentBE;
 import com.teamcitrus.factory_expansion.common.block.interfaces.block.IPreviewBlock;
 import com.teamcitrus.factory_expansion.core.properties.FEProperties;
 import com.teamcitrus.factory_expansion.core.properties.properties.LargeVentBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
@@ -16,7 +20,9 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -27,9 +33,10 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class LargeVentBlock extends RotatedPillarBlock implements IPreviewBlock {
+public class LargeVentBlock extends RotatedPillarBlock implements IPreviewBlock, EntityBlock {
 
     public static final EnumProperty<LargeVentBlocks> POS = FEProperties.LARGE_VENT_BLOCKS;
+    //public static final MultiBlock<LargeVentBlocks> MULTI = new MultiBlock<>();
 
     public LargeVentBlock(Properties properties) {
         super(properties.noOcclusion().pushReaction(PushReaction.DESTROY));
@@ -154,5 +161,50 @@ public class LargeVentBlock extends RotatedPillarBlock implements IPreviewBlock 
         if(context.getItemInHand().getCount() < 9 && !context.getPlayer().hasInfiniteMaterials()) return;
 
         BlockPreviewRenderer.renderGhostBlock(state, stack, context);
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (random.nextInt(100) == 0) {
+            level.playLocalSound(
+                    (double)pos.getX() + 0.5,
+                    (double)pos.getY() + 0.5,
+                    (double)pos.getZ() + 0.5,
+                    SoundEvents.VAULT_AMBIENT,
+                    SoundSource.BLOCKS,
+                    0.5F,
+                    random.nextFloat() * 0.4F + 0.8F,
+                    false
+            );
+        }
+
+
+        double d0 = (double)pos.getX() + random.nextDouble();
+        double d1 = (double)pos.getY() + random.nextDouble();
+        double d2 = (double)pos.getZ() + random.nextDouble();
+
+        float speed = 0.2f;
+        float x = 0;
+        float y = 0;
+        float z = 0;
+
+        switch(state.getValue(AXIS)) {
+            case X -> x = speed;
+            case Y -> y = speed;
+            case Z -> z = speed;
+        }
+
+        level.addParticle(ParticleTypes.SMOKE, d0, d1, d2, x, y, z);
+
+        level.addParticle(ParticleTypes.SMOKE, d0, d1, d2, -x, -y, -z);
+
+    }
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        if(state.getValue(POS) == LargeVentBlocks.MIDDLE) {
+            return new VentBE(pos, state);
+        }
+        return null;
     }
 }

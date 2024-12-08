@@ -4,18 +4,23 @@ import com.teamcitrus.factory_expansion.common.item.cycleable.CycleBlockItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ScaffoldingBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class CatwalkBlock extends SlabBlock {
+public class CatwalkBlock extends Block {
 
     public static final BooleanProperty NORTH = BooleanProperty.create("north");
     public static final BooleanProperty EAST = BooleanProperty.create("east");
@@ -34,22 +39,42 @@ public class CatwalkBlock extends SlabBlock {
                 .setValue(WEST, false)
                 .setValue(UP, false)
                 .setValue(DOWN, false)
-                .setValue(WATERLOGGED, false)
-                .setValue(TYPE, SlabType.BOTTOM)
+                //.setValue(WATERLOGGED, false)
+                //.setValue(TYPE, SlabType.BOTTOM)
         );
     }
 
     @Override
-    protected boolean skipRendering(BlockState state, BlockState adjacentBlockState, Direction side) {
-        return false;// adjacentBlockState.is(this) || super.skipRendering(state, adjacentBlockState, side);
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+
+        VoxelShape platform = Block.box(0.0, 14.0, 0.0, 16.0, 16.0, 16.0);
+
+        VoxelShape voxelshape5 = Block.box(0.0, 14.0, 0.0, 16.0, 16.0, 16.0);
+
+        VoxelShape[] support = {
+                Block.box(0.0, 0.0, 0.0, 2.0, 16.0, 2.0),
+                Block.box(14.0, 0.0, 0.0, 16.0, 16.0, 2.0),
+                Block.box(0.0, 0.0, 14.0, 2.0, 16.0, 16.0),
+                Block.box(14.0, 0.0, 14.0, 16.0, 16.0, 16.0)
+        };
+
+        VoxelShape shape = Shapes.empty();
+
+        if(state.getValue(UP) || state.getValue(DOWN)) shape = Shapes.or(support[0], support[1], support[2], support[3]);
+
+        if(!state.getValue(DOWN) || !state.getValue(UP) || state.getValue(NORTH) || state.getValue(EAST) || state.getValue(SOUTH) || state.getValue(WEST)) shape = Shapes.or(shape, platform);
+
+        return shape;
     }
 
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
+
         Level level = context.getLevel();
         BlockState state = this.defaultBlockState();
         BlockPos pos = context.getClickedPos();
 
+         /*
         //SlabType slabType = this.defaultBlockState().getValue(TYPE);
 
         //if(context.getItemInHand().getItem() instanceof CycleBlockItem item) {
@@ -74,17 +99,26 @@ public class CatwalkBlock extends SlabBlock {
         //} else {
         //    return state;
         //}
+
+         */
+
+        if(level.getBlockState(pos.below()).isSolid()) state = state.setValue(DOWN, true);
+        return state;
     }
 
     @Override
     protected boolean canBeReplaced(BlockState state, BlockPlaceContext useContext) {
 
+        /*
         if(useContext.getItemInHand().getItem() instanceof CycleBlockItem item) {
             SlabType temp = (SlabType) item.getOptStateBlock().getProperty(TYPE);
             if(temp == SlabType.DOUBLE) return false;
         };
 
         return super.canBeReplaced(state, useContext);
+
+         */
+        return false;
     }
 
     @Override
@@ -100,7 +134,7 @@ public class CatwalkBlock extends SlabBlock {
             case EAST -> state = state.setValue(EAST, flag);
             case NORTH -> state = state.setValue(NORTH, flag);
             case WEST -> state = state.setValue(SOUTH, flag); // ??
-            case DOWN -> state = state.setValue(DOWN, flag);
+            case DOWN -> state = state.setValue(DOWN, facingState.isSolid());
         }
 
         return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
@@ -108,6 +142,6 @@ public class CatwalkBlock extends SlabBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(TYPE, WATERLOGGED, NORTH, EAST, SOUTH, WEST, UP, DOWN);
+        builder.add(/*TYPE, WATERLOGGED,*/ NORTH, EAST, SOUTH, WEST, UP, DOWN);
     }
 }
