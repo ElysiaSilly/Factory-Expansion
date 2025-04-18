@@ -1,0 +1,6 @@
+{
+  "parent": "fne:parent/warning_light",
+  "textures": {
+    "bulb": "fne:block/warning_light/red"
+  }
+}

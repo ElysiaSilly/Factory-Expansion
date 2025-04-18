@@ -1,0 +1,49 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "fne:block/girder/black/horizontal"
+      },
+      "when": {
+        "x": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "fne:block/girder/black/vertical"
+      },
+      "when": {
+        "y": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "fne:block/girder/black/horizontal",
+        "y": 90
+      },
+      "when": {
+        "z": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "fne:block/girder/black/midsection"
+      },
+      "when": {
+        "y": "false",
+        "z": "false",
+        "x": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "fne:block/girder/black/midsection",
+        "y": 90
+      },
+      "when": {
+        "y": "false",
+        "z": "true"
+      }
+    }
+  ]
+}

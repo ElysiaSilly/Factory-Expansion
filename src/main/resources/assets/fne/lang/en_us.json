@@ -1,0 +1,51 @@
+{
+  "itemGroup.fne": "Factory Expansion",
+  "item.fne.junk_collection": "Junk Collection",
+  "item.fne.transgender_block": "Transgender Block",
+  "item.fne.flux_bulb": "Flux Bulb",
+  "item.fne.red_flux_bulb": "Red Flux Bulb",
+  "item.fne.uv_flux_bulb": "Glow Flux Bulb",
+  "item.fne.black_industrial_vent": "Black Industrial Vent",
+
+  "item.fne.flux_bulb.1": "Normal",
+  "item.fne.flux_bulb.2": "Inverted",
+  "item.fne.flux_bulb.3": "Normal Pulsing",
+  "item.fne.flux_bulb.4": "Inverted Pulsing",
+
+  "item.fne.black_catwalk": "Black Catwalk",
+
+  "item.fne.black_catwalk.1": "Slab",
+  "item.fne.black_catwalk.2": "Full",
+  "item.fne.black_catwalk.3": "Stairs",
+
+  "item.fne.red_flux_bulb.1": "Normal",
+  "item.fne.red_flux_bulb.2": "Inverted",
+  "item.fne.red_flux_bulb.3": "Normal Pulsing",
+  "item.fne.red_flux_bulb.4": "Inverted Pulsing",
+
+  "item.fne.uv_flux_bulb.1": "Normal",
+  "item.fne.uv_flux_bulb.2": "Inverted",
+  "item.fne.uv_flux_bulb.3": "Normal Pulsing",
+  "item.fne.uv_flux_bulb.4": "Inverted Pulsing",
+
+  "item.fne.black_industrial_vent.1": "1x1",
+  "item.fne.black_industrial_vent.2": "2x2",
+  "item.fne.black_industrial_vent.3": "3x3",
+
+  "tooltip.fne.random": "Random",
+
+  "item.fne.transgender_block.minecraft.light_blue_wool": "Blue",
+  "item.fne.transgender_block.minecraft.pink_wool": "Pink",
+  "item.fne.transgender_block.minecraft.white_wool": "White",
+
+  "misc.fne.canister": "%1 [%2]",
+
+  "item.fne.skin_token": "Skin Token",
+  "misc.fne.skin_token": "%1 [%2]",
+  "misc.fne.skin_token_success": "Your essence has been embedded within this Token",
+  "misc.fne.skin_token_failure": "You are not present within the archives",
+
+  "misc.fne.flamethrower": "%1 [%2]",
+
+  "flamethrower_skin.fne.starfleet": "Starfleet"
+}

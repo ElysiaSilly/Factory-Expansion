@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "fne:block/industrial_fan/small",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "fne:block/industrial_fan/small"
+    },
+    "axis=z": {
+      "model": "fne:block/industrial_fan/small",
+      "x": 90
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "fne:block/drywall",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "fne:block/drywall"
+    },
+    "axis=z": {
+      "model": "fne:block/drywall",
+      "x": 90
+    }
+  }
+}

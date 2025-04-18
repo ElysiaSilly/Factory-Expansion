@@ -1,0 +1,8 @@
+{
+  "parent": "fne:parent/display",
+  "textures": {
+    "front": "fne:block/display/front_3",
+    "back": "fne:block/display/back",
+    "side": "fne:block/display/side"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "fne:block/scorched_bricks/slab/5/bottom"
+    },
+    "type=double": {
+      "model": "fne:block/scorched_bricks/5"
+    },
+    "type=top": {
+      "model": "fne:block/scorched_bricks/slab/5/top"
+    }
+  }
+}

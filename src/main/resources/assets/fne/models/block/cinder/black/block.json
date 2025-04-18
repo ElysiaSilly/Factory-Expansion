@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "fne:block/cinder/black/block_end",
+    "side": "fne:block/cinder/black/block_side"
+  }
+}

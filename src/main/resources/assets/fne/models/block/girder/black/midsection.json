@@ -1,0 +1,7 @@
+{
+  "parent": "fne:parent/girder_midsection",
+  "textures": {
+    "side": "fne:block/girder/black/side",
+    "extra": "fne:block/girder/black/extra"
+  }
+}

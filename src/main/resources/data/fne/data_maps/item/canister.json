@@ -1,0 +1,23 @@
+{
+  "values": {
+    "minecraft:tnt": {
+      "capacity": 1,
+      "consume": true,
+      "hide": true,
+      "type": "fne:nitro"
+    },
+    "minecraft:dirt": {
+      "capacity": 100,
+      "consume": true,
+      "type": "fne:blaze"
+    },
+    "minecraft:diamond": {
+      "capacity": 200,
+      "consume": true,
+      "type": "fne:soul"
+    },
+    "minecraft:bedrock": {
+      "type": "fne:soul"
+    }
+  }
+}

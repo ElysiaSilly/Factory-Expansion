@@ -1,0 +1,7 @@
+{
+  "parent": "fne:parent/girder_vertical",
+  "textures": {
+    "end": "fne:block/girder/brass/vertical_end",
+    "side": "fne:block/girder/brass/vertical_side"
+  }
+}

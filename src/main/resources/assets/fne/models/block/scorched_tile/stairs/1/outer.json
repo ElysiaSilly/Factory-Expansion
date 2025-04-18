@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "fne:block/scorched_tile/1",
+    "side": "fne:block/scorched_tile/1",
+    "top": "fne:block/scorched_tile/1"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "fne:parent/girder_inventory",
+  "textures": {
+    "side": "fne:block/girder/pale/side",
+    "extra": "fne:block/girder/pale/extra"
+  }
+}

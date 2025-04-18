@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.elysiasilly.fne.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "factory_expansion.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+    "client.GUIGraphicsMixin",
+    "client.HumanoidModelMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

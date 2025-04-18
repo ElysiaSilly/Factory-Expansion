@@ -1,0 +1,6 @@
+{
+  "parent": "fne:parent/flux_bulb",
+  "textures": {
+    "bulb": "fne:block/flux_bulb/uv_lit"
+  }
+}

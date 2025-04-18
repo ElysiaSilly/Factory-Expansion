@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "fne:block/drywall_end",
+    "side": "fne:block/drywall_slab",
+    "top": "fne:block/drywall_end"
+  }
+}

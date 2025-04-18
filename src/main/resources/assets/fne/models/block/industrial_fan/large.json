@@ -1,0 +1,51 @@
+{
+	"credit": "an ElysiaSilly creation :D",
+	"render_type": "cutout",
+	"textures": {
+		"extra": "fne:block/industrial_fan/extra",
+		"inside": "fne:block/industrial_fan/large_inside",
+		"outside": "fne:block/industrial_fan/large_outside",
+		"particle": "fne:block/black_alloy_block"
+	},
+	"elements": [
+		{
+			"name": "outside",
+			"from": [-16, 0, -16],
+			"to": [32, 16, 32],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 5.33333], "texture": "#extra"},
+				"east": {"uv": [0, 0, 16, 5.33333], "texture": "#extra"},
+				"south": {"uv": [0, 0, 16, 5.33333], "texture": "#extra"},
+				"west": {"uv": [0, 0, 16, 5.33333], "texture": "#extra"},
+				"up": {"uv": [0, 16, 16, 0], "texture": "#outside"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#outside"}
+			}
+		},
+		{
+			"name": "inside",
+			"from": [31.9, 16, 31.9],
+			"to": [-15.9, 0.1, -15.9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [48, 16, 48]},
+			"faces": {
+				"north": {"uv": [0, 5.33333, 16, 10.56667], "texture": "#extra"},
+				"east": {"uv": [0, 5.33333, 16, 10.56667], "texture": "#extra"},
+				"south": {"uv": [0, 5.33333, 16, 10.56667], "texture": "#extra"},
+				"west": {"uv": [0, 5.33333, 16, 10.56667], "texture": "#extra"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#inside"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#inside"}
+			}
+		},
+		{
+			"name": "support",
+			"from": [6, 0, 6],
+			"to": [10, 16, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, -8, 8]},
+			"faces": {
+				"north": {"uv": [0, 10.66667, 1.33333, 16], "texture": "#extra"},
+				"east": {"uv": [0, 10.66667, 1.33333, 16], "texture": "#extra"},
+				"south": {"uv": [0, 10.66667, 1.33333, 16], "texture": "#extra"},
+				"west": {"uv": [0, 10.66667, 1.33333, 16], "texture": "#extra"}
+			}
+		}
+	]
+}

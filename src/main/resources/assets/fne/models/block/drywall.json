@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "fne:block/drywall_end",
+    "side": "fne:block/drywall_side"
+  }
+}

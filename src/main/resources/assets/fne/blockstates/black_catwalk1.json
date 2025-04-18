@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "fne:block/catwalk/bottom"
+    },
+    "type=double,up=false": {
+      "model": "fne:block/catwalk/full"
+    },
+    "type=double,up=true": {
+      "model": "fne:block/catwalk/support"
+    },
+    "type=top": {
+      "model": "fne:block/catwalk/top"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "fne:block/industrial_fan/medium",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "block": "4",
+        "axis": "x"
+      }
+    },{
+      "apply": {
+        "model": "fne:block/industrial_fan/medium"
+      },
+      "when": {
+        "block": "4",
+        "axis": "y"
+      }
+    },{
+      "apply": {
+        "model": "fne:block/industrial_fan/medium",
+        "x": 90
+      },
+      "when": {
+        "block": "4",
+        "axis": "z"
+      }
+    },{
+      "apply": {
+        "model": "fne:block/industrial_fan/empty"
+      }
+    }
+  ]
+}

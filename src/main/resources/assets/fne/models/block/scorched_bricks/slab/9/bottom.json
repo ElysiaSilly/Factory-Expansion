@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "fne:block/scorched_bricks/9",
+    "side": "fne:block/scorched_bricks/9",
+    "top": "fne:block/scorched_bricks/9"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "fne:block/chs_pipe_bundle_end",
+    "side": "fne:block/chs_pipe_bundle_side"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "fne:block/egg_block"
+    }
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "factory_expansion:block/scorched_bricks/1",
-    "side": "factory_expansion:block/scorched_bricks/1",
-    "top": "factory_expansion:block/scorched_bricks/1"
-  }
-}

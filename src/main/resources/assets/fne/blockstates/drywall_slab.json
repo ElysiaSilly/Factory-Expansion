@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "fne:block/drywall_slab"
+    },
+    "type=double": {
+      "model": "fne:block/drywall_slab_double"
+    },
+    "type=top": {
+      "model": "fne:block/drywall_slab_top"
+    }
+  }
+}

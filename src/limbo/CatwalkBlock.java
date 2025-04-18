@@ -1,6 +1,6 @@
-package com.teamcitrus.factory_expansion.common.block;
+package com.elysiasilly.fne.common.block;
 
-import com.teamcitrus.factory_expansion.common.item.cycleable.CycleBlockItem;
+import com.elysiasilly.fne.common.item.cycleable.CycleBlockItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
